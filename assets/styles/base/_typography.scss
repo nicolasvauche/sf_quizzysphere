@@ -1,0 +1,47 @@
+h1 {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+dl {
+  margin-bottom: 0;
+  line-height: 1.5rem;
+
+  dt {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+
+    i,
+    svg {
+      margin-right: 0.25rem;
+    }
+  }
+
+  dd {
+    margin-bottom: 1.5rem;
+    margin-left: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+strong {
+  font-weight: 600;
+}
+
+small {
+  font-size: 0.75em;
+}

@@ -1,0 +1,12 @@
+.app-grid {
+  @include displayGrid;
+  margin-bottom: 0.5rem;
+
+  &.third {
+    grid-template-columns: 4fr 6fr;
+
+    &.reverse {
+      grid-template-columns: 6fr 4fr;
+    }
+  }
+}

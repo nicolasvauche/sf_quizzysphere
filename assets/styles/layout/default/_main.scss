@@ -1,0 +1,15 @@
+.app-main {
+  margin-bottom: 4rem;
+
+  section {
+    padding: 1.5rem 1rem;
+
+    &:first-child {
+      padding-top: 2rem;
+    }
+
+    &:last-child {
+      padding-bottom: 2rem;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+h1 {
+  color: $fifth;
+}
+
+dl {
+  dt {
+    color: $fifth;
+
+    i,
+    svg {
+      color: $fourth;
+    }
+  }
+}
+
+.app-btn {
+  color: $fifth;
+  background-color: $secondary;
+
+  &.cta {
+    color: $white;
+    background-color: $fifth;
+  }
+}
+
+.app-card {
+  .card-body {
+    i,
+    svg {
+      color: $fifth;
+    }
+  }
+}

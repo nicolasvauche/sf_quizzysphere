@@ -1,3 +1,9 @@
+###> quizzysphere/local ###
+.DS_Store
+.idea/
+quizzyspherenew.crt
+quizzyspherenew.key
+###< quizzysphere/local ###
 
 ###> symfony/framework-bundle ###
 /.env.local

@@ -1,0 +1,53 @@
+.app-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  flex: 2;
+  @include displayFlex(center, center);
+  background-color: $white;
+
+  @include respondTo(sm) {
+    position: static;
+    bottom: initial;
+    left: initial;
+    right: initial;
+    background-color: transparent;
+  }
+
+  a {
+    flex: 1;
+    display: block;
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: $fifth;
+
+    @include respondTo(sm) {
+      font-size: 1.25rem;
+    }
+
+    i,
+    svg {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+
+      @include respondTo(sm) {
+        display: initial;
+      }
+    }
+
+    &.active {
+      color: $fourth;
+
+      @include respondTo(sm) {
+        color: $white;
+      }
+    }
+  }
+}
+

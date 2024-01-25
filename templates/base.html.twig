@@ -1,17 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app_locale }}">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %}{% endblock %} - QuizzySphere</title>
+
+        <link rel="icon"
+              href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+              rel="stylesheet">
+
+        <script src="https://kit.fontawesome.com/b916232238.js" crossorigin="anonymous"></script>
+
         {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
         {% endblock %}
 
         {% block javascripts %}
-{% block importmap %}{{ importmap('app') }}{% endblock %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header class="app-header">
+            <a href="{{ path('app_home') }}" class="app-logo">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo QuizzySphere"/>
+            </a>
+
+            <a href="{{ path('app_home') }}" class="app-sitename">Quizzy<span>Sphere</span></a>
+
+            <nav class="app-navigation">
+                <a href="{{ path('app_home') }}" class="active">
+                    <i class="fa-solid fa-house-chimney"></i>
+                    Accueil
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    Quizz
+                </a>
+
+                <a href="#">
+                    <i class="fa-solid fa-circle-play"></i>
+                    Cours
+                </a>
+            </nav>
+
+            <nav class="app-profile">
+                <div class="app-dropdown">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <input type="checkbox"/>
+                    <div class="dropdown-content">
+                        <a href="#">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Connexion
+                        </a>
+                        <a href="#">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Inscription
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="app-main">
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>
