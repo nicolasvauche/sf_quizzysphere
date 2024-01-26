@@ -29,8 +29,9 @@
     }
   }
 
-  &:has(input:checked) {
-    color: $white;
+  &:has(input:checked),
+  &:has(a.active) {
+    color: $secondary;
   }
 
   .dropdown-content {
@@ -38,7 +39,7 @@
     right: -1rem;
     display: none;
     white-space: nowrap;
-    background-color: $fifth;
+    background-color: $white;
     border-radius: 0.5rem;
     border-bottom-right-radius: 0;
 
@@ -49,11 +50,20 @@
       font-weight: 600;
       text-decoration: none;
       color: $primary;
+      border-radius: 0.5rem;
 
       i,
       svg {
         font-size: 1rem;
       }
+
+      &.active {
+        color: $secondary;
+      }
+    }
+
+    hr {
+      margin: 0.5rem;
     }
   }
 }

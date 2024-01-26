@@ -67,5 +67,16 @@
       -webkit-appearance: initial;
       appearance: auto;
     }
+
+    ul {
+      margin-top: 0.5rem;
+
+      li {
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-align: center;
+        color: $danger;
+      }
+    }
   }
 }

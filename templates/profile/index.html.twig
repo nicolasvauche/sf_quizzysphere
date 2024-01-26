@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer mon Compte{% endblock %}
+{% block title %}Mon Compte{% endblock %}
 
 {% block body %}
     <section>
-        <h1>Créer mon compte</h1>
-        <p>Créez votre compte pour entrer dans la QuizzySphere. Vous serez connecté automatiquement, prêt à jouer !</p>
+        <h1>Mon Compte</h1>
+        <p>
+            Modifiez vos informations de profil ici. Laissez votre mot de passe <strong>vide</strong> si vous ne voulez
+            pas le changer.
+        </p>
     </section>
-
-    {{ form_errors(form) }}
 
     {{ form_start(form, {'attr': {'class': 'app-form'}}) }}
 
@@ -38,6 +39,15 @@
         <legend class="form-legend">Votre identité</legend>
 
         <div class="form-group">
+            <label for="{{ form.gender.vars.id }}"
+                   class="form-label {% if form.gender.vars.required %}required{% endif %}">
+                {{ form.gender.vars.label }}
+            </label>
+            {{ form_widget(form.gender) }}
+            {{ form_errors(form.gender) }}
+        </div>
+
+        <div class="form-group">
             <label for="{{ form.firstname.vars.id }}"
                    class="form-label {% if form.firstname.vars.required %}required{% endif %}">
                 {{ form.firstname.vars.label }}
@@ -54,28 +64,17 @@
             {{ form_widget(form.lastname) }}
             {{ form_errors(form.lastname) }}
         </div>
+
+        <div class="form-group">
+            <label for="{{ form.pseudo.vars.id }}"
+                   class="form-label {% if form.pseudo.vars.required %}required{% endif %}">
+                {{ form.pseudo.vars.label }}
+            </label>
+            {{ form_widget(form.pseudo) }}
+            {{ form_errors(form.pseudo) }}
+        </div>
     </fieldset>
 
-    <div class="form-group">
-        <label for="{{ form.agreeTerms.vars.id }}"
-               class="form-label {% if form.agreeTerms.vars.required %}required{% endif %}">
-            {{ form_widget(form.agreeTerms) }}
-            {{ form.agreeTerms.vars.label }}
-        </label>
-        {{ form_errors(form.agreeTerms) }}
-    </div>
-
-    <button type="submit" class="app-btn cta">Inscription</button>
-
-    <hr/>
-
-    <p class="text-center">
-        <strong>
-            <small>J'ai déjà mon compte dans la QuizzySphere :</small>
-        </strong>
-        <a href="{{ path('app_login') }}" class="app-btn">
-            Je me connecte
-        </a>
-    </p>
+    <button type="submit" class="app-btn cta">Enregistrer</button>
     {{ form_end(form) }}
 {% endblock %}

@@ -4,7 +4,7 @@
   z-index: 9998;
   @include displayFlex(space-between, center, 1rem);
   padding: 0.25rem 1rem;
-  background-color: $fifth;
+  background-color: $white;
 
   @import "../../components/logo";
   @import "../../components/sitename";

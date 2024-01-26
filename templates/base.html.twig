@@ -31,7 +31,8 @@
             <a href="{{ path('app_home') }}" class="app-sitename">Quizzy<span>Sphere</span></a>
 
             <nav class="app-navigation">
-                <a href="{{ path('app_home') }}" class="active">
+                <a href="{{ path('app_home') }}"
+                   {% if app.request.get('_route') == 'app_home' %}class="active"{% endif %}>
                     <i class="fa-solid fa-house-chimney"></i>
                     Accueil
                 </a>
@@ -53,10 +54,12 @@
                     <input type="checkbox"/>
                     <div class="dropdown-content">
                         {% if app.user %}
-                            <a href="#">
+                            <a href="{{ path('app_profile') }}"
+                               {% if app.request.get('_route') == 'app_profile' %}class="active"{% endif %}>
                                 <i class="fa-solid fa-address-card"></i>
                                 Mon compte
                             </a>
+                            <hr/>
                             <a href="{{ path('app_logout') }}"
                                class="text-danger"
                                onclick="return window.confirm('Vous partez déjà ?')">
