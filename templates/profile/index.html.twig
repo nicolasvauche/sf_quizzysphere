@@ -35,6 +35,19 @@
         </div>
     </fieldset>
 
+    {#<fieldset class="form-fieldset">
+        <legend class="form-legend">Votre Compte</legend>
+
+        <div class="form-group">
+            <label for="{{ form.userGroups.vars.id }}"
+                   class="form-label {% if form.userGroups.vars.required %}required{% endif %}">
+                {{ form.userGroups.vars.label }}
+            </label>
+            {{ form_widget(form.userGroups) }}
+            {{ form_errors(form.userGroups) }}
+        </div>
+    </fieldset>#}
+
     <fieldset class="form-fieldset">
         <legend class="form-legend">Votre identité</legend>
 
