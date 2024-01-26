@@ -25,6 +25,7 @@
     letter-spacing: 1px;
     text-decoration: none;
     color: $primary;
+    border-radius: 0.5rem;
 
     @include respondTo(sm) {
       font-size: 1.25rem;
@@ -45,7 +46,7 @@
       color: $secondary;
 
       @include respondTo(sm) {
-        color: $primary;
+        background-color: $white;
       }
     }
   }
