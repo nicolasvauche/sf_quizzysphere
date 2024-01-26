@@ -15,7 +15,8 @@
     background-color: transparent;
   }
 
-  a {
+  a,
+  .app-dropdown {
     flex: 1;
     display: block;
     padding: 0.25rem 0.5rem;
@@ -47,6 +48,20 @@
 
       @include respondTo(sm) {
         background-color: $white;
+      }
+    }
+
+    .dropdown-content {
+      bottom: 100%;
+
+      @include respondTo(sm) {
+        bottom: initial;
+        left: 0;
+        right: 0;
+      }
+
+      a {
+        font-size: 1rem;
       }
     }
   }

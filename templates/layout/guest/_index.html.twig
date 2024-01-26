@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header class="app-header">
+        <a href="{{ path('app_home') }}" class="app-logo">
+            <img src="{{ asset('img/logo.png') }}" alt="Logo QuizzySphere"/>
+        </a>
+
+        <a href="{{ path('app_home') }}" class="app-sitename">Quizzy<span>Sphere</span></a>
+
+        <nav class="app-profile">
+            <div class="app-dropdown">
+                <i class="fa-solid fa-circle-user"></i>
+                <input type="checkbox"/>
+                <div class="dropdown-content">
+                    <a href="{{ path('app_login') }}"
+                       {% if app.request.get('_route') == 'app_login' %}class="active"{% endif %}>
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Connexion
+                    </a>
+                    <a href="{{ path('app_register') }}"
+                       {% if app.request.get('_route') == 'app_register' %}class="active"{% endif %}>
+                        <i class="fa-solid fa-user-plus"></i>
+                        Inscription
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="app-main">
+        {% include 'layout/_alert.html.twig' %}
+
+        {% block main %}{% endblock %}
+    </main>
+{% endblock %}

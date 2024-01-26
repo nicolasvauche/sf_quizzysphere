@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'layout/admin/_header.html.twig' %}
+
+    <main class="app-main">
+        {% include 'layout/_alert.html.twig' %}
+
+        {% block main %}{% endblock %}
+    </main>
+{% endblock %}

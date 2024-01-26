@@ -1,0 +1,24 @@
+<nav class="app-navigation">
+    <a href="{{ path('app_home') }}"
+       {% if app.request.get('_route') == 'app_admin_index' %}class="active"{% endif %}>
+        <i class="fa-solid fa-house-chimney"></i>
+        Accueil
+    </a>
+
+    <div class="app-dropdown">
+        <i class="fa-solid fa-users"></i>
+        Utilisateurs
+        <input type="checkbox"/>
+        <div class="dropdown-content">
+            <a href="#"
+               {% if app.request.get('_route') == 'app_' %}class="active"{% endif %}>
+                <i class="fa-solid fa-users-viewfinder"></i>
+                Groupes Utilisateurs
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-users"></i>
+                Tous les Utilisateurs
+            </a>
+        </div>
+    </div>
+</nav>

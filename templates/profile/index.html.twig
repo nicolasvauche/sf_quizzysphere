@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends (is_granted('ROLE_ADMIN')) ? 'layout/admin/_index.html.twig' : 'layout/default/_index.html.twig' %}
 
 {% block title %}Mon Compte{% endblock %}
 
-{% block body %}
+{% block main %}
     <section>
         <h1>Mon Compte</h1>
         <p>
