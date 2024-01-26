@@ -10,13 +10,13 @@
         Utilisateurs
         <input type="checkbox"/>
         <div class="dropdown-content">
-            <a href="#"
-               {% if app.request.get('_route') == 'app_' %}class="active"{% endif %}>
+            <a href="{{ path('app_admin_usergroup_index') }}"
+               {% if 'app_admin_usergroup_' in app.request.get('_route') %}class="active"{% endif %}>
                 <i class="fa-solid fa-users-viewfinder"></i>
                 Groupes Utilisateurs
             </a>
             <a href="{{ path('app_admin_user_index') }}"
-               {% if 'app_admin_user' in app.request.get('_route') %}class="active"{% endif %}>
+               {% if 'app_admin_user_' in app.request.get('_route') %}class="active"{% endif %}>
                 <i class="fa-solid fa-users"></i>
                 Tous les Utilisateurs
             </a>

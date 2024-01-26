@@ -25,11 +25,11 @@ class UserType extends AbstractType
                 'label' => 'Groupes',
                 'class' => UserGroup::class,
                 'choice_label' => 'name',
+                'autocomplete' => true,
+                'multiple' => true,
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'autocomplete' => true,
-                'multiple' => true,
             ])
             ->add('email', EmailType::class, [
                 'required' => true,

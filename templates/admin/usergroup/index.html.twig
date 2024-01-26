@@ -1,0 +1,52 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Les Groupes Utilisateurs{% endblock %}
+
+{% block main %}
+    <section>
+        <h1>Les Groupes Utilisateurs</h1>
+        <p>Gérez les Groupes d'Utilisateurs de QuizzySphere.</p>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_usergroup_add') }}" class="text-success">
+            <i class="fa-solid fa-circle-plus"></i>
+            Nouveau
+        </a>
+    </section>
+
+    <section>
+        {% if userGroups | length > 0 %}
+            <dl>
+                {% for userGroup in userGroups %}
+                    <dt>
+                        {{ userGroup.name }}
+                    </dt>
+                    <dd>
+                        <strong>
+                            {{ userGroup.members | length }} Membre{% if userGroup.members | length > 1 %}s{% endif %}
+                        </strong>
+                        <br/>
+
+                        <a href="{{ path('app_admin_usergroup_show', {'id': userGroup.id}) }}" class="text-primary">
+                            <small>
+                                <i class="fa-solid fa-eye text-primary"></i>
+                                <strong>Détails</strong>
+                            </small>
+                        </a>
+                        <a href="{{ path('app_admin_usergroup_edit', {'id': userGroup.id}) }}" class="text-info">
+                            <small>
+                                <i class="fa-solid fa-pen-to-square text-info"></i>
+                                <strong>Modifier</strong>
+                            </small>
+                        </a>
+
+                        <hr/>
+                    </dd>
+                {% endfor %}
+            </dl>
+        {% else %}
+            <p class="text-center">Aucun groupe d'utilisateurs.</p>
+        {% endif %}
+    </section>
+{% endblock %}

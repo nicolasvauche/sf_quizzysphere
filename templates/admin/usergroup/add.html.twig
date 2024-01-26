@@ -1,0 +1,21 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Nouveau Groupe d'Utilisateurs{% endblock %}
+
+{% block main %}
+    <section>
+        <h1>Nouveau Groupe d'Utilisateurs</h1>
+        <p>
+            Ajoutez un nouveau Groupe d'Utilisateurs.
+        </p>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_usergroup_index') }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Retour à la liste
+        </a>
+    </section>
+
+    {{ include('admin/usergroup/_form.html.twig') }}
+{% endblock %}

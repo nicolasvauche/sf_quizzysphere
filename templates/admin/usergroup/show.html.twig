@@ -1,0 +1,52 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Fiche Groupe d'Utilisateurs{% endblock %}
+
+{% block main %}
+    <section>
+        <h1>Groupe : {{ userGroup.name }}</h1>
+        <p>
+            Consultez les informations de ce <strong>Groupe d'Utilisateurs</strong>, et les Quizzs que ses membres ont
+            réalisés.
+        </p>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_usergroup_index') }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Retour
+        </a>
+        <a href="{{ path('app_admin_usergroup_edit', {id: userGroup.id}) }}" class="text-info">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Modifier
+        </a>
+    </section>
+
+    <section>
+        <h2>Informations</h2>
+        <ul>
+            {% if userGroup.members | length > 0 %}
+                <li>
+                    <strong class="text-primary">
+                        {{ userGroup.members | length }} Membre{% if userGroup.members | length > 1 %}s{% endif %} :
+                    </strong>
+                    {% for user in userGroup.members %}
+                        {{ user.fullname }}{% if loop.index < userGroup.members | length %}, {% endif %}
+                    {% endfor %}
+                </li>
+            {% endif %}
+            <li>
+                <strong class="text-primary">Nom :</strong>
+                {{ userGroup.name }}
+            </li>
+            <li>
+                <strong class="text-primary">Créé le :</strong>
+                {{ userGroup.createdAt|date('d/m/Y à H:i') }}
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Quizzs réalisés</h2>
+    </section>
+{% endblock %}
