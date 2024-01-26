@@ -4,8 +4,6 @@
 
 @import "base/reset", "base/typography";
 
-@import "layout/default", "layout/grid";
+@import "layout/default", "layout/grid", "layout/form";
 
 @import "components/card", "components/button";
-
-@import "themes/default";

@@ -3,7 +3,7 @@
   display: block;
   padding: 0.25rem 0.5rem;
   text-align: center;
-  color: $fifth;
+  color: $primary;
   transition: all 0.3s;
 
   & > i,
@@ -38,16 +38,17 @@
     right: -1rem;
     display: none;
     white-space: nowrap;
-    background-color: $fourth;
+    background-color: $fifth;
     border-radius: 0.5rem;
+    border-bottom-right-radius: 0;
 
     a {
       @include displayFlex(null, center, 0.5rem);
       margin: 0.5rem 0;
       padding: 0.5rem 1.5rem;
-      font-weight: 500;
+      font-weight: 600;
       text-decoration: none;
-      color: $fifth;
+      color: $primary;
 
       i,
       svg {

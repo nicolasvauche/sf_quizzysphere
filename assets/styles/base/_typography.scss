@@ -1,7 +1,22 @@
-h1 {
+h1,
+h2 {
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
   font-weight: bold;
+  color: $primary;
+}
+
+h2 {
+  margin-bottom: 1rem;
+
+  &:after {
+    content: "";
+    display: block;
+    margin-top: 0.25rem;
+    width: 2.75rem;
+    border: 2px solid $fifth;
+    border-radius: 0.25rem;
+  }
 }
 
 p {
@@ -21,10 +36,12 @@ dl {
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
     font-weight: bold;
+    color: $primary;
 
     i,
     svg {
       margin-right: 0.25rem;
+      color: $fifth;
     }
   }
 
@@ -44,4 +61,8 @@ strong {
 
 small {
   font-size: 0.75em;
+}
+
+em {
+  font-style: italic;
 }

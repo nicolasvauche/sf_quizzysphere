@@ -3,14 +3,19 @@
   box-sizing: border-box;
   margin: 1rem 0;
   padding: 1rem 1.5rem;
+  width: 100%;
   font-size: 1.25rem;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
+  color: $primary;
+  background-color: $fourth;
   border: none;
   border-radius: 0.5rem;
 
   &.cta {
     font-size: 1.5rem;
+    color: $white;
+    background-color: $primary;
   }
 }

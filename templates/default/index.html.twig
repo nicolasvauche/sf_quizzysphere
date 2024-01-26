@@ -3,115 +3,212 @@
 {% block title %}Bienvenue{% endblock %}
 
 {% block body %}
-    <section>
-        <h1>Bienvenue dans la QuizzySphere !</h1>
+    {% if app.user %}
+        <section>
+            <h1>Bienvenue {{ app.user.username }} !</h1>
+            <p>
+                Vous êtes <strong>connecté</strong> avec le compte <em>{{ app.user.userIdentifier }}</em>.
+            </p>
+        </section>
 
-        <p>
-            Bienvenue dans le monde fascinant de <strong>QuizzySphere</strong>, l'application de quizz conçue pour
-            offrir une expérience interactive, éducative et entièrement personnalisable.
-        </p>
-    </section>
+        <section>
+            <div class="app-grid third">
+                <article class="app-card">
+                    <div class="card-header">
+                        <strong>Quizzs</strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="big">2</p>
+                    </div>
+                    <div class="card-footer">
+                        réalisés
+                    </div>
+                </article>
 
-    <section>
-        <div class="app-grid third">
-            <article class="app-card">
-                <div class="card-header">des questions</div>
-                <div class="card-body">
-                    <i class="fa-solid fa-globe fa-3x" aria-hidden="true"></i>
+                <article class="app-card">
+                    <div class="card-header">
+                        <strong>Note</strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="big">
+                            16,7<small>/20</small>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        moyenne
+                    </div>
+                </article>
+            </div>
+
+            <div class="app-grid third reverse">
+                <article class="app-card">
+                    <div class="card-header">
+                        <strong>Classement</strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="big">
+                            22<small>/57</small>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        général
+                    </div>
+                </article>
+
+                <article class="app-card">
+                    <div class="card-header">
+                        <strong>Cours</strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="big">1</p>
+                    </div>
+                    <div class="card-footer">
+                        suivis
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section>
+            <h2>Vos Quizzs en cours</h2>
+
+            <div class="app-grid">
+                <div class="app-card">
+                    <a href="#">
+                        <div class="card-header">
+                            <strong>
+                                <small>1/10</small>
+                            </strong>
+
+                            <i class="fa-solid fa-stopwatch"></i>
+                            <strong>
+                                <small>30s</small>
+                            </strong>
+                        </div>
+                        <div class="card-body">
+                            <p class="big">
+                                JavaScript
+                            </p>
+                            <strong>Développement web</strong>
+                        </div>
+                        <div class="card-footer">
+
+                        </div>
+                    </a>
                 </div>
-                <div class="card-footer">
-                    <strong>Universelles</strong>
-                </div>
-            </article>
+            </div>
+        </section>
+    {% else %}
+        <section>
+            <h1>Bienvenue dans la QuizzySphere !</h1>
 
-            <article class="app-card">
-                <div class="card-header">une application</div>
-                <div class="card-body">
-                    <i class="fa-solid fa-hand-pointer fa-3x" aria-hidden="true"></i>
-                </div>
-                <div class="card-footer">
-                    <strong>Interactive</strong>
-                </div>
-            </article>
-        </div>
+            <p>
+                Bienvenue dans le monde fascinant de <strong>QuizzySphere</strong>, l'application de quizz conçue pour
+                offrir une expérience interactive, éducative et entièrement personnalisable.
+            </p>
+        </section>
 
-        <div class="app-grid third reverse">
-            <article class="app-card">
-                <div class="card-header">un jeu</div>
-                <div class="card-body">
-                    <i class="fa-solid fa-brain fa-3x" aria-hidden="true"></i>
-                </div>
-                <div class="card-footer">
-                    <strong>Instructif</strong>
-                </div>
-            </article>
+        <section>
+            <div class="app-grid third">
+                <article class="app-card">
+                    <div class="card-header">des questions</div>
+                    <div class="card-body">
+                        <i class="fa-solid fa-globe fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-footer">
+                        <strong>Universelles</strong>
+                    </div>
+                </article>
 
-            <article class="app-card">
-                <div class="card-header">une expérience</div>
-                <div class="card-body">
-                    <i class="fa-solid fa-person-snowboarding fa-3x" aria-hidden="true"></i>
-                </div>
-                <div class="card-footer">
-                    <strong>Amusante</strong>
-                </div>
-            </article>
-        </div>
-    </section>
+                <article class="app-card">
+                    <div class="card-header">une application</div>
+                    <div class="card-body">
+                        <i class="fa-solid fa-hand-pointer fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-footer">
+                        <strong>Interactive</strong>
+                    </div>
+                </article>
+            </div>
 
-    <section class="text-center">
-        <a href="#" class="app-btn cta">Je m'inscris !</a>
-        ou
-        <a href="#" class="app-btn">Je me connecte</a>
-    </section>
+            <div class="app-grid third reverse">
+                <article class="app-card">
+                    <div class="card-header">un jeu</div>
+                    <div class="card-body">
+                        <i class="fa-solid fa-brain fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-footer">
+                        <strong>Instructif</strong>
+                    </div>
+                </article>
 
-    <section>
-        <dl>
-            <dt>
-                <i class="fa-solid fa-cubes"></i>
-                Diversité des Quizz
-            </dt>
-            <dd>
-                De la culture générale à la science, en passant par l'informatique,
-                la musique et l'histoire, QuizzySphere offre des quizz pour tous les
-                intérêts et tous les niveaux.
-            </dd>
+                <article class="app-card">
+                    <div class="card-header">une expérience</div>
+                    <div class="card-body">
+                        <i class="fa-solid fa-person-snowboarding fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-footer">
+                        <strong>Amusante</strong>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-            <dt>
-                <i class="fa-solid fa-cubes"></i>
-                Création de Quizz Personnalisés
-            </dt>
-            <dd>
-                Les utilisateurs peuvent créer leurs propres quizz, en choisissant
-                les thèmes, les questions, les options de réponses et le niveau de
-                difficulté.
-            </dd>
+        <section class="text-center">
+            <a href="#" class="app-btn cta">Je m'inscris !</a>
+            ou
+            <a href="{{ path('app_login') }}" class="app-btn">Je me connecte</a>
+        </section>
 
-            <dt>
-                <i class="fa-solid fa-cubes"></i>
-                Interface Intuitive et Adaptable
-            </dt>
-            <dd>
-                Naviguez facilement à travers une interface claire et réactive,
-                garantissant une expérience utilisateur fluide et agréable.
-            </dd>
+        <section>
+            <dl>
+                <dt>
+                    <i class="fa-solid fa-cubes"></i>
+                    Diversité des Quizz
+                </dt>
+                <dd>
+                    De la culture générale à la science, en passant par l'informatique,
+                    la musique et l'histoire, QuizzySphere offre des quizz pour tous les
+                    intérêts et tous les niveaux.
+                </dd>
 
-            <dt>
-                <i class="fa-solid fa-cubes"></i>
-                Points & Classements
-            </dt>
-            <dd>
-                Accumulez des points pour chaque bonne réponse et grimpez dans les
-                classements pour devenir un maître du quizz.
-            </dd>
+                <dt>
+                    <i class="fa-solid fa-cubes"></i>
+                    Création de Quizz Personnalisés
+                </dt>
+                <dd>
+                    Les utilisateurs peuvent créer leurs propres quizz, en choisissant
+                    les thèmes, les questions, les options de réponses et le niveau de
+                    difficulté.
+                </dd>
 
-            <dt>
-                <i class="fa-solid fa-cubes"></i>
-                Feedback Immédiat et Éducatif
-            </dt>
-            <dd>
-                Obtenez des explications détaillées après chaque réponse pour
-                enrichir vos connaissances.
-            </dd>
-        </dl>
-    </section>
+                <dt>
+                    <i class="fa-solid fa-cubes"></i>
+                    Interface Intuitive et Adaptable
+                </dt>
+                <dd>
+                    Naviguez facilement à travers une interface claire et réactive,
+                    garantissant une expérience utilisateur fluide et agréable.
+                </dd>
+
+                <dt>
+                    <i class="fa-solid fa-cubes"></i>
+                    Points & Classements
+                </dt>
+                <dd>
+                    Accumulez des points pour chaque bonne réponse et grimpez dans les
+                    classements pour devenir un maître du quizz.
+                </dd>
+
+                <dt>
+                    <i class="fa-solid fa-cubes"></i>
+                    Feedback Immédiat et Éducatif
+                </dt>
+                <dd>
+                    Obtenez des explications détaillées après chaque réponse pour
+                    enrichir vos connaissances.
+                </dd>
+            </dl>
+        </section>
+    {% endif %}
 {% endblock %}

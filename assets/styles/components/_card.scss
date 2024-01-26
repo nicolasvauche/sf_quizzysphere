@@ -1,6 +1,18 @@
 .app-card {
   @include displayFlex(space-between, center, 1rem, column);
   padding: 0.5rem;
-  background-color: $primary;
+  text-align: center;
+  background-color: $third;
   border-radius: 0.5rem;
+
+  &:has(a) {
+    display: block;
+    background-color: $fourth;
+
+    & > a {
+      @include displayFlex(space-between, center, 1rem, column);
+      text-decoration: none;
+      color: inherit;
+    }
+  }
 }

@@ -16,9 +16,7 @@
 
         <script src="https://kit.fontawesome.com/b916232238.js" crossorigin="anonymous"></script>
 
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
-        {% endblock %}
+        {% block stylesheets %}{% endblock %}
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -54,14 +52,27 @@
                     <i class="fa-solid fa-circle-user"></i>
                     <input type="checkbox"/>
                     <div class="dropdown-content">
-                        <a href="#">
-                            <i class="fa-solid fa-right-to-bracket"></i>
-                            Connexion
-                        </a>
-                        <a href="#">
-                            <i class="fa-solid fa-user-plus"></i>
-                            Inscription
-                        </a>
+                        {% if app.user %}
+                            <a href="#">
+                                <i class="fa-solid fa-address-card"></i>
+                                Mon compte
+                            </a>
+                            <a href="{{ path('app_logout') }}"
+                               class="text-danger"
+                               onclick="return window.confirm('Vous partez déjà ?')">
+                                <i class="fa-solid fa-person-through-window"></i>
+                                Déconnexion
+                            </a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                Connexion
+                            </a>
+                            <a href="#">
+                                <i class="fa-solid fa-user-plus"></i>
+                                Inscription
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </nav>

@@ -1,3 +1,17 @@
 .text-center {
   text-align: center !important;
 }
+
+.big {
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
+
+  small {
+    font-size: 0.5em;
+    opacity: 0.5;
+  }
+}
+
+.text-danger {
+  color: $danger !important;
+}
