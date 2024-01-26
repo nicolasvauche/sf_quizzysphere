@@ -1,0 +1,47 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Fiche Utilisateur{% endblock %}
+
+{% block main %}
+    <section>
+        <h1>Utilisateur : {{ user.fullname }}</h1>
+        <p>Consultez les informations de cet <strong>Utilisateur</strong>, et les Quizzs qu'il a réalisés.</p>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_user_index') }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Retour
+        </a>
+        <a href="{{ path('app_admin_user_edit', {id: user.id}) }}" class="text-info">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Modifier
+        </a>
+    </section>
+
+    <section>
+        <h2>Informations</h2>
+        <ul>
+            <li>
+                <strong class="text-primary">Nom :</strong>
+                {{ user.gender }} {{ user.firstname }} {{ user.lastname }}
+            </li>
+            <li>
+                <strong class="text-primary">Pseudo :</strong>
+                {{ user.pseudo }}
+            </li>
+            <li>
+                <strong class="text-primary">E-mail :</strong>
+                <a href="mailto:{{ user.userIdentifier }}">{{ user.userIdentifier }}</a>
+            </li>
+            <li>
+                <strong class="text-primary">Créé le :</strong>
+                {{ user.createdAt|date('d/m/Y à H:i') }}
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Quizzs réalisés</h2>
+    </section>
+{% endblock %}

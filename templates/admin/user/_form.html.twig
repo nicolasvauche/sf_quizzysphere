@@ -1,0 +1,75 @@
+{{ form_start(form, {'attr': {'class': 'app-form'}}) }}
+
+<fieldset class="form-fieldset">
+    <legend class="form-legend">Ses identifiants</legend>
+
+    <div class="form-group">
+        <label for="{{ form.email.vars.id }}"
+               class="form-label {% if form.email.vars.required %}required{% endif %}">
+            {{ form.email.vars.label }}
+        </label>
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.plainPassword.vars.id }}"
+               class="form-label {% if form.plainPassword.vars.required %}required{% endif %}">
+            {{ form.plainPassword.vars.label }}
+        </label>
+        {{ form_widget(form.plainPassword) }}
+        {{ form_errors(form.plainPassword) }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.active.vars.id }}"
+               class="form-label {% if form.active.vars.required %}required{% endif %}">
+            {{ form_widget(form.active) }}
+            {{ form.active.vars.label }}
+        </label>
+        {{ form_errors(form.active) }}
+    </div>
+</fieldset>
+
+<fieldset class="form-fieldset">
+    <legend class="form-legend">Son identité</legend>
+
+    <div class="form-group">
+        <label for="{{ form.gender.vars.id }}"
+               class="form-label {% if form.gender.vars.required %}required{% endif %}">
+            {{ form.gender.vars.label }}
+        </label>
+        {{ form_widget(form.gender) }}
+        {{ form_errors(form.gender) }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.firstname.vars.id }}"
+               class="form-label {% if form.firstname.vars.required %}required{% endif %}">
+            {{ form.firstname.vars.label }}
+        </label>
+        {{ form_widget(form.firstname) }}
+        {{ form_errors(form.firstname) }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.lastname.vars.id }}"
+               class="form-label {% if form.lastname.vars.required %}required{% endif %}">
+            {{ form.lastname.vars.label }}
+        </label>
+        {{ form_widget(form.lastname) }}
+        {{ form_errors(form.lastname) }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.pseudo.vars.id }}"
+               class="form-label {% if form.pseudo.vars.required %}required{% endif %}">
+            {{ form.pseudo.vars.label }}
+        </label>
+        {{ form_widget(form.pseudo) }}
+        {{ form_errors(form.pseudo) }}
+    </div>
+</fieldset>
+
+<button type="submit" class="app-btn cta">{{ button_label|default('Créer') }}</button>
+{{ form_end(form) }}

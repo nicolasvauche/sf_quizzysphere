@@ -7,4 +7,22 @@
         <h1>Administration</h1>
         <p>Gérez les paramètres, les Quizzs et les Utilisateurs.</p>
     </section>
+
+    <section>
+        <div class="app-grid third">
+            <article class="app-card">
+                <a href="{{ path('app_admin_user_index') }}">
+                    <div class="card-header">
+                        <strong>Utilisateur{% if users | length > 1 %}s{% endif %}</strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="big">{{ users | length }}</p>
+                    </div>
+                    <div class="card-footer">
+                        inscrit{% if users | length > 1 %}s{% endif %}
+                    </div>
+                </a>
+            </article>
+        </div>
+    </section>
 {% endblock %}

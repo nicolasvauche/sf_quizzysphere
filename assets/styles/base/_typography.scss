@@ -43,12 +43,6 @@ dl {
     font-size: 1.1rem;
     font-weight: bold;
     color: $primary;
-
-    i,
-    svg {
-      margin-right: 0.25rem;
-      color: $fifth;
-    }
   }
 
   dd {
@@ -58,6 +52,23 @@ dl {
     &:last-child {
       margin-bottom: 0;
     }
+
+    a {
+      margin-right: 1rem;
+      text-decoration: none;
+    }
+
+    i,
+    svg {
+      margin-right: 0.25rem;
+      color: $fifth;
+    }
+  }
+}
+
+ul {
+  li {
+    margin-bottom: 1rem;
   }
 }
 

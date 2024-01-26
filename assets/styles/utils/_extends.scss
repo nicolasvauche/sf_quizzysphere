@@ -1,7 +1,9 @@
+/** TEXT ALIGNMENTS **/
 .text-center {
   text-align: center !important;
 }
 
+/** TEXT SIZES **/
 .big {
   font-size: 2.5rem !important;
   font-weight: 600 !important;
@@ -12,6 +14,19 @@
   }
 }
 
+/** TEXT COLORS **/
+.text-success {
+  color: $success !important;
+}
+
+.text-info {
+  color: $info !important;
+}
+
 .text-danger {
   color: $danger !important;
+}
+
+.text-primary {
+  color: $primary !important;
 }

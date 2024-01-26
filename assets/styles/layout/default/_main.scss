@@ -18,5 +18,25 @@
     &:last-child {
       padding-bottom: 2rem;
     }
+
+    &.controls {
+      @include displayFlex(center, center, 1.5rem);
+      padding: 0 1rem;
+      background-color: rgba($success, 0.15);
+
+      a {
+        flex: 1;
+        @include displayFlex(center, center, 0.25rem);
+        padding: 0.5rem 0.5rem;
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-decoration: none;
+
+        i,
+        svg {
+          font-size: 1.5rem;
+        }
+      }
+    }
   }
 }
