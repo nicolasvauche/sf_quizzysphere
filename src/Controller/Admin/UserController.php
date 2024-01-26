@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\UserGroup;
 use App\Form\Admin\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,6 +39,18 @@ class UserController extends AbstractController
                 )
             );
 
+            $formUserGroups = $form->get('userGroups')->getData();
+
+            foreach($entityManager->getRepository(UserGroup::class)->findAll() as $mainUserGroup) {
+                if($formUserGroups->contains($mainUserGroup)) {
+                    $mainUserGroup->addMember($user);
+                    $entityManager->persist($mainUserGroup);
+                } else {
+                    $mainUserGroup->removeMember($user);
+                    $entityManager->persist($mainUserGroup);
+                }
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -64,10 +77,23 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserType::class, $user, [
             'mode' => 'edit',
+            'userGroups' => $entityManager->getRepository(UserGroup::class)->findByNotAdmin(),
         ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $formUserGroups = $form->get('userGroups')->getData();
+
+            foreach($entityManager->getRepository(UserGroup::class)->findAll() as $mainUserGroup) {
+                if($formUserGroups->contains($mainUserGroup)) {
+                    $mainUserGroup->addMember($user);
+                    $entityManager->persist($mainUserGroup);
+                } else {
+                    $mainUserGroup->removeMember($user);
+                    $entityManager->persist($mainUserGroup);
+                }
+            }
+
             $entityManager->flush();
 
             $this->addFlash('success', "L'utilisateur {$user->getFullname()} a été modifié");

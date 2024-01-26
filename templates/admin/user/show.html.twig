@@ -22,6 +22,16 @@
     <section>
         <h2>Informations</h2>
         <ul>
+            {% if user.userGroups | length > 0 %}
+                <li>
+                    <strong class="text-primary">
+                        Groupe{% if user.userGroups | length > 1 %}s{% endif %} :
+                    </strong>
+                    {% for userGroup in user.userGroups %}
+                        {{ userGroup.name }}{% if loop.index < user.userGroups | length %}, {% endif %}
+                    {% endfor %}
+                </li>
+            {% endif %}
             <li>
                 <strong class="text-primary">Nom :</strong>
                 {{ user.gender }} {{ user.firstname }} {{ user.lastname }}

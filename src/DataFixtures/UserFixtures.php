@@ -20,7 +20,8 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $user = new User();
-        $user->setFirstname('Administrateur')
+        $user->addUserGroup($this->getReference('usergroup-administrateurs'))
+            ->setFirstname('Administrateur')
             ->setLastname('Système')
             ->setPseudo('admin')
             ->setEmail('admin@quizzysphere.com')
@@ -31,7 +32,8 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('user-admin', $user);
 
         $user = new User();
-        $user->setGender('Monsieur')
+        $user->addUserGroup($this->getReference('usergroup-testeurs'))
+            ->setGender('Monsieur')
             ->setFirstname('Nicolas')
             ->setLastname('Vauché')
             ->setPseudo('nicolasvauche')
@@ -46,6 +48,6 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
 
     public function getOrder(): int
     {
-        return 1;
+        return 2;
     }
 }

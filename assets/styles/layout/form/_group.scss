@@ -1,0 +1,57 @@
+.form-group {
+  margin-bottom: 1.5rem;
+
+  .form-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: $primary;
+
+    &.required {
+      &:after {
+        content: "*";
+        color: $danger;
+      }
+    }
+  }
+
+  .form-control {
+    display: block;
+    box-sizing: border-box;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    font-family: $fontPrimary;
+    font-size: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:valid {
+      color: $success;
+    }
+
+    &:invalid {
+      color: $danger;
+    }
+  }
+
+  .form-checkbox {
+    -webkit-appearance: initial;
+    appearance: auto;
+  }
+
+  ul {
+    margin-top: 0.5rem;
+
+    li {
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-align: center;
+      color: $danger;
+    }
+  }
+}

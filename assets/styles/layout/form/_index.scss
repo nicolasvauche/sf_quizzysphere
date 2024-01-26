@@ -1,82 +1,9 @@
 .app-form {
   padding: 1.5rem 1rem;
 
-  .form-fieldset {
-    margin: 1rem 0 2rem;
-    padding: 1.5rem;
-    background-color: rgba($primary, 0.15);
-    border-radius: 0.5rem;
+  @import "./fieldset";
 
-    &:has(.form-legend) {
-      border-top-left-radius: 0;
-    }
+  @import "./group";
 
-    .form-legend {
-      padding: 0.5rem 1rem;
-      font-weight: bold;
-      color: $primary;
-      background-color: rgba($primary, 0.15);
-      border-top-left-radius: 0.5rem;
-      border-top-right-radius: 0.5rem;
-      transform: translate(-1.5rem, -1rem);
-    }
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-
-    .form-label {
-      display: block;
-      margin-bottom: 0.25rem;
-      font-weight: 600;
-      line-height: 1.5rem;
-      color: $primary;
-
-      &.required {
-        &:after {
-          content: "*";
-          color: $danger;
-        }
-      }
-    }
-
-    .form-control {
-      display: block;
-      box-sizing: border-box;
-      padding: 0.75rem 1rem;
-      width: 100%;
-      font-family: $fontPrimary;
-      font-size: 1rem;
-      border: 1px solid transparent;
-      border-radius: 0.5rem;
-
-      &:focus {
-        outline: none;
-      }
-
-      &:valid {
-        color: $success;
-      }
-
-      &:invalid {
-        color: $danger;
-      }
-    }
-
-    .form-checkbox {
-      -webkit-appearance: initial;
-      appearance: auto;
-    }
-
-    ul {
-      margin-top: 0.5rem;
-
-      li {
-        font-size: 0.75rem;
-        font-weight: bold;
-        text-align: center;
-        color: $danger;
-      }
-    }
-  }
+  @import "./autocomplete";
 }

@@ -3,6 +3,8 @@
 namespace App\Form\Admin;
 
 use App\Entity\User;
+use App\Entity\UserGroup;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,6 +20,17 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('userGroups', EntityType::class, [
+                'required' => false,
+                'label' => 'Groupes',
+                'class' => UserGroup::class,
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'autocomplete' => true,
+                'multiple' => true,
+            ])
             ->add('email', EmailType::class, [
                 'required' => true,
                 'label' => 'Adresse e-mail',
@@ -87,6 +100,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'userGroups' => [],
             'mode' => 'add',
         ]);
     }

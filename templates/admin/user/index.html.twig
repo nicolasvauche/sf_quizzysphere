@@ -23,10 +23,17 @@
                         {{ user.fullname }}
                     </dt>
                     <dd>
-                        <small>
-                            <strong>Inscrit le</strong> {{ user.createdAt | date('d/m/Y') }}
-                        </small>
+                        {% if user.userGroups | length > 0 %}
+                            <strong>Groupe{% if user.userGroups | length > 1 %}s{% endif %}</strong>
+                            {% for userGroup in user.userGroups %}
+                                {{ userGroup.name }}{% if loop.index < user.userGroups | length %}, {% endif %}
+                            {% endfor %}
+                            <br/>
+                        {% endif %}
+
+                        <strong>Inscrit le</strong> {{ user.createdAt | date('d/m/Y') }}
                         <br/>
+
                         <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="text-primary">
                             <small>
                                 <i class="fa-solid fa-eye text-primary"></i>
@@ -39,6 +46,7 @@
                                 <strong>Modifier</strong>
                             </small>
                         </a>
+
                         <hr/>
                     </dd>
                 {% endfor %}
