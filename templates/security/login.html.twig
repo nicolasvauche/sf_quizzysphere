@@ -5,12 +5,11 @@
 {% block body %}
     <section>
         <h1>Connectez-vous</h1>
+        <p>Et entrez dans la QuizzySphere !</p>
+    </section>
 
-        <form method="post" class="app-form">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-
+    <form method="post" class="app-form">
+        <fieldset class="form-fieldset">
             <div class="form-group">
                 <label for="inputEmail" class="form-label required">Adresse e-mail</label>
                 <input type="email"
@@ -32,10 +31,21 @@
                        autocomplete="current-password"
                        required>
             </div>
+        </fieldset>
 
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <button class="app-btn cta" type="submit">Connexion</button>
-        </form>
-    </section>
+        <button class="app-btn cta" type="submit">Connexion</button>
+
+        <hr/>
+
+        <p class="text-center">
+            <strong>
+                <small>Je n'ai pas encore mon compte dans la QuizzySphere :</small>
+                <a href="{{ path('app_register') }}" class="app-btn">
+                    Je m'inscris
+                </a>
+            </strong>
+        </p>
+    </form>
 {% endblock %}

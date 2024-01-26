@@ -68,7 +68,7 @@
                                 <i class="fa-solid fa-right-to-bracket"></i>
                                 Connexion
                             </a>
-                            <a href="#">
+                            <a href="{{ path('app_register') }}">
                                 <i class="fa-solid fa-user-plus"></i>
                                 Inscription
                             </a>
@@ -79,6 +79,8 @@
         </header>
 
         <main class="app-main">
+            {% include 'layout/_alert.html.twig' %}
+
             {% block body %}{% endblock %}
         </main>
     </body>

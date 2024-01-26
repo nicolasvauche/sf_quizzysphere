@@ -14,9 +14,15 @@ h2 {
     display: block;
     margin-top: 0.25rem;
     width: 2.75rem;
-    border: 2px solid $fifth;
+    border: 2px solid $secondary;
     border-radius: 0.25rem;
   }
+}
+
+hr {
+  margin: 1.5rem 0 1rem;
+  border-color: $fourth;
+  border-radius: 0.25rem;
 }
 
 p {
