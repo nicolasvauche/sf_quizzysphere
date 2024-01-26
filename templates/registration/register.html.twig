@@ -5,7 +5,10 @@
 {% block main %}
     <section>
         <h1>Créer mon compte</h1>
-        <p>Créez votre compte pour entrer dans la QuizzySphere. Vous serez connecté automatiquement, prêt à jouer !</p>
+        <p>
+            Créez votre compte et rejoignez la QuizzySphere. Vous serez <strong>connecté</strong> automatiquement, prêt
+            à jouer !
+        </p>
     </section>
 
     {{ form_errors(form) }}
@@ -60,7 +63,9 @@
         <label for="{{ form.agreeTerms.vars.id }}"
                class="form-label {% if form.agreeTerms.vars.required %}required{% endif %}">
             {{ form_widget(form.agreeTerms) }}
-            {{ form.agreeTerms.vars.label }}
+            <a href="{{ path('app_cgu') }}">
+                {{ form.agreeTerms.vars.label }}
+            </a>
         </label>
         {{ form_errors(form.agreeTerms) }}
     </div>

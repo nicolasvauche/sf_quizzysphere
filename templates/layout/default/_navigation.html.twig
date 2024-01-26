@@ -1,0 +1,17 @@
+<nav class="app-navigation">
+    <a href="{{ path('app_home') }}"
+       {% if app.request.get('_route') == 'app_home' %}class="active"{% endif %}>
+        <i class="fa-solid fa-house-chimney"></i>
+        Accueil
+    </a>
+
+    <a href="#">
+        <i class="fa-solid fa-earth-americas"></i>
+        Quizz
+    </a>
+
+    <a href="#">
+        <i class="fa-solid fa-circle-play"></i>
+        Cours
+    </a>
+</nav>

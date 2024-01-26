@@ -14,7 +14,13 @@ class DefaultController extends AbstractController
         if($this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('app_admin_index');
         }
-        
+
         return $this->render('default/index.html.twig');
+    }
+
+    #[Route('/cgu', name: 'app_cgu')]
+    public function cgu(): Response
+    {
+        return $this->render('default/cgu.html.twig');
     }
 }

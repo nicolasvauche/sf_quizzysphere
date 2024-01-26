@@ -1,0 +1,9 @@
+<header class="app-header">
+    <a href="{{ path('app_home') }}" class="app-logo">
+        <img src="{{ asset('img/logo.png') }}" alt="Logo QuizzySphere"/>
+    </a>
+
+    <a href="{{ path('app_home') }}" class="app-sitename">Quizzy<span>Sphere</span></a>
+
+    {% include 'layout/guest/_profile.html.twig' %}
+</header>

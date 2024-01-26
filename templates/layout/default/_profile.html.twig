@@ -1,0 +1,31 @@
+<nav class="app-profile">
+    <div class="app-dropdown">
+        <i class="fa-solid fa-circle-user"></i>
+        <input type="checkbox"/>
+        <div class="dropdown-content">
+            {% if app.user %}
+                <a href="{{ path('app_profile') }}"
+                   {% if app.request.get('_route') == 'app_profile' %}class="active"{% endif %}>
+                    <i class="fa-solid fa-address-card"></i>
+                    Mon compte
+                </a>
+                <hr/>
+                <a href="{{ path('app_logout') }}"
+                   class="text-danger"
+                   onclick="return window.confirm('Vous partez déjà ?')">
+                    <i class="fa-solid fa-person-through-window"></i>
+                    Déconnexion
+                </a>
+            {% else %}
+                <a href="{{ path('app_login') }}">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Connexion
+                </a>
+                <a href="{{ path('app_register') }}">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Inscription
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
