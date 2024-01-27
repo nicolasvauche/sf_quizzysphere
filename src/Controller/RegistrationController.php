@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Settings;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use App\Security\LoginFormAuthenticator;
@@ -16,7 +17,11 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(Request                     $request,
+                             UserPasswordHasherInterface $userPasswordHasher,
+                             UserAuthenticatorInterface  $userAuthenticator,
+                             LoginFormAuthenticator      $authenticator,
+                             EntityManagerInterface      $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -30,6 +35,11 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setActive(true);
+
+            $settings = $entityManager->getRepository(Settings::class)->find(1);
+            if($settings->getDefaultUserGroup() !== null) {
+                $user->addUserGroup($settings->getDefaultUserGroup());
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();
