@@ -19,7 +19,7 @@ class UserController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         return $this->render('admin/user/index.html.twig', [
-            'users' => $entityManager->getRepository(User::class)->findByNotAdmin(),
+            'users' => $entityManager->getRepository(User::class)->findAll(),
         ]);
     }
 

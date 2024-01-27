@@ -1,0 +1,149 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Fiche Catégorie de Quizzs{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        {% if quizzCategory.cover %}
+            <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.cover) }}" alt="{{ quizzCategory.name }}"/>
+        {% else %}
+            <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+        {% endif %}
+
+        <h1>
+            <small>Catégorie de Quizzs :</small>
+            <br/>
+            {{ quizzCategory.name }}
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_quizzcategory_index') }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Retour
+        </a>
+        <a href="#" class="text-info">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Modifier
+        </a>
+    </section>
+
+    {% if false %}
+        <section>
+            <h2>Quizzs</h2>
+
+        </section>
+    {% endif %}
+
+    {% if quizzCategory.parent %}
+        <section class="alt">
+            <h2>Catégorie Parente</h2>
+
+            <dl>
+                <dt>{{ quizzCategory.parent.name }}</dt>
+                <dd>
+                    <figure>
+                        {% if quizzCategory.parent.cover %}
+                            <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.parent.cover) }}"
+                                 alt="{{ quizzCategory.parent.name }}"/>
+                        {% else %}
+                            <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+                        {% endif %}
+                    </figure>
+
+                    <p>
+                        {% set quizzs = [] %}
+                        <i class="fa-solid fa-globe text-fourth"></i>
+                        <strong class="text-center">
+                            {{ quizzs | length }}
+                            Quizz{% if quizzs | length > 1 %}s{% endif %}
+                        </strong>
+
+                        <br/>
+
+                        <i class="fa-solid fa-boxes-packing text-fourth"></i>
+                        <strong class="text-center">
+                            {{ quizzCategory.parent.children | length }}
+                            Sous-Catégorie{% if quizzCategory.parent.children | length > 1 %}s{% endif %}
+                        </strong>
+                    </p>
+
+                    <div class="app-grid two">
+                        <a href="{{ path('app_admin_quizzcategory_show', {'id': quizzCategory.parent.id}) }}"
+                           class="app-btn">
+                            <small>
+                                <i class="fa-solid fa-eye text-primary"></i>
+                                <strong>Détails</strong>
+                            </small>
+                        </a>
+                        <a href="#" class="app-btn text-info">
+                            <small>
+                                <i class="fa-solid fa-pen-to-square text-info"></i>
+                                <strong>Modifier</strong>
+                            </small>
+                        </a>
+                    </div>
+                </dd>
+            </dl>
+        </section>
+    {% endif %}
+
+    {% if quizzCategory.children | length > 0 %}
+        <section>
+            <h2>Sous-Catégories</h2>
+
+            <dl>
+                {% for child in quizzCategory.children %}
+                    <dt>{{ child.name }}</dt>
+                    <dd>
+                        <figure>
+                            {% if child.cover %}
+                                <img src="{{ asset('uploads/quizz_category/' ~ child.cover) }}"
+                                     alt="{{ child.name }}"/>
+                            {% else %}
+                                <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+                            {% endif %}
+                        </figure>
+
+                        <p>
+                            {% set quizzs = [] %}
+                            <i class="fa-solid fa-globe text-fourth"></i>
+                            <strong class="text-center">
+                                {{ quizzs | length }}
+                                Quizz{% if quizzs | length > 1 %}s{% endif %}
+                            </strong>
+
+                            <br/>
+
+                            <i class="fa-solid fa-boxes-packing text-fourth"></i>
+                            <strong class="text-center">
+                                {{ child.children | length }}
+                                Sous-Catégorie{% if child.children | length > 1 %}s{% endif %}
+                            </strong>
+                        </p>
+
+                        <div class="app-grid two">
+                            <a href="{{ path('app_admin_quizzcategory_show', {'id': child.id}) }}"
+                               class="app-btn">
+                                <small>
+                                    <i class="fa-solid fa-eye text-primary"></i>
+                                    <strong>Détails</strong>
+                                </small>
+                            </a>
+                            <a href="#" class="app-btn text-info">
+                                <small>
+                                    <i class="fa-solid fa-pen-to-square text-info"></i>
+                                    <strong>Modifier</strong>
+                                </small>
+                            </a>
+                        </div>
+
+                        {% if loop.index != quizzCategory.children | length %}
+                            <hr/>
+                        {% endif %}
+                    </dd>
+                {% endfor %}
+            </dl>
+        </section>
+    {% endif %}
+{% endblock %}

@@ -21,6 +21,6 @@ class SettingsService
 
     public function getDefaultUserGroup()
     {
-        return $this->getSettings()->getDefaultUserGroup();
+        return $this->getSettings()?->getDefaultUserGroup();
     }
 }

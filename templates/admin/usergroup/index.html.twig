@@ -3,9 +3,14 @@
 {% block title %}Les Groupes Utilisateurs{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Les Groupes Utilisateurs</h1>
-        <p>Gérez les Groupes d'Utilisateurs de QuizzySphere.</p>
+    <section class="bg-image">
+        <img src="{{ asset('img/usergroups_cover.png') }}" alt="Les Groupes d'Utilisateurs"/>
+
+        <h1>
+            <small>Les Utilisateurs :</small>
+            <br/>
+            {{ userGroups | length }} Groupe{% if userGroups | length > 1 %}s{% endif %} d'Utilisateurs
+        </h1>
     </section>
 
     <section class="controls">
@@ -28,25 +33,34 @@
                         {% endif %}
                     </dt>
                     <dd>
-                        <strong>
-                            {{ userGroup.members | length }} Membre{% if userGroup.members | length > 1 %}s{% endif %}
-                        </strong>
-                        <br/>
+                        <p>
+                            <i class="fa-solid fa-globe text-fourth"></i>
+                            <strong>
+                                {{ userGroup.members | length }}
+                                Membre{% if userGroup.members | length > 1 %}s{% endif %}
+                            </strong>
+                        </p>
 
-                        <a href="{{ path('app_admin_usergroup_show', {'id': userGroup.id}) }}" class="text-primary">
-                            <small>
-                                <i class="fa-solid fa-eye text-primary"></i>
-                                <strong>Détails</strong>
-                            </small>
-                        </a>
-                        <a href="{{ path('app_admin_usergroup_edit', {'id': userGroup.id}) }}" class="text-info">
-                            <small>
-                                <i class="fa-solid fa-pen-to-square text-info"></i>
-                                <strong>Modifier</strong>
-                            </small>
-                        </a>
+                        <div class="app-grid two">
+                            <a href="{{ path('app_admin_usergroup_show', {'id': userGroup.id}) }}"
+                               class="app-btn">
+                                <small>
+                                    <i class="fa-solid fa-eye text-primary"></i>
+                                    <strong>Détails</strong>
+                                </small>
+                            </a>
+                            <a href="{{ path('app_admin_usergroup_edit', {'id': userGroup.id}) }}"
+                               class="app-btn text-info">
+                                <small>
+                                    <i class="fa-solid fa-pen-to-square text-info"></i>
+                                    <strong>Modifier</strong>
+                                </small>
+                            </a>
+                        </div>
 
-                        <hr/>
+                        {% if loop.index != userGroups | length %}
+                            <hr/>
+                        {% endif %}
                     </dd>
                 {% endfor %}
             </dl>

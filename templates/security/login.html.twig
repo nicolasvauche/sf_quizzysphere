@@ -3,9 +3,13 @@
 {% block title %}Authentification{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Connectez-vous</h1>
-        <p>Et entrez dans la QuizzySphere !</p>
+    <section class="bg-image">
+        <img src="{{ asset('img/login_cover.png') }}" alt="Connexion"/>
+
+        <h1>
+            <small>Rejoindre la QuizzySphere :</small>
+            Connectez-vous
+        </h1>
     </section>
 
     <form method="post" class="app-form">

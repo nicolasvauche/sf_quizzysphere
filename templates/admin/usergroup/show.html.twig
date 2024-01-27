@@ -3,12 +3,19 @@
 {% block title %}Fiche Groupe d'Utilisateurs{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Groupe : {{ userGroup.name }}</h1>
-        <p>
-            Consultez les informations de ce <strong>Groupe d'Utilisateurs</strong>, et les Quizzs que ses membres ont
-            réalisés.
-        </p>
+    <section class="bg-image">
+        <img src="{{ asset('img/usergroups_cover.png') }}" alt="Les Groupes d'Utilisateurs"/>
+
+        <h1>
+            <small>Groupe d'Utilisateurs :</small>
+            <br/>
+            {{ userGroup.name }}
+            {% if app_settings.getDefaultUserGroup() == userGroup %}
+                <small>
+                    <i class="fa-solid fa-sliders text-warning"></i>
+                </small>
+            {% endif %}
+        </h1>
     </section>
 
     <section class="controls">
@@ -25,28 +32,74 @@
     <section>
         <h2>Informations</h2>
         <ul>
-            {% if userGroup.members | length > 0 %}
-                <li>
-                    <strong class="text-primary">
-                        {{ userGroup.members | length }} Membre{% if userGroup.members | length > 1 %}s{% endif %} :
-                    </strong>
-                    {% for user in userGroup.members %}
-                        {{ user.fullname }}{% if loop.index < userGroup.members | length %}, {% endif %}
-                    {% endfor %}
-                </li>
-            {% endif %}
-            <li>
-                <strong class="text-primary">Nom :</strong>
-                {{ userGroup.name }}
-            </li>
             <li>
                 <strong class="text-primary">Créé le :</strong>
                 {{ userGroup.createdAt|date('d/m/Y à H:i') }}
             </li>
+            {% if userGroup.members | length == 0 %}
+                <li>
+                    <strong class="text-primary">Aucun membre</strong>
+                </li>
+            {% endif %}
         </ul>
     </section>
 
-    <section>
-        <h2>Quizzs réalisés</h2>
-    </section>
+    {% if userGroup.members | length > 0 %}
+        <section>
+            <h2>
+                {{ userGroup.members | length }}
+                Membre{% if userGroup.members | length > 1 %}s{% endif %}
+            </h2>
+
+            <dl>
+                {% for user in userGroup.members %}
+                    <dt>
+                        {{ user.fullname }}
+                    </dt>
+                    <dd>
+                        <p>
+                            <i class="fa-solid fa-globe text-fourth"></i>
+                            {% if user.userGroups | length > 0 %}
+                                <strong class="text-primary">
+                                    Groupe{% if user.userGroups | length > 1 %}s{% endif %} :
+                                </strong>
+                                {% for userGroup in user.userGroups %}
+                                    <a href="{{ path('app_admin_usergroup_show', {'id': userGroup.id}) }}">
+                                        {{ userGroup.name }}{% if loop.index < user.userGroups | length %}, {% endif %}
+                                    </a>
+                                {% endfor %}
+                            {% endif %}
+
+                            <br/>
+
+                            <i class="fa-regular fa-calendar-days text-fourth"></i>
+                            <strong class="text-primary">Inscrit le :</strong> {{ user.createdAt | date('d/m/Y') }}
+                        </p>
+
+                        <div class="app-grid two">
+                            <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="app-btn">
+                                <small>
+                                    <i class="fa-solid fa-eye text-primary"></i>
+                                    <strong>Détails</strong>
+                                </small>
+                            </a>
+                            {% if user != app.user %}
+                                <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}"
+                                   class="app-btn text-info">
+                                    <small>
+                                        <i class="fa-solid fa-pen-to-square text-info"></i>
+                                        <strong>Modifier</strong>
+                                    </small>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        {% if loop.index != userGroup.members | length %}
+                            <hr/>
+                        {% endif %}
+                    </dd>
+                {% endfor %}
+            </dl>
+        </section>
+    {% endif %}
 {% endblock %}

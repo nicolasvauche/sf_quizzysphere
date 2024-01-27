@@ -3,11 +3,13 @@
 {% block title %}Modifier un Groupe d'Utilisateurs{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Modifier {{ userGroup.name }}</h1>
-        <p>
-            Modifiez les informations d'un groupe d'utilisateurs ici.
-        </p>
+    <section class="bg-image">
+        <img src="{{ asset('img/usergroups_cover.png') }}" alt="Les Groupes d'Utilisateurs"/>
+
+        <h1>
+            <small>Modifier un Groupe d'Utilisateurs :</small>
+            {{ userGroup.name }}
+        </h1>
     </section>
 
     <section class="controls">

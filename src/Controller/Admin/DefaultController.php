@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\QuizzCategory;
 use App\Entity\User;
 use App\Entity\UserGroup;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,6 +19,8 @@ class DefaultController extends AbstractController
         return $this->render('admin/index.html.twig', [
             'users' => $entityManager->getRepository(User::class)->findByNotAdmin(),
             'userGroups' => $entityManager->getRepository(UserGroup::class)->findAll(),
+            'quizzs' => [],
+            'quizzCategories' => $entityManager->getRepository(QuizzCategory::class)->findAll(),
         ]);
     }
 }

@@ -3,12 +3,14 @@
 {% block title %}Modifier un Utilisateur{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Modifier {{ user.fullname }}</h1>
-        <p>
-            Modifiez les informations d'un utilisateur ici. Laissez le mot de passe <strong>vide</strong> si vous ne
-            voulez pas le changer.
-        </p>
+    <section class="bg-image">
+        <img src="{{ asset('img/users_cover.png') }}" alt="Les Utilisateurs"/>
+
+        <h1>
+            <small>Modifier un Utilisateur :</small>
+            <br/>
+            {{ user.fullname }}
+        </h1>
     </section>
 
     <section class="controls">

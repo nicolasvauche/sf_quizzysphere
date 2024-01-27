@@ -3,37 +3,80 @@
 {% block title %}Administration{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Administration</h1>
-        <p>Gérez les Paramètres de l'application, les Quizzs, les Cours et les Utilisateurs.</p>
+    <section class="bg-image">
+        <img src="{{ asset('img/home_cover.png') }}" alt="Administration de QuizzySphere"/>
+
+        <h1>
+            <small>Administration :</small>
+            <br/>
+            Tableau de bord
+        </h1>
+    </section>
+
+    <section class="alt">
+        <p>
+            Bienvenue <strong>{{ app.user.fullname }}</strong> !
+            <br/>
+            Vous êtes connecté avec le compte <em>{{ app.user.userIdentifier }}</em>.
+        </p>
     </section>
 
     <section>
         <div class="app-grid third">
             <article class="app-card">
-                <a href="{{ path('app_admin_user_index') }}">
+                <a href="{{ path('app_admin_usergroup_index') }}">
                     <div class="card-header">
-                        <strong>Utilisateur{% if users | length > 1 %}s{% endif %}</strong>
+                        <strong>Groupe{% if userGroups | length > 1 %}s{% endif %}</strong>
                     </div>
-                    <div class="card-body">
-                        <p class="big">{{ users | length }}</p>
+                    <div class="card-body text-primary">
+                        <p class="big">{{ userGroups | length }}</p>
                     </div>
                     <div class="card-footer">
-                        inscrit{% if users | length > 1 %}s{% endif %}
+                        <small>créé{% if userGroups | length > 1 %}s{% endif %}</small>
                     </div>
                 </a>
             </article>
 
             <article class="app-card">
-                <a href="{{ path('app_admin_usergroup_index') }}">
+                <a href="{{ path('app_admin_user_index') }}">
                     <div class="card-header">
-                        <strong>Groupe{% if userGroups | length > 1 %}s{% endif %} d'Utilisateurs</strong>
+                        <strong>Utilisateur{% if users | length > 1 %}s{% endif %}</strong>
                     </div>
-                    <div class="card-body">
-                        <p class="big">{{ userGroups | length }}</p>
+                    <div class="card-body text-primary">
+                        <p class="big">{{ users | length }}</p>
                     </div>
                     <div class="card-footer">
-                        créé{% if userGroups | length > 1 %}s{% endif %}
+                        <small>inscrit{% if users | length > 1 %}s{% endif %}</small>
+                    </div>
+                </a>
+            </article>
+        </div>
+
+        <div class="app-grid third reverse">
+            <article class="app-card">
+                <a href="{{ path('app_admin_quizzcategory_index') }}">
+                    <div class="card-header">
+                        <strong>Catégorie{% if quizzCategories | length > 1 %}s{% endif %}</strong>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="big">{{ quizzCategories | length }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small>créée{% if quizzCategories | length > 1 %}s{% endif %}</small>
+                    </div>
+                </a>
+            </article>
+
+            <article class="app-card">
+                <a href="#">
+                    <div class="card-header">
+                        <strong>Quizz{% if quizzs | length > 1 %}s{% endif %}</strong>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="big">{{ quizzs | length }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small>en ligne</small>
                     </div>
                 </a>
             </article>

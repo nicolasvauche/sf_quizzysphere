@@ -3,6 +3,8 @@
 .idea/
 quizzyspherenew.crt
 quizzyspherenew.key
+public/uploads/quizz_category/*
+!public/uploads/quizz_category/.gitkeep
 ###< quizzysphere/local ###
 
 ###> symfony/framework-bundle ###

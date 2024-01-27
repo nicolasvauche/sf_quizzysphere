@@ -3,9 +3,14 @@
 {% block title %}Les Utilisateurs{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Les Utilisateurs</h1>
-        <p>Gérez les Utilisateurs de QuizzySphere.</p>
+    <section class="bg-image">
+        <img src="{{ asset('img/users_cover.png') }}" alt="Les Utilisateurs"/>
+
+        <h1>
+            <small>Les Utilisateurs :</small>
+            <br/>
+            {{ users | length }} Utilisateur{% if users | length > 1 %}s{% endif %}
+        </h1>
     </section>
 
     <section class="controls">
@@ -23,31 +28,46 @@
                         {{ user.fullname }}
                     </dt>
                     <dd>
-                        {% if user.userGroups | length > 0 %}
-                            <strong>Groupe{% if user.userGroups | length > 1 %}s{% endif %}</strong>
-                            {% for userGroup in user.userGroups %}
-                                {{ userGroup.name }}{% if loop.index < user.userGroups | length %}, {% endif %}
-                            {% endfor %}
+                        <p>
+                            <i class="fa-solid fa-globe text-fourth"></i>
+                            {% if user.userGroups | length > 0 %}
+                                <strong class="text-primary">
+                                    Groupe{% if user.userGroups | length > 1 %}s{% endif %} :
+                                </strong>
+                                {% for userGroup in user.userGroups %}
+                                    <a href="{{ path('app_admin_usergroup_show', {'id': userGroup.id}) }}">
+                                        {{ userGroup.name }}{% if loop.index < user.userGroups | length %}, {% endif %}
+                                    </a>
+                                {% endfor %}
+                            {% endif %}
+
                             <br/>
+
+                            <i class="fa-regular fa-calendar-days text-fourth"></i>
+                            <strong class="text-primary">Inscrit le :</strong> {{ user.createdAt | date('d/m/Y') }}
+                        </p>
+
+                        <div class="app-grid two">
+                            <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="app-btn">
+                                <small>
+                                    <i class="fa-solid fa-eye text-primary"></i>
+                                    <strong>Détails</strong>
+                                </small>
+                            </a>
+                            {% if user != app.user %}
+                                <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}"
+                                   class="app-btn text-info">
+                                    <small>
+                                        <i class="fa-solid fa-pen-to-square text-info"></i>
+                                        <strong>Modifier</strong>
+                                    </small>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        {% if loop.index != users | length %}
+                            <hr/>
                         {% endif %}
-
-                        <strong>Inscrit le</strong> {{ user.createdAt | date('d/m/Y') }}
-                        <br/>
-
-                        <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="text-primary">
-                            <small>
-                                <i class="fa-solid fa-eye text-primary"></i>
-                                <strong>Détails</strong>
-                            </small>
-                        </a>
-                        <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="text-info">
-                            <small>
-                                <i class="fa-solid fa-pen-to-square text-info"></i>
-                                <strong>Modifier</strong>
-                            </small>
-                        </a>
-
-                        <hr/>
                     </dd>
                 {% endfor %}
             </dl>

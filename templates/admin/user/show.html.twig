@@ -3,9 +3,14 @@
 {% block title %}Fiche Utilisateur{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Utilisateur : {{ user.fullname }}</h1>
-        <p>Consultez les informations de cet <strong>Utilisateur</strong>, et les Quizzs qu'il a réalisés.</p>
+    <section class="bg-image">
+        <img src="{{ asset('img/users_cover.png') }}" alt="Les Utilisateurs"/>
+
+        <h1>
+            <small>Utilisateur :</small>
+            <br/>
+            {{ user.fullname }}
+        </h1>
     </section>
 
     <section class="controls">
@@ -13,10 +18,12 @@
             <i class="fa-solid fa-circle-arrow-left"></i>
             Retour
         </a>
-        <a href="{{ path('app_admin_user_edit', {id: user.id}) }}" class="text-info">
-            <i class="fa-solid fa-pen-to-square"></i>
-            Modifier
-        </a>
+        {% if user != app.user %}
+            <a href="{{ path('app_admin_user_edit', {id: user.id}) }}" class="text-info">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Modifier
+            </a>
+        {% endif %}
     </section>
 
     <section>
@@ -28,7 +35,9 @@
                         Groupe{% if user.userGroups | length > 1 %}s{% endif %} :
                     </strong>
                     {% for userGroup in user.userGroups %}
-                        {{ userGroup.name }}{% if loop.index < user.userGroups | length %}, {% endif %}
+                        <a href="{{ path('app_admin_usergroup_show', {'id': userGroup.id}) }}">
+                            {{ userGroup.name }}{% if loop.index < user.userGroups | length %}, {% endif %}
+                        </a>
                     {% endfor %}
                 </li>
             {% endif %}

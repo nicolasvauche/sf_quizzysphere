@@ -1,10 +1,16 @@
-{% extends 'layout/guest/_index.html.twig' %}
+{% extends (app.user) ? 'layout/default/_index.html.twig' : 'layout/guest/_index.html.twig' %}
 
 {% block title %}Conditions Générales d'Utilisation{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Conditions Générales d'Utilisation</h1>
+    <section class="bg-image">
+        <img src="{{ asset('img/home_cover.png') }}" alt="Les CGU"/>
+
+        <h1>
+            <small>Mentions Légales :</small>
+            <br/>
+            Conditions Générales d'Utilisation
+        </h1>
     </section>
 
     <section>

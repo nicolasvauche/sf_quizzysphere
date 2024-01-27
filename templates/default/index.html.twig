@@ -1,11 +1,20 @@
-{% extends 'layout/default/_index.html.twig' %}
+{% extends (app.user) ? 'layout/default/_index.html.twig' : 'layout/guest/_index.html.twig' %}
 
 {% block title %}Bienvenue{% endblock %}
 
 {% block main %}
     {% if app.user %}
-        <section>
-            <h1>Bienvenue {{ app.user.username }} !</h1>
+        <section class="bg-image">
+            <img src="{{ asset('img/home_cover.png') }}" alt="QuizzySphere"/>
+
+            <h1>
+                <small>Bienvenue</small>
+                <br/>
+                {{ app.user.fullname }}
+            </h1>
+        </section>
+
+        <section class="alt">
             <p>
                 Vous êtes <strong>connecté</strong> avec le compte <em>{{ app.user.userIdentifier }}</em>.
             </p>
@@ -17,11 +26,11 @@
                     <div class="card-header">
                         <strong>Quizzs</strong>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-primary">
                         <p class="big">2</p>
                     </div>
                     <div class="card-footer">
-                        réalisés
+                        <small>réalisés</small>
                     </div>
                 </article>
 
@@ -29,13 +38,13 @@
                     <div class="card-header">
                         <strong>Note</strong>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-primary">
                         <p class="big">
                             16,7<small>/20</small>
                         </p>
                     </div>
                     <div class="card-footer">
-                        moyenne
+                        <small>de moyenne</small>
                     </div>
                 </article>
             </div>
@@ -45,13 +54,13 @@
                     <div class="card-header">
                         <strong>Classement</strong>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-primary">
                         <p class="big">
                             22<small>/57</small>
                         </p>
                     </div>
                     <div class="card-footer">
-                        général
+                        <small>au général</small>
                     </div>
                 </article>
 
@@ -59,18 +68,18 @@
                     <div class="card-header">
                         <strong>Cours</strong>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-primary">
                         <p class="big">1</p>
                     </div>
                     <div class="card-footer">
-                        suivis
+                        <small>suivis</small>
                     </div>
                 </article>
             </div>
         </section>
 
         <section>
-            <h2>Vos Quizzs en cours</h2>
+            <h2>Mes Quizzs en cours</h2>
 
             <div class="app-grid">
                 <div class="app-card">
@@ -79,22 +88,26 @@
                             <i class="fa-solid fa-stopwatch"></i>
                             <strong>30s</strong>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body text-primary">
                             Développement web
                             <p class="big">JavaScript</p>
                         </div>
                         <div class="card-footer">
                             <i class="fa-solid fa-circle-question"></i>
-                            <strong>1/10</strong>
+                            1/10
                         </div>
                     </a>
                 </div>
             </div>
         </section>
     {% else %}
-        <section>
-            <h1>Bienvenue dans la QuizzySphere !</h1>
+        <section class="bg-image">
+            <img src="{{ asset('img/home_cover.png') }}" alt="QuizzySphere"/>
 
+            <h1>Bienvenue dans la QuizzySphere !</h1>
+        </section>
+
+        <section class="alt">
             <p>
                 Bienvenue dans le monde fascinant de <strong>QuizzySphere</strong>, l'application de quizz conçue pour
                 offrir une expérience interactive, éducative et entièrement personnalisable.
@@ -104,21 +117,25 @@
         <section>
             <div class="app-grid third">
                 <article class="app-card">
-                    <div class="card-header">des questions</div>
-                    <div class="card-body">
-                        <i class="fa-solid fa-globe fa-3x" aria-hidden="true"></i>
+                    <div class="card-header">
+                        <small>des questions</small>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-body">
+                        <p class="big text-primary">
+                            <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                        </p>
                         <strong>Universelles</strong>
                     </div>
                 </article>
 
                 <article class="app-card">
-                    <div class="card-header">une application</div>
-                    <div class="card-body">
-                        <i class="fa-solid fa-hand-pointer fa-3x" aria-hidden="true"></i>
+                    <div class="card-header">
+                        <small>une application</small>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-body">
+                        <p class="big text-primary">
+                            <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
+                        </p>
                         <strong>Interactive</strong>
                     </div>
                 </article>
@@ -126,30 +143,39 @@
 
             <div class="app-grid third reverse">
                 <article class="app-card">
-                    <div class="card-header">un jeu</div>
-                    <div class="card-body">
-                        <i class="fa-solid fa-brain fa-3x" aria-hidden="true"></i>
+                    <div class="card-header">
+                        <small>un jeu</small>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-body">
+                        <p class="big text-primary">
+                            <i class="fa-solid fa-brain" aria-hidden="true"></i>
+                        </p>
                         <strong>Instructif</strong>
                     </div>
                 </article>
 
                 <article class="app-card">
-                    <div class="card-header">une expérience</div>
-                    <div class="card-body">
-                        <i class="fa-solid fa-person-snowboarding fa-3x" aria-hidden="true"></i>
+                    <div class="card-header">
+                        <small>une expérience</small>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-body">
+                        <p class="big text-primary">
+                            <i class="fa-solid fa-person-snowboarding" aria-hidden="true"></i>
+                        </p>
                         <strong>Amusante</strong>
                     </div>
                 </article>
             </div>
         </section>
 
-        <section class="text-center">
+        <section class="alt text-center">
+            <strong>
+                <small>Je viens d'arriver dans la QuizzySphere :</small>
+            </strong>
             <a href="{{ path('app_register') }}" class="app-btn cta">Je m'inscris !</a>
-            ou
+            <strong>
+                <small>ou j'ai déjà un compte :</small>
+            </strong>
             <a href="{{ path('app_login') }}" class="app-btn">Je me connecte</a>
         </section>
 

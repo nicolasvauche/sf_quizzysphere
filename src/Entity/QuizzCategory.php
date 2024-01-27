@@ -35,6 +35,8 @@ class QuizzCategory
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $children;
 
+    private $temporaryDepth = 0;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -131,6 +133,18 @@ class QuizzCategory
                 $child->setParent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTemporaryDepth(): int
+    {
+        return $this->temporaryDepth;
+    }
+
+    public function setTemporaryDepth($depth): static
+    {
+        $this->temporaryDepth = $depth;
 
         return $this;
     }

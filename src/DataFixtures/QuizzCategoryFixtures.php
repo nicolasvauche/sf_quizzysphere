@@ -13,6 +13,7 @@ class QuizzCategoryFixtures extends Fixture implements OrderedFixtureInterface
     {
         $quizzCategory = (new QuizzCategory())
             ->setName('Informatique')
+            ->setCover('informatique657d8c8b5830f.png')
             ->setActive(true);
         $manager->persist($quizzCategory);
         $this->addReference('quizzcategory-informatique', $quizzCategory);
@@ -26,6 +27,7 @@ class QuizzCategoryFixtures extends Fixture implements OrderedFixtureInterface
 
         $quizzCategory = (new QuizzCategory())
             ->setName('Développement Web')
+            ->setCover('developpement-web657d8d0f54b2a.png')
             ->setActive(true)
             ->setParent($this->getReference('quizzcategory-informatique'));
         $manager->persist($quizzCategory);

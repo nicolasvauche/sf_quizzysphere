@@ -3,9 +3,14 @@
 {% block title %}Paramètres de l'application{% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Paramètres de l'application</h1>
-        <p>Gérez les <strong>Paramètres Utilisateurs</strong> de la QuizzySphere.</p>
+    <section class="bg-image">
+        <img src="{{ asset('img/home_cover.png') }}" alt="Paramètres de QuizzySphere"/>
+
+        <h1>
+            <small>Configuration :</small>
+            <br/>
+            Paramètres Utilisateurs
+        </h1>
     </section>
 
     {{ form_start(form, {'attr': {'class': 'app-form'}}) }}

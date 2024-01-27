@@ -1,0 +1,79 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Les Catégories de Quizzs{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+
+        <h1>
+            <small>Les Quizzs :</small>
+            <br/>
+            {{ quizzCategories | length }} Catégorie{% if quizzCategories | length > 1 %}s{% endif %} de Quizzs
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="#" class="text-success">
+            <i class="fa-solid fa-circle-plus"></i>
+            Nouvelle
+        </a>
+    </section>
+
+    <section>
+        {% if quizzCategories | length > 0 %}
+            <dl>
+                {% for quizzCategory in quizzCategories %}
+                    <dt>{{ quizzCategory.name }}</dt>
+                    <dd>
+                        {% if quizzCategory.cover %}
+                            <figure>
+                                <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.cover) }}"
+                                     alt="{{ quizzCategory.name }}"/>
+                            </figure>
+                        {% endif %}
+
+                        {% set quizzs = [] %}
+                        <p>
+                            <i class="fa-solid fa-globe text-fourth"></i>
+                            <strong>
+                                {{ quizzs | length }}
+                                Quizz{% if quizzs | length > 1 %}s{% endif %}
+                            </strong>
+
+                            <br/>
+
+                            <i class="fa-solid fa-boxes-packing text-fourth"></i>
+                            <strong>
+                                {{ quizzCategory.children | length }}
+                                Sous-Catégorie{% if quizzCategory.children | length > 1 %}s{% endif %}
+                            </strong>
+                        </p>
+
+                        <div class="app-grid two">
+                            <a href="{{ path('app_admin_quizzcategory_show', {'id': quizzCategory.id}) }}"
+                               class="app-btn">
+                                <small>
+                                    <i class="fa-solid fa-eye text-primary"></i>
+                                    <strong>Détails</strong>
+                                </small>
+                            </a>
+                            <a href="#" class="app-btn text-info">
+                                <small>
+                                    <i class="fa-solid fa-pen-to-square text-info"></i>
+                                    <strong>Modifier</strong>
+                                </small>
+                            </a>
+                        </div>
+
+                        {% if loop.index != quizzCategories | length %}
+                            <hr/>
+                        {% endif %}
+                    </dd>
+                {% endfor %}
+            </dl>
+        {% else %}
+            <p class="text-center">Aucune catégorie de quizzs.</p>
+        {% endif %}
+    </section>
+{% endblock %}
