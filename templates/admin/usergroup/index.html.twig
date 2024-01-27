@@ -21,6 +21,11 @@
                 {% for userGroup in userGroups %}
                     <dt>
                         {{ userGroup.name }}
+                        {% if app_settings.getDefaultUserGroup() == userGroup %}
+                            <small>
+                                <i class="fa-solid fa-sliders text-warning"></i>
+                            </small>
+                        {% endif %}
                     </dt>
                     <dd>
                         <strong>

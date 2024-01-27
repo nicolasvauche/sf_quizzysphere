@@ -24,6 +24,24 @@
     </div>
 
     <div class="app-dropdown" data-controller="dropdown--index">
+        <i class="fa-solid fa-globe"></i>
+        Quizzs
+        <input type="checkbox"/>
+        <div class="dropdown-content">
+            <a href="#"
+               {% if 'app_admin_quizzcategory_' in app.request.get('_route') %}class="active"{% endif %}>
+                <i class="fa-solid fa-boxes-packing"></i>
+                Catégories de Quizzs
+            </a>
+            <a href="#"
+               {% if 'app_admin_quizz_' in app.request.get('_route') %}class="active"{% endif %}>
+                <i class="fa-solid fa-globe"></i>
+                Tous les Quizzs
+            </a>
+        </div>
+    </div>
+
+    <div class="app-dropdown" data-controller="dropdown--index">
         <i class="fa-solid fa-sliders"></i>
         Paramètres
         <input type="checkbox"/>
