@@ -52,9 +52,13 @@
     }
 
     .dropdown-content {
-      bottom: 100%;
+      position: fixed;
+      bottom: 3rem;
+      left: 0;
+      right: 0;
 
       @include respondTo(sm) {
+        position: absolute;
         bottom: initial;
         left: 0;
         right: 0;

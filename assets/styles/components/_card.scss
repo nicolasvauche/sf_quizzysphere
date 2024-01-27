@@ -13,6 +13,24 @@
       @include displayFlex(space-between, center, 1rem, column);
       text-decoration: none;
       color: inherit;
+
+      .card-body {
+        p {
+          margin: 1rem 0 !important;
+        }
+      }
     }
+  }
+
+  .card-header {
+    align-self: flex-start;
+  }
+
+  .card-body {
+    align-self: center;
+  }
+
+  .card-footer {
+    align-self: flex-end;
   }
 }

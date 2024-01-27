@@ -5,7 +5,7 @@
         Accueil
     </a>
 
-    <div class="app-dropdown">
+    <div class="app-dropdown" data-controller="dropdown--index">
         <i class="fa-solid fa-users"></i>
         Utilisateurs
         <input type="checkbox"/>
@@ -19,6 +19,19 @@
                {% if 'app_admin_user_' in app.request.get('_route') %}class="active"{% endif %}>
                 <i class="fa-solid fa-users"></i>
                 Tous les Utilisateurs
+            </a>
+        </div>
+    </div>
+
+    <div class="app-dropdown" data-controller="dropdown--index">
+        <i class="fa-solid fa-sliders"></i>
+        Paramètres
+        <input type="checkbox"/>
+        <div class="dropdown-content">
+            <a href="#"
+               {% if 'app_admin_parameters_' in app.request.get('_route') %}class="active"{% endif %}>
+                <i class="fa-solid fa-users-viewfinder"></i>
+                Paramètres Utilisateurs
             </a>
         </div>
     </div>
