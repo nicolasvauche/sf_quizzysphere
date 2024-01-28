@@ -1,0 +1,24 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Nouvelle Catégorie de Quizzs{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+
+        <h1>
+            <small>Les Quizzs :</small>
+            <br/>
+            Nouvelle Catégorie de Quizzs
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_quizzcategory_index') }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Retour à la liste
+        </a>
+    </section>
+
+    {{ include('admin/quizzcategory/_form.html.twig') }}
+{% endblock %}

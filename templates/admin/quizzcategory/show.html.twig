@@ -22,7 +22,7 @@
             <i class="fa-solid fa-circle-arrow-left"></i>
             Retour
         </a>
-        <a href="#" class="text-info">
+        <a href="{{ path('app_admin_quizzcategory_edit', {'id': quizzCategory.id}) }}" class="text-info">
             <i class="fa-solid fa-pen-to-square"></i>
             Modifier
         </a>
@@ -31,7 +31,9 @@
     {% if false %}
         <section>
             <h2>Quizzs</h2>
-
+            <p class="text-center">
+                Aucun Quizz dans cette catégorie…
+            </p>
         </section>
     {% endif %}
 
@@ -76,7 +78,8 @@
                                 <strong>Détails</strong>
                             </small>
                         </a>
-                        <a href="#" class="app-btn text-info">
+                        <a href="{{ path('app_admin_quizzcategory_edit', {'id': quizzCategory.parent.id}) }}"
+                           class="app-btn text-info">
                             <small>
                                 <i class="fa-solid fa-pen-to-square text-info"></i>
                                 <strong>Modifier</strong>
@@ -130,7 +133,8 @@
                                     <strong>Détails</strong>
                                 </small>
                             </a>
-                            <a href="#" class="app-btn text-info">
+                            <a href="{{ path('app_admin_quizzcategory_edit', {'id': child.id}) }}"
+                               class="app-btn text-info">
                                 <small>
                                     <i class="fa-solid fa-pen-to-square text-info"></i>
                                     <strong>Modifier</strong>

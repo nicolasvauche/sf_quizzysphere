@@ -14,7 +14,7 @@
     </section>
 
     <section class="controls">
-        <a href="#" class="text-success">
+        <a href="{{ path('app_admin_quizzcategory_add') }}" class="text-success">
             <i class="fa-solid fa-circle-plus"></i>
             Nouvelle
         </a>
@@ -58,7 +58,8 @@
                                     <strong>Détails</strong>
                                 </small>
                             </a>
-                            <a href="#" class="app-btn text-info">
+                            <a href="{{ path('app_admin_quizzcategory_edit', {'id': quizzCategory.id}) }}"
+                               class="app-btn text-info">
                                 <small>
                                     <i class="fa-solid fa-pen-to-square text-info"></i>
                                     <strong>Modifier</strong>

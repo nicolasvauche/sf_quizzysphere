@@ -29,7 +29,7 @@ class QuizzCategoryType extends AbstractType
         $builder
             ->add('parent', EntityType::class, [
                 'required' => false,
-                'label' => "Catégorie parente",
+                'label' => 'Catégorie parente',
                 'class' => QuizzCategory::class,
                 'attr' => [
                     'class' => 'form-control text-left',
@@ -42,14 +42,14 @@ class QuizzCategoryType extends AbstractType
             ])
             ->add('name', TextType::class, [
                 'required' => true,
-                'label' => 'Nom du groupe',
+                'label' => 'Nom de la catégorie',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
             ->add('active', CheckboxType::class, [
                 'required' => false,
-                'label' => 'Groupe actif',
+                'label' => 'Catégorie active',
                 'attr' => [
                     'class' => 'form-checkbox',
                 ],
@@ -60,7 +60,7 @@ class QuizzCategoryType extends AbstractType
                 'required' => false,
                 'attr' =>
                     [
-                        'class' => 'form-control',
+                        'class' => 'form-file',
                     ],
                 'constraints' => [
                     new File([

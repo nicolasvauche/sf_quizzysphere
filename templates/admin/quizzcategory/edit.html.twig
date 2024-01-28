@@ -1,0 +1,37 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Modifier une Catégorie de Quizzs{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        {% if quizzCategory.cover %}
+            <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.cover) }}" alt="{{ quizzCategory.name }}"/>
+        {% else %}
+            <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+        {% endif %}
+
+        <h1>
+            <small>Modifier une Catégorie de Quizzs :</small>
+            {{ quizzCategory.name }}
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_quizzcategory_index') }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Liste
+        </a>
+        <a href="{{ path('app_admin_quizzcategory_show', {id: quizzCategory.id}) }}" class="text-primary">
+            <i class="fa-solid fa-eye"></i>
+            Détails
+        </a>
+        <a href="{{ path('app_admin_quizzcategory_delete', {id: quizzCategory.id}) }}"
+           class="text-danger"
+           onclick="return window.confirm('Supprimer cette Catégorie ?')">
+            <i class="fa-solid fa-trash-can"></i>
+            Supprimer
+        </a>
+    </section>
+
+    {{ include('admin/quizzcategory/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}
