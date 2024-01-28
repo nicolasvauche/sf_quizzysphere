@@ -15,11 +15,22 @@
       text-decoration: none;
       color: inherit;
 
+      & > img {
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+      }
+
       .card-body {
         p {
           margin: 0.5rem 0 !important;
         }
       }
+    }
+  }
+
+  &.alt {
+    &:has(a) {
+      background-color: rgba($fifth, 0.25);
     }
   }
 

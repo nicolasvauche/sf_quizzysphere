@@ -24,8 +24,8 @@
         {% if quizzCategories | length > 0 %}
             <dl>
                 {% for quizzCategory in quizzCategories %}
-                    <dt>{{ quizzCategory.name }}</dt>
-                    <dd>
+                    <dt {% if not quizzCategory.active %}class="disabled"{% endif %}>{{ quizzCategory.name }}</dt>
+                    <dd {% if not quizzCategory.active %}class="disabled"{% endif %}>
                         {% if quizzCategory.cover %}
                             <figure>
                                 <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.cover) }}"

@@ -1,0 +1,45 @@
+{% extends 'layout/default/_index.html.twig' %}
+
+{% block title %}Les Quizzs{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Mon Compte"/>
+
+        <h1>
+            <small>Les Quizzs :</small>
+            <br/>
+            Choisissez votre challenge !
+        </h1>
+    </section>
+
+    {% include 'quizz/_started.html.twig' %}
+
+    {% include 'quizz/_recommended.html.twig' %}
+
+    <section>
+        <h2>Choisissez votre Catégorie</h2>
+
+        <div class="app-grid two">
+            {% for quizzCategory in quizzCategories %}
+                <div class="app-card alt">
+                    <a href="#">
+                        {% if quizzCategory.cover %}
+                            <img src="{{ asset('uploads/quizz_category//' ~ quizzCategory.cover) }}"
+                                 alt="{{ quizzCategory.name }}"/>
+                        {% else %}
+                            <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h3>{{ quizzCategory.name }}</h3>
+                            <strong>
+                                <small>0 Quizz</small>
+                            </strong>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

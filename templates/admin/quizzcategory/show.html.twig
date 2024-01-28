@@ -28,6 +28,12 @@
         </a>
     </section>
 
+    {% if not quizzCategory.active %}
+        <section class="inactive">
+            <h3>Catégorie désactivée</h3>
+        </section>
+    {% endif %}
+
     {% if false %}
         <section>
             <h2>Quizzs</h2>
@@ -97,8 +103,8 @@
 
             <dl>
                 {% for child in quizzCategory.children %}
-                    <dt>{{ child.name }}</dt>
-                    <dd>
+                    <dt {% if not child.active %}class="disabled"{% endif %}>{{ child.name }}</dt>
+                    <dd {% if not child.active %}class="disabled"{% endif %}>
                         <figure>
                             {% if child.cover %}
                                 <img src="{{ asset('uploads/quizz_category/' ~ child.cover) }}"

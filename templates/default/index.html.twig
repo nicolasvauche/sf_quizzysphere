@@ -78,28 +78,7 @@
             </div>
         </section>
 
-        <section>
-            <h2>Mes Quizzs en cours</h2>
-
-            <div class="app-grid">
-                <div class="app-card">
-                    <a href="#">
-                        <div class="card-header">
-                            <i class="fa-solid fa-stopwatch"></i>
-                            <strong>30s</strong>
-                        </div>
-                        <div class="card-body text-primary">
-                            Développement web
-                            <p class="big">JavaScript</p>
-                        </div>
-                        <div class="card-footer">
-                            <i class="fa-solid fa-circle-question"></i>
-                            1/10
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+        {% include 'quizz/_started.html.twig' %}
     {% else %}
         <section class="bg-image">
             <img src="{{ asset('img/home_cover.png') }}" alt="QuizzySphere"/>

@@ -46,3 +46,14 @@
 .text-fourth {
   color: $fourth !important;
 }
+
+/**BACKGROUND COLORS **/
+.bg-danger {
+  color: $white !important;
+  background-color: $danger !important;
+}
+
+/** DISABLED ELEMENTS **/
+.disabled {
+  opacity: 0.5;
+}
