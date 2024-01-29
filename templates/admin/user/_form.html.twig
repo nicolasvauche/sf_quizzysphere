@@ -25,6 +25,15 @@
 <fieldset class="form-fieldset">
     <legend class="form-legend">Son Compte</legend>
 
+    <div class="form-group toggle">
+        <label for="{{ form.active.vars.id }}"
+               class="toggle-label {% if form.active.vars.required %}required{% endif %}">
+            {{ form.active.vars.label }}
+        </label>
+        {{ form_widget(form.active) }}
+        <div class="toggle-switch"></div>
+    </div>
+
     <div class="form-group">
         <label for="{{ form.userGroups.vars.id }}"
                class="form-label {% if form.userGroups.vars.required %}required{% endif %}">
@@ -32,15 +41,6 @@
         </label>
         {{ form_widget(form.userGroups) }}
         {{ form_errors(form.userGroups) }}
-    </div>
-
-    <div class="form-group">
-        <label for="{{ form.active.vars.id }}"
-               class="form-label {% if form.active.vars.required %}required{% endif %}">
-            {{ form_widget(form.active) }}
-            {{ form.active.vars.label }}
-        </label>
-        {{ form_errors(form.active) }}
     </div>
 </fieldset>
 
