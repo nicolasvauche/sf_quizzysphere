@@ -24,20 +24,6 @@
     <section>
         <div class="app-grid third">
             <article class="app-card">
-                <a href="{{ path('app_admin_usergroup_index') }}">
-                    <div class="card-header">
-                        <strong>Groupe{% if userGroups | length > 1 %}s{% endif %}</strong>
-                    </div>
-                    <div class="card-body text-primary">
-                        <p class="big">{{ userGroups | length }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <small>créé{% if userGroups | length > 1 %}s{% endif %}</small>
-                    </div>
-                </a>
-            </article>
-
-            <article class="app-card">
                 <a href="{{ path('app_admin_user_index') }}">
                     <div class="card-header">
                         <strong>Utilisateur{% if users | length > 1 %}s{% endif %}</strong>
@@ -45,8 +31,22 @@
                     <div class="card-body text-primary">
                         <p class="big">{{ users | length }}</p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-right">
                         <small>inscrit{% if users | length > 1 %}s{% endif %}</small>
+                    </div>
+                </a>
+            </article>
+
+            <article class="app-card">
+                <a href="{{ path('app_admin_usergroup_index') }}">
+                    <div class="card-header">
+                        <strong>Groupe{% if userGroups | length > 1 %}s{% endif %} d'Utilisateurs</strong>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="big">{{ userGroups | length }}</p>
+                    </div>
+                    <div class="card-footer text-right">
+                        <small>créé{% if userGroups | length > 1 %}s{% endif %}</small>
                     </div>
                 </a>
             </article>
@@ -56,12 +56,12 @@
             <article class="app-card">
                 <a href="{{ path('app_admin_quizzcategory_index') }}">
                     <div class="card-header">
-                        <strong>Catégorie{% if quizzCategories | length > 1 %}s{% endif %}</strong>
+                        <strong>Catégorie{% if quizzCategories | length > 1 %}s{% endif %} de Quizzs</strong>
                     </div>
                     <div class="card-body text-primary">
                         <p class="big">{{ quizzCategories | length }}</p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-right">
                         <small>créée{% if quizzCategories | length > 1 %}s{% endif %}</small>
                     </div>
                 </a>
@@ -75,8 +75,24 @@
                     <div class="card-body text-primary">
                         <p class="big">{{ quizzs | length }}</p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-right">
                         <small>en ligne</small>
+                    </div>
+                </a>
+            </article>
+        </div>
+
+        <div class="app-grid third">
+            <article class="app-card">
+                <a href="{{ path('app_admin_course_index') }}">
+                    <div class="card-header">
+                        <strong>Parcours</strong>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="big">{{ courses | length }}</p>
+                    </div>
+                    <div class="card-footer text-right">
+                        <small>créé{% if courses | length > 1 %}s{% endif %}</small>
                     </div>
                 </a>
             </article>

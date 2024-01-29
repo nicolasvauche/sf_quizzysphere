@@ -11,9 +11,10 @@
         Quizzs
     </a>
 
-    <a href="#">
+    <a href="{{ path('app_course_index') }}"
+       {% if 'app_course_' in app.request.get('_route') %}class="active"{% endif %}>
         <i class="fa-solid fa-circle-play"></i>
-        Cours
+        Parcours
     </a>
 
     <a href="#">

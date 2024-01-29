@@ -19,6 +19,10 @@ class QuizzCategory
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column(length: 255)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private ?string $slug = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cover = null;
 
@@ -37,9 +41,13 @@ class QuizzCategory
 
     private $temporaryDepth = 0;
 
+    #[ORM\ManyToMany(targetEntity: Course::class, mappedBy: 'quizzCategories')]
+    private Collection $courses;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->courses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,6 +63,18 @@ class QuizzCategory
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
@@ -145,6 +165,33 @@ class QuizzCategory
     public function setTemporaryDepth($depth): static
     {
         $this->temporaryDepth = $depth;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Course>
+     */
+    public function getCourses(): Collection
+    {
+        return $this->courses;
+    }
+
+    public function addCourse(Course $course): static
+    {
+        if(!$this->courses->contains($course)) {
+            $this->courses->add($course);
+            $course->addQuizzCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): static
+    {
+        if($this->courses->removeElement($course)) {
+            $course->removeQuizzCategory($this);
+        }
 
         return $this;
     }

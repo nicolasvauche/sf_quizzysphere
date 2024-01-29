@@ -29,7 +29,7 @@
         </a>
     </section>
 
-    <section>
+    <section class="alt">
         <h2>Informations</h2>
         <ul>
             <li>
@@ -43,6 +43,58 @@
             {% endif %}
         </ul>
     </section>
+
+    {% if userGroup.courses | length > 0 %}
+        <section>
+            <h2>
+                {{ userGroup.courses | length }}
+                Parcours
+            </h2>
+
+            <dl>
+                {% for course in userGroup.courses %}
+                    <dt>
+                        {{ course.name }}
+                    </dt>
+                    <dd>
+                        <p>
+                            <i class="fa-solid fa-globe text-fourth"></i>
+                            {% if course.quizzCategories | length > 0 %}
+                                <strong class="text-primary">
+                                    Catégorie{% if course.quizzCategories | length > 1 %}s{% endif %} :
+                                </strong>
+                                {% for quizzCategory in course.quizzCategories %}
+                                <a href="{{ path('app_admin_quizzcategory_show', {'id': quizzCategory.id}) }}">
+                                    {{ quizzCategory.name }}
+                                    </a>{% if loop.index < course.quizzCategories | length %}, {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </p>
+
+                        <div class="app-grid two">
+                            {# <a href="{{ path('app_admin_course_show', {'id': course.id}) }}" class="app-btn">
+                                <small>
+                                    <i class="fa-solid fa-eye text-primary"></i>
+                                    <strong>Détails</strong>
+                                </small>
+                            </a>
+                            <a href="{{ path('app_admin_course_edit', {'id': course.id}) }}"
+                               class="app-btn text-info">
+                                <small>
+                                    <i class="fa-solid fa-pen-to-square text-info"></i>
+                                    <strong>Modifier</strong>
+                                </small>
+                            </a> #}
+                        </div>
+
+                        {% if loop.index != course.quizzCategories | length %}
+                            <hr/>
+                        {% endif %}
+                    </dd>
+                {% endfor %}
+            </dl>
+        </section>
+    {% endif %}
 
     {% if userGroup.members | length > 0 %}
         <section>
@@ -64,9 +116,9 @@
                                     Groupe{% if user.userGroups | length > 1 %}s{% endif %} :
                                 </strong>
                                 {% for userGroup in user.userGroups %}
-                                    <a href="{{ path('app_admin_usergroup_show', {'id': userGroup.id}) }}">
-                                        {{ userGroup.name }}{% if loop.index < user.userGroups | length %}, {% endif %}
-                                    </a>
+                                <a href="{{ path('app_admin_usergroup_show', {'id': userGroup.id}) }}">
+                                    {{ userGroup.name }}
+                                    </a>{% if loop.index < user.userGroups | length %}, {% endif %}
                                 {% endfor %}
                             {% endif %}
 

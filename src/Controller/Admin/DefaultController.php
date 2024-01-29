@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Course;
 use App\Entity\QuizzCategory;
 use App\Entity\User;
 use App\Entity\UserGroup;
@@ -21,6 +22,7 @@ class DefaultController extends AbstractController
             'userGroups' => $entityManager->getRepository(UserGroup::class)->findAll(),
             'quizzs' => [],
             'quizzCategories' => $entityManager->getRepository(QuizzCategory::class)->findAll(),
+            'courses' => $entityManager->getRepository(Course::class)->findAll(),
         ]);
     }
 }

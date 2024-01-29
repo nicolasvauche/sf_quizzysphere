@@ -1,0 +1,46 @@
+{% extends 'layout/default/_index.html.twig' %}
+
+{% block title %}Parcours - {{ course.name }}{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        {% if course.cover %}
+            <img src="{{ asset('uploads/course/' ~ course.cover) }}" alt="{{ course.name }}"/>
+        {% else %}
+            <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Parcours"/>
+        {% endif %}
+
+        <h1>
+            <small>Parcours :</small>
+            <br/>
+            {{ course.name }}
+        </h1>
+    </section>
+
+    {% if courses and courses | length > 1 %}
+        <section class="controls">
+            <a href="{{ path('app_course_index') }}" class="text-primary">
+                <i class="fa-solid fa-circle-arrow-left"></i>
+                Retour
+            </a>
+        </section>
+    {% endif %}
+
+    <section>
+        <h2>Quizzs en cours</h2>
+        {% include 'quizz/_grid.html.twig' with {'warning': true} %}
+    </section>
+
+    <section class="alt">
+        <h2>Quizzs restants</h2>
+        {% include 'quizz/_grid.html.twig' %}
+    </section>
+
+    {% if course.quizzCategories | length > 0 %}
+        <section>
+            <h2>Les Catégories</h2>
+
+            {% include 'quizzcategory/_grid.html.twig' with {'quizzCategories': course.quizzCategories} %}
+        </section>
+    {% endif %}
+{% endblock %}

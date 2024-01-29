@@ -29,9 +29,13 @@ class UserGroup
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'userGroups', cascade: ['persist'])]
     private Collection $members;
 
+    #[ORM\ManyToMany(targetEntity: Course::class, mappedBy: 'userGroups')]
+    private Collection $courses;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
+        $this->courses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,6 +101,33 @@ class UserGroup
     {
         if($this->members->removeElement($member)) {
             $member->removeUserGroup($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Course>
+     */
+    public function getCourses(): Collection
+    {
+        return $this->courses;
+    }
+
+    public function addCourse(Course $course): static
+    {
+        if (!$this->courses->contains($course)) {
+            $this->courses->add($course);
+            $course->addUserGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): static
+    {
+        if ($this->courses->removeElement($course)) {
+            $course->removeUserGroup($this);
         }
 
         return $this;

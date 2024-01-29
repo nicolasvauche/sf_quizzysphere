@@ -1,0 +1,29 @@
+<div class="app-grid two">
+    {% for quizzCategory in quizzCategories %}
+        <div class="app-card alt">
+            <a href="#">
+                <div class="card-header">
+                    <strong>
+                        <small>{{ quizzCategory.name }}</small>
+                    </strong>
+                </div>
+
+                <div class="card-body">
+                    {% if quizzCategory.cover %}
+                        <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.cover) }}"
+                             alt="{{ quizzCategory.name }}"/>
+                    {% else %}
+                        <img src="{{ asset('img/quizzcategories_cover.png') }}"
+                             alt="Les Catégories de Quizzs"/>
+                    {% endif %}
+                </div>
+
+                <div class="card-footer text-right">
+                    <strong>
+                        <small>0 Quizz</small>
+                    </strong>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>

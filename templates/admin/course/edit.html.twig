@@ -1,0 +1,37 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Modifier un Parcours{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        {% if course.cover %}
+            <img src="{{ asset('uploads/course/' ~ course.cover) }}" alt="{{ course.name }}"/>
+        {% else %}
+            <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Parcours"/>
+        {% endif %}
+
+        <h1>
+            <small>Modifier un Parcours :</small>
+            {{ course.name }}
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_course_index') }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Liste
+        </a>
+        <a href="{{ path('app_admin_course_show', {id: course.id}) }}" class="text-primary">
+            <i class="fa-solid fa-eye"></i>
+            Détails
+        </a>
+        <a href="{{ path('app_admin_course_delete', {id: course.id}) }}"
+           class="text-danger"
+           onclick="return window.confirm('Supprimer ce Parcours ?')">
+            <i class="fa-solid fa-trash-can"></i>
+            Supprimer
+        </a>
+    </section>
+
+    {{ include('admin/course/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'layout/default/_index.html.twig' %}
+
+{% block title %}Les Parcours{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Parcours"/>
+
+        <h1>
+            <small>Les Parcours :</small>
+            <br/>
+            Choisissez votre programme !
+        </h1>
+    </section>
+
+    {% if courses | length > 0 %}
+        <section>
+            <div class="app-grid two">
+                {% for course in courses %}
+                    <div class="app-card alt">
+                        <a href="{{ path('app_course_show', {'slug': course.slug}) }}">
+                            {% if course.cover %}
+                                <img src="{{ asset('uploads/course/' ~ course.cover) }}"
+                                     alt="{{ course.name }}"/>
+                            {% else %}
+                                <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Parcours"/>
+                            {% endif %}
+
+                            <div class="card-body">
+                                <h3>{{ course.name }}</h3>
+                            </div>
+
+                            <div class="card-footer text-center">
+                                <strong>
+                                    <small>
+                                        {{ course.quizzCategories | length }}
+                                        Catégorie{% if course.quizzCategories | length > 1 %}s{% endif %}
+                                        de Quizzs
+                                    </small>
+                                </strong>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% else %}
+        <section class="alt">
+            <p class="text-center">
+                <strong>Aucun Parcours suivi pour le moment.</strong>
+            </p>
+
+            <a href="#" class="app-btn">
+                Réclamez le vôtre !
+            </a>
+        </section>
+    {% endif %}
+{% endblock %}

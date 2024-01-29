@@ -29,8 +29,8 @@
                     </dt>
                     <dd>
                         <p>
-                            <i class="fa-solid fa-globe text-fourth"></i>
                             {% if user.userGroups | length > 0 %}
+                                <i class="fa-solid fa-globe text-fourth"></i>
                                 <strong class="text-primary">
                                     Groupe{% if user.userGroups | length > 1 %}s{% endif %} :
                                 </strong>
@@ -39,9 +39,8 @@
                                         {{ userGroup.name }}{% if loop.index < user.userGroups | length %}, {% endif %}
                                     </a>
                                 {% endfor %}
+                                <br/>
                             {% endif %}
-
-                            <br/>
 
                             <i class="fa-regular fa-calendar-days text-fourth"></i>
                             <strong class="text-primary">Inscrit le :</strong> {{ user.createdAt | date('d/m/Y') }}

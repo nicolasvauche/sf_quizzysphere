@@ -242,4 +242,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getUserCourses(): Collection
+    {
+        $courses = new ArrayCollection();
+        foreach($this->getUserGroups() as $userGroup) {
+            foreach($userGroup->getCourses() as $course) {
+                if($course->isActive()) {
+                    $courses->add($course);
+                }
+            }
+        }
+
+        return $courses;
+    }
 }

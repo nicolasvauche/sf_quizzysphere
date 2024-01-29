@@ -1,29 +1,54 @@
 {% extends 'layout/admin/_index.html.twig' %}
 
-{% block title %}Les Catégories de Quizzs{% endblock %}
+{% block title %}Fiche Parcours{% endblock %}
 
 {% block main %}
     <section class="bg-image">
-        <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+        {% if course.cover %}
+            <img src="{{ asset('uploads/course/' ~ course.cover) }}" alt="{{ course.name }}"/>
+        {% else %}
+            <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Parcours"/>
+        {% endif %}
 
         <h1>
-            <small>Les Quizzs :</small>
+            <small>Parcours :</small>
             <br/>
-            {{ quizzCategories | length }} Catégorie{% if quizzCategories | length > 1 %}s{% endif %} de Quizzs
+            {{ course.name }}
         </h1>
     </section>
 
     <section class="controls">
-        <a href="{{ path('app_admin_quizzcategory_add') }}" class="text-success">
-            <i class="fa-solid fa-circle-plus"></i>
-            Nouvelle
+        <a href="{{ path('app_admin_course_index') }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Retour
+        </a>
+        <a href="{{ path('app_admin_course_edit', {'id': course.id}) }}" class="text-info">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Modifier
         </a>
     </section>
 
-    <section>
-        {% if quizzCategories | length > 0 %}
+    {% if not course.active %}
+        <section class="inactive">
+            <h3>Parcours désactivé</h3>
+        </section>
+    {% endif %}
+
+    {% if false %}
+        <section>
+            <h2>Quizzs</h2>
+            <p class="text-center">
+                Aucun Quizz dans ce parcours…
+            </p>
+        </section>
+    {% endif %}
+
+    {% if course.quizzCategories | length > 0 %}
+        <section class="alt">
+            <h2>Catégories</h2>
+
             <dl>
-                {% for quizzCategory in quizzCategories %}
+                {% for quizzCategory in course.quizzCategories %}
                     <dt {% if not quizzCategory.active %}class="disabled"{% endif %}>
                         {{ quizzCategory.name }}
                         {% if not quizzCategory.active %}
@@ -33,27 +58,21 @@
                         {% endif %}
                     </dt>
                     <dd {% if not quizzCategory.active %}class="disabled"{% endif %}>
-                        {% if quizzCategory.cover %}
-                            <figure>
+                        <figure>
+                            {% if quizzCategory.cover %}
                                 <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.cover) }}"
                                      alt="{{ quizzCategory.name }}"/>
-                            </figure>
-                        {% endif %}
+                            {% else %}
+                                <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+                            {% endif %}
+                        </figure>
 
-                        {% set quizzs = [] %}
                         <p>
+                            {% set quizzs = [] %}
                             <i class="fa-solid fa-globe text-fourth"></i>
-                            <strong>
+                            <strong class="text-center">
                                 {{ quizzs | length }}
                                 Quizz{% if quizzs | length > 1 %}s{% endif %}
-                            </strong>
-
-                            <br/>
-
-                            <i class="fa-solid fa-boxes-packing text-fourth"></i>
-                            <strong>
-                                {{ quizzCategory.children | length }}
-                                Sous-Catégorie{% if quizzCategory.children | length > 1 %}s{% endif %}
                             </strong>
                         </p>
 
@@ -74,14 +93,12 @@
                             </a>
                         </div>
 
-                        {% if loop.index != quizzCategories | length %}
+                        {% if loop.index != course.quizzCategories | length %}
                             <hr/>
                         {% endif %}
                     </dd>
                 {% endfor %}
             </dl>
-        {% else %}
-            <p class="text-center">Aucune catégorie de quizzs.</p>
-        {% endif %}
-    </section>
+        </section>
+    {% endif %}
 {% endblock %}

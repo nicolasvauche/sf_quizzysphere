@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
             $user->setActive(true);
 
             $settings = $entityManager->getRepository(Settings::class)->find(1);
-            if($settings->getDefaultUserGroup() !== null) {
+            if($settings && $settings->getDefaultUserGroup() !== null) {
                 $user->addUserGroup($settings->getDefaultUserGroup());
             }
 

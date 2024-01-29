@@ -1,44 +1,46 @@
 {% extends 'layout/admin/_index.html.twig' %}
 
-{% block title %}Les Catégories de Quizzs{% endblock %}
+{% block title %}Les Parcours{% endblock %}
 
 {% block main %}
     <section class="bg-image">
-        <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Parcours"/>
 
         <h1>
-            <small>Les Quizzs :</small>
+            <small>Les Parcours :</small>
             <br/>
-            {{ quizzCategories | length }} Catégorie{% if quizzCategories | length > 1 %}s{% endif %} de Quizzs
+            {{ courses | length }} Parcours
         </h1>
     </section>
 
     <section class="controls">
-        <a href="{{ path('app_admin_quizzcategory_add') }}" class="text-success">
+        <a href="{{ path('app_admin_course_add') }}" class="text-success">
             <i class="fa-solid fa-circle-plus"></i>
-            Nouvelle
+            Nouveau
         </a>
     </section>
 
     <section>
-        {% if quizzCategories | length > 0 %}
+        {% if courses | length > 0 %}
             <dl>
-                {% for quizzCategory in quizzCategories %}
-                    <dt {% if not quizzCategory.active %}class="disabled"{% endif %}>
-                        {{ quizzCategory.name }}
-                        {% if not quizzCategory.active %}
+                {% for course in courses %}
+                    <dt {% if not course.active %}class="disabled"{% endif %}>
+                        {{ course.name }}
+                        {% if not course.active %}
                             <small>
                                 <i class="fa-solid fa-eye-slash text-warning"></i>
                             </small>
                         {% endif %}
                     </dt>
-                    <dd {% if not quizzCategory.active %}class="disabled"{% endif %}>
-                        {% if quizzCategory.cover %}
-                            <figure>
-                                <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.cover) }}"
-                                     alt="{{ quizzCategory.name }}"/>
-                            </figure>
-                        {% endif %}
+                    <dd {% if not course.active %}class="disabled"{% endif %}>
+                        <figure>
+                            {% if course.cover %}
+                                <img src="{{ asset('uploads/course/' ~ course.cover) }}"
+                                     alt="{{ course.name }}"/>
+                            {% else %}
+                                <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Parcours"/>
+                            {% endif %}
+                        </figure>
 
                         {% set quizzs = [] %}
                         <p>
@@ -52,20 +54,20 @@
 
                             <i class="fa-solid fa-boxes-packing text-fourth"></i>
                             <strong>
-                                {{ quizzCategory.children | length }}
-                                Sous-Catégorie{% if quizzCategory.children | length > 1 %}s{% endif %}
+                                {{ course.quizzCategories | length }}
+                                Catégorie{% if course.quizzCategories | length > 1 %}s{% endif %}
                             </strong>
                         </p>
 
                         <div class="app-grid two">
-                            <a href="{{ path('app_admin_quizzcategory_show', {'id': quizzCategory.id}) }}"
+                            <a href="{{ path('app_admin_course_show', {'id': course.id}) }}"
                                class="app-btn">
                                 <small>
                                     <i class="fa-solid fa-eye text-primary"></i>
                                     <strong>Détails</strong>
                                 </small>
                             </a>
-                            <a href="{{ path('app_admin_quizzcategory_edit', {'id': quizzCategory.id}) }}"
+                            <a href="{{ path('app_admin_course_edit', {'id': course.id}) }}"
                                class="app-btn text-info">
                                 <small>
                                     <i class="fa-solid fa-pen-to-square text-info"></i>
@@ -74,14 +76,14 @@
                             </a>
                         </div>
 
-                        {% if loop.index != quizzCategories | length %}
+                        {% if loop.index != courses | length %}
                             <hr/>
                         {% endif %}
                     </dd>
                 {% endfor %}
             </dl>
         {% else %}
-            <p class="text-center">Aucune catégorie de quizzs.</p>
+            <p class="text-center">Aucun parcours.</p>
         {% endif %}
     </section>
 {% endblock %}

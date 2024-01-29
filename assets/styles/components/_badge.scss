@@ -1,0 +1,21 @@
+.app-badge {
+  position: absolute;
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  &.top {
+    top: 0.5rem;
+  }
+
+  &.bottom {
+    bottom: 0.5rem;
+  }
+
+  &.left {
+    left: 0.5rem;
+  }
+
+  &.right {
+    right: 0.5rem;
+  }
+}

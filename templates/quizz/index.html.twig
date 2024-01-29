@@ -4,7 +4,7 @@
 
 {% block main %}
     <section class="bg-image">
-        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Mon Compte"/>
+        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
 
         <h1>
             <small>Les Quizzs :</small>
@@ -13,33 +13,19 @@
         </h1>
     </section>
 
-    {% include 'quizz/_started.html.twig' %}
-
-    {% include 'quizz/_recommended.html.twig' %}
-
     <section>
-        <h2>Choisissez votre Catégorie</h2>
-
-        <div class="app-grid two">
-            {% for quizzCategory in quizzCategories %}
-                <div class="app-card alt">
-                    <a href="#">
-                        {% if quizzCategory.cover %}
-                            <img src="{{ asset('uploads/quizz_category//' ~ quizzCategory.cover) }}"
-                                 alt="{{ quizzCategory.name }}"/>
-                        {% else %}
-                            <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
-                        {% endif %}
-
-                        <div class="card-body">
-                            <h3>{{ quizzCategory.name }}</h3>
-                            <strong>
-                                <small>0 Quizz</small>
-                            </strong>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+        <h2>Quizzs à terminer</h2>
+        {% include 'quizz/_grid.html.twig' with {'warning': true} %}
     </section>
+
+    <section class="alt">
+        <h2>Quizzs recommandés</h2>
+        {% include 'quizz/_grid.html.twig' %}
+    </section>
+
+    {# <section>
+        <h2>Parcourez les Catégories</h2>
+
+        {% include 'quizzcategory/_grid.html.twig' %}
+    </section> #}
 {% endblock %}

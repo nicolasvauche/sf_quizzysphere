@@ -1,4 +1,5 @@
 .app-card {
+  position: relative;
   @include displayFlex(space-between, center, 0.5rem, column);
   padding: 0.5rem;
   text-align: center;
@@ -15,11 +16,6 @@
       text-decoration: none;
       color: inherit;
 
-      & > img {
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-      }
-
       .card-body {
         p {
           margin: 0.5rem 0 !important;
@@ -34,16 +30,34 @@
     }
   }
 
+  &.warning {
+    &:has(a) {
+      background-color: rgba($warning, 0.25);
+    }
+  }
+
   .card-header {
     align-self: flex-start;
     margin-bottom: 0.25rem;
+    width: 100%;
+    text-align: left;
   }
 
   .card-body {
     align-self: center;
+    width: 100%;
+
+    & > img {
+      width: 100%;
+      height: 14dvh;
+      object-fit: cover;
+      border-radius: 0.25rem;
+    }
   }
 
   .card-footer {
     align-self: flex-end;
+    width: 100%;
+    text-align: left;
   }
 }

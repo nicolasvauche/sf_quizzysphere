@@ -43,13 +43,13 @@
 
     <div class="app-dropdown" data-controller="dropdown--index">
         <i class="fa-solid fa-circle-play"></i>
-        Cours
+        Parcours
         <input type="checkbox"/>
         <div class="dropdown-content">
-            <a href="#"
-               {% if 'app_admin_courses_' in app.request.get('_route') %}class="active"{% endif %}>
+            <a href="{{ path('app_admin_course_index') }}"
+               {% if 'app_admin_course_' in app.request.get('_route') %}class="active"{% endif %}>
                 <i class="fa-solid fa-circle-play"></i>
-                Tous les Cours
+                Tous les Parcours
             </a>
         </div>
     </div>

@@ -27,9 +27,9 @@
                         <strong>Quizzs</strong>
                     </div>
                     <div class="card-body text-primary">
-                        <p class="big">2</p>
+                        <p class="big">0</p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-right">
                         <small>réalisés</small>
                     </div>
                 </article>
@@ -40,10 +40,10 @@
                     </div>
                     <div class="card-body text-primary">
                         <p class="big">
-                            16,7<small>/20</small>
+                            0<small>/20</small>
                         </p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-right">
                         <small>de moyenne</small>
                     </div>
                 </article>
@@ -56,29 +56,29 @@
                     </div>
                     <div class="card-body text-primary">
                         <p class="big">
-                            22<small>/57</small>
+                            {{ users | length }}<small>/{{ users | length }}</small>
                         </p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-right">
                         <small>au général</small>
                     </div>
                 </article>
 
                 <article class="app-card">
                     <div class="card-header">
-                        <strong>Cours</strong>
+                        <strong>Parcours</strong>
                     </div>
                     <div class="card-body text-primary">
-                        <p class="big">1</p>
+                        <p class="big">{{ userCourses | length }}</p>
                     </div>
-                    <div class="card-footer">
-                        <small>suivis</small>
+                    <div class="card-footer text-right">
+                        <small>
+                            suivi{% if userCourses | length > 1 %}s{% endif %}
+                        </small>
                     </div>
                 </article>
             </div>
         </section>
-
-        {% include 'quizz/_started.html.twig' %}
     {% else %}
         <section class="bg-image">
             <img src="{{ asset('img/home_cover.png') }}" alt="QuizzySphere"/>
@@ -96,7 +96,7 @@
         <section>
             <div class="app-grid third">
                 <article class="app-card">
-                    <div class="card-header">
+                    <div class="card-header text-center">
                         <small>des questions</small>
                     </div>
                     <div class="card-body">
@@ -108,7 +108,7 @@
                 </article>
 
                 <article class="app-card">
-                    <div class="card-header">
+                    <div class="card-header text-center">
                         <small>une application</small>
                     </div>
                     <div class="card-body">
@@ -122,26 +122,26 @@
 
             <div class="app-grid third reverse">
                 <article class="app-card">
-                    <div class="card-header">
-                        <small>un jeu</small>
+                    <div class="card-header text-center">
+                        <small>des parcours</small>
                     </div>
                     <div class="card-body">
                         <p class="big text-primary">
                             <i class="fa-solid fa-brain" aria-hidden="true"></i>
                         </p>
-                        <strong>Instructif</strong>
+                        <strong>complets</strong>
                     </div>
                 </article>
 
                 <article class="app-card">
-                    <div class="card-header">
+                    <div class="card-header text-center">
                         <small>une expérience</small>
                     </div>
                     <div class="card-body">
                         <p class="big text-primary">
                             <i class="fa-solid fa-person-snowboarding" aria-hidden="true"></i>
                         </p>
-                        <strong>Amusante</strong>
+                        <strong>Glissante</strong>
                     </div>
                 </article>
             </div>

@@ -1,0 +1,31 @@
+<div class="app-grid">
+    <div class="app-card {% if warning is defined %} warning{% else %}alt{% endif %}">
+        <a href="#">
+            <div class="card-header">
+                <strong>Le Développement Web</strong>
+                <span class="app-badge top right">
+                        <i class="fa-solid fa-stopwatch"></i>
+                        30s
+                    </span>
+            </div>
+
+            <div class="card-body">
+                <img src="{{ asset('img/quizzs_cover.png') }}"
+                     alt="Les Catégories de Quizzs"/>
+                <p class="big text-primary">JavaScript</p>
+            </div>
+
+            <div class="card-footer">
+                <strong>
+                    <small>
+                        <i class="fa-solid fa-circle-question"></i>
+                        1/10
+                    </small>
+                </strong>
+                <span class="app-badge bottom right">
+                        avancé
+                    </span>
+            </div>
+        </a>
+    </div>
+</div>
