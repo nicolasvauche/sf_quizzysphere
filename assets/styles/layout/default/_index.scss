@@ -1,10 +1,31 @@
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $fifth rgba($fifth, 0.05);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba($fifth, 0.05);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $fifth;
+  border-radius: 1rem;
+  border: 2px solid rgba($fifth, 0.05);
+}
+
 html {
   scroll-behavior: smooth;
 
   body {
     font-family: $fontPrimary;
     color: $black;
-    background-color: $white;
+    background-color: rgba($fifth, 0.05);
 
     @import "./header";
 

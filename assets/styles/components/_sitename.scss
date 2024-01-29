@@ -8,5 +8,9 @@
   span {
     font-size: 0.65em;
     color: $fifth;
+
+    @include respondTo(md) {
+      color: rgba($white, 0.5);
+    }
   }
 }

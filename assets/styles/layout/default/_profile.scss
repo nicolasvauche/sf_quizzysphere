@@ -32,6 +32,7 @@
   &:has(input:checked),
   &:has(a.active) {
     color: $secondary;
+    background-color: $white;
   }
 
   .dropdown-content {
@@ -40,12 +41,16 @@
     display: none;
     white-space: nowrap;
     background-color: $white;
-    border-radius: 0.5rem;
-    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0.5rem;
+
+    @include respondTo(md) {
+      top: 100%;
+      background-color: $fifth;
+    }
 
     a {
       @include displayFlex(null, center, 0.5rem);
-      margin: 0.5rem 0;
+      margin: 0.5rem;
       padding: 0.5rem 1.5rem;
       font-weight: 600;
       text-decoration: none;
@@ -59,6 +64,7 @@
 
       &.active {
         color: $secondary;
+        background-color: $white;
       }
     }
 
