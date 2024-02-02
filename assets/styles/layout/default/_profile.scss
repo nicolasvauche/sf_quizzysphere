@@ -32,7 +32,11 @@
   &:has(input:checked),
   &:has(a.active) {
     color: $secondary;
-    background-color: $white;
+
+    @include respondTo(md) {
+      background-color: rgba($white, 0.5);
+      box-shadow: inset 2px 2px 2px rgba($black, 0.25);
+    }
   }
 
   .dropdown-content {
@@ -64,7 +68,11 @@
 
       &.active {
         color: $secondary;
-        background-color: $white;
+
+        @include respondTo(md) {
+          background-color: rgba($white, 0.5);
+          box-shadow: inset 2px 2px 2px rgba($black, 0.25);
+        }
       }
     }
 
