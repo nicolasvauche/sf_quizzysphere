@@ -1,0 +1,22 @@
+{% apply inline_css %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            color: #222222;
+            background-color: #ffffff;
+        }
+    </style>
+
+    <main>
+        <h1>Salut, {{ mailData['to']['name'] }} !</h1>
+
+        <p>Nous avons reçu un nouveau message de {{ mailData['from']['name'] }} :</p>
+
+        <blockquote>
+            {{ mailData['message'] }}
+        </blockquote>
+    </main>
+{% endapply %}

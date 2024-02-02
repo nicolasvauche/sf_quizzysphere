@@ -1,0 +1,58 @@
+{% extends 'layout/default/_index.html.twig' %}
+
+{% block title %}Contactez l'Administrateur{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        <img src="{{ asset('img/home_cover.png') }}" alt="Contactez-nous"/>
+
+        <h1>
+            <small>Contact :</small>
+            <br/>
+            Laissez un message
+        </h1>
+    </section>
+
+    {{ form_start(form, {'attr': {'class': 'app-form'}}) }}
+
+    <fieldset class="form-fieldset">
+        <div class="form-group">
+            <label for="{{ form.email.vars.id }}"
+                   class="form-label {% if form.email.vars.required %}required{% endif %}">
+                {{ form.email.vars.label }}
+            </label>
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.name.vars.id }}"
+                   class="form-label {% if form.name.vars.required %}required{% endif %}">
+                {{ form.name.vars.label }}
+            </label>
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.subject.vars.id }}"
+                   class="form-label {% if form.subject.vars.required %}required{% endif %}">
+                {{ form.subject.vars.label }}
+            </label>
+            {{ form_widget(form.subject) }}
+            {{ form_errors(form.subject) }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.message.vars.id }}"
+                   class="form-label {% if form.message.vars.required %}required{% endif %}">
+                {{ form.message.vars.label }}
+            </label>
+            {{ form_widget(form.message) }}
+            {{ form_errors(form.message) }}
+        </div>
+    </fieldset>
+
+    <button type="submit" class="app-btn cta">Envoyer</button>
+    {{ form_end(form) }}
+{% endblock %}

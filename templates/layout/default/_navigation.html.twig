@@ -17,7 +17,8 @@
         Parcours
     </a>
 
-    <a href="#">
+    <a href="{{ path('app_contact_index') }}"
+       {% if 'app_conttact_' in app.request.get('_route') %}class="active"{% endif %}>
         <i class="fa-solid fa-envelope"></i>
         Contact
     </a>

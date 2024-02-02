@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\QuizzCategory;
 use App\Entity\UserGroup;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
