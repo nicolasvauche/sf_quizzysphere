@@ -19,7 +19,12 @@ class ContactController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, MailerService $mailerService): Response
     {
-        $form = $this->createForm(ContactType::class);
+        $defaultData = [
+            'email' => $this->getUser()?->getEmail(),
+            'name' => $this->getUser()?->getFullname(),
+        ];
+
+        $form = $this->createForm(ContactType::class, $defaultData);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {

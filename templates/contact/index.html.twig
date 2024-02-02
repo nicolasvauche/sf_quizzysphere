@@ -1,4 +1,4 @@
-{% extends 'layout/default/_index.html.twig' %}
+{% extends (app.user) ? 'layout/default/_index.html.twig' : 'layout/guest/_index.html.twig' %}
 
 {% block title %}Contactez l'Administrateur{% endblock %}
 
