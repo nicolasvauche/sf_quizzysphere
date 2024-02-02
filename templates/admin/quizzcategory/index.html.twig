@@ -35,28 +35,37 @@
                         {% endif %}
                     </dt>
                     <dd {% if not quizzCategory.active %}class="disabled"{% endif %}>
-                        {% if quizzCategory.cover %}
-                            <figure>
+                        <figure>
+                            {% if quizzCategory.cover %}
                                 <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.cover) }}"
                                      alt="{{ quizzCategory.name }}"/>
-                            </figure>
-                        {% endif %}
+                            {% elseif quizzCategory.parent and quizzCategory.parent.cover %}
+                                <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.parent.cover) }}"
+                                     alt="{{ quizzCategory.name }}"/>
+                            {% else %}
+                                <img src="{{ asset('img/quizzcategories_cover.png') }}" alt="Les Catégories de Quizzs"/>
+                            {% endif %}
+                        </figure>
 
-                        {% set quizzs = [] %}
+                        {% set quizzs = app_quizzService.collectQuizzsFromCategories([quizzCategory]) %}
                         <p>
-                            <i class="fa-solid fa-globe text-fourth"></i>
-                            <strong>
-                                {{ quizzs | length }}
-                                Quizz{% if quizzs | length > 1 %}s{% endif %}
-                            </strong>
+                            {% if quizzs | length > 0 %}
+                                <i class="fa-solid fa-globe text-fourth"></i>
+                                <strong>
+                                    {{ quizzs | length }}
+                                    Quizz{% if quizzs | length > 1 %}s{% endif %}
+                                </strong>
 
-                            <br/>
+                                <br/>
+                            {% endif %}
 
-                            <i class="fa-solid fa-boxes-packing text-fourth"></i>
-                            <strong>
-                                {{ quizzCategory.children | length }}
-                                Sous-Catégorie{% if quizzCategory.children | length > 1 %}s{% endif %}
-                            </strong>
+                            {% if quizzCategory.children | length > 0 %}
+                                <i class="fa-solid fa-boxes-packing text-fourth"></i>
+                                <strong>
+                                    {{ quizzCategory.children | length }}
+                                    Sous-Catégorie{% if quizzCategory.children | length > 1 %}s{% endif %}
+                                </strong>
+                            {% endif %}
                         </p>
 
                         <div class="app-grid two">

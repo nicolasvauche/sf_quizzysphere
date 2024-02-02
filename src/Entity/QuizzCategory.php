@@ -44,10 +44,14 @@ class QuizzCategory
     #[ORM\ManyToMany(targetEntity: Course::class, mappedBy: 'quizzCategories')]
     private Collection $courses;
 
+    #[ORM\ManyToMany(targetEntity: Quizz::class, mappedBy: 'quizzCategories')]
+    private Collection $quizzs;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->courses = new ArrayCollection();
+        $this->quizzs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,6 +195,33 @@ class QuizzCategory
     {
         if($this->courses->removeElement($course)) {
             $course->removeQuizzCategory($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quizz>
+     */
+    public function getQuizzs(): Collection
+    {
+        return $this->quizzs;
+    }
+
+    public function addQuizz(Quizz $quizz): static
+    {
+        if (!$this->quizzs->contains($quizz)) {
+            $this->quizzs->add($quizz);
+            $quizz->addQuizzCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuizz(Quizz $quizz): static
+    {
+        if ($this->quizzs->removeElement($quizz)) {
+            $quizz->removeQuizzCategory($this);
         }
 
         return $this;

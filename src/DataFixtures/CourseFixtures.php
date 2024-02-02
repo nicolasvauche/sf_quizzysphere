@@ -25,8 +25,8 @@ class CourseFixtures extends Fixture implements OrderedFixtureInterface
             ->setName("Concepteur Développeur d'Applications")
             ->setActive(true)
             ->addQuizzCategory($this->getReference('quizzcategory-uml'))
+            ->addQuizzCategory($this->getReference('quizzcategory-gestion-de-projets'))
             ->addQuizzCategory($this->getReference('quizzcategory-agile'))
-            ->addQuizzCategory($this->getReference('quizzcategory-scrum'))
             ->addUserGroup($this->getReference('usergroup-testeurs'));
         $manager->persist($course);
         $this->addReference('course-cda', $course);

@@ -34,17 +34,61 @@
         </section>
     {% endif %}
 
-    {% if false %}
-        <section>
+    {% if quizzCategory.quizzs | length > 0 %}
+        <section class="alt">
             <h2>Quizzs</h2>
-            <p class="text-center">
-                Aucun Quizz dans cette catégorie…
-            </p>
+
+            <dl>
+                {% for quizz in quizzCategory.quizzs %}
+                    <dt>{{ quizz.name }}</dt>
+                    <dd>
+                        <figure>
+                            {% if quizz.cover %}
+                                <img src="{{ asset('uploads/quizz_category/' ~ quizz.cover) }}"
+                                     alt="{{ quizz.name }}"/>
+                            {% elseif quizzCategory.cover %}
+                                <img src="{{ asset('uploads/quizz_category/' ~ quizz.quizzCategory.cover) }}"
+                                     alt="{{ quizz.name }}"/>
+                            {% else %}
+                                <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+                            {% endif %}
+                        </figure>
+
+                        <p>
+                            <small>
+                                <strong>Niveau :</strong>
+                                {{ quizz.level }}
+                            </small>
+                        </p>
+
+                        <div class="app-grid two">
+                            <a href="#"
+                               class="app-btn">
+                                <small>
+                                    <i class="fa-solid fa-eye text-primary"></i>
+                                    <strong>Détails</strong>
+                                </small>
+                            </a>
+                            <a href="#"
+                               class="app-btn text-info">
+                                <small>
+                                    <i class="fa-solid fa-pen-to-square text-info"></i>
+                                    <strong>Modifier</strong>
+                                </small>
+                            </a>
+                        </div>
+
+                        {% if loop.index != quizzCategory.quizzs | length %}
+                            <hr/>
+                        {% endif %}
+                    </dd>
+                {% endfor %}
+            </dl>
         </section>
     {% endif %}
 
     {% if quizzCategory.children | length > 0 %}
-        <section class="alt">
+        <section>
             <h2>Sous-Catégories</h2>
 
             <dl>
@@ -68,20 +112,24 @@
                         </figure>
 
                         <p>
-                            {% set quizzs = [] %}
-                            <i class="fa-solid fa-globe text-fourth"></i>
-                            <strong class="text-center">
-                                {{ quizzs | length }}
-                                Quizz{% if quizzs | length > 1 %}s{% endif %}
-                            </strong>
+                            {% set quizzs = app_quizzService.collectQuizzsFromCategories([child]) %}
+                            {% if quizzs | length > 0 %}
+                                <i class="fa-solid fa-globe text-fourth"></i>
+                                <strong class="text-center">
+                                    {{ quizzs | length }}
+                                    Quizz{% if quizzs | length > 1 %}s{% endif %}
+                                </strong>
 
-                            <br/>
+                                <br/>
+                            {% endif %}
 
-                            <i class="fa-solid fa-boxes-packing text-fourth"></i>
-                            <strong class="text-center">
-                                {{ child.children | length }}
-                                Sous-Catégorie{% if child.children | length > 1 %}s{% endif %}
-                            </strong>
+                            {% if child.children | length > 0 %}
+                                <i class="fa-solid fa-boxes-packing text-fourth"></i>
+                                <strong class="text-center">
+                                    {{ child.children | length }}
+                                    Sous-Catégorie{% if child.children | length > 1 %}s{% endif %}
+                                </strong>
+                            {% endif %}
                         </p>
 
                         <div class="app-grid two">
@@ -127,20 +175,24 @@
                     </figure>
 
                     <p>
-                        {% set quizzs = [] %}
-                        <i class="fa-solid fa-globe text-fourth"></i>
-                        <strong class="text-center">
-                            {{ quizzs | length }}
-                            Quizz{% if quizzs | length > 1 %}s{% endif %}
-                        </strong>
+                        {% set quizzs = app_quizzService.collectQuizzsFromCategories([quizzCategory.parent]) %}
+                        {% if quizzs | length > 0 %}
+                            <i class="fa-solid fa-globe text-fourth"></i>
+                            <strong class="text-center">
+                                {{ quizzs | length }}
+                                Quizz{% if quizzs | length > 1 %}s{% endif %}
+                            </strong>
 
-                        <br/>
+                            <br/>
+                        {% endif %}
 
-                        <i class="fa-solid fa-boxes-packing text-fourth"></i>
-                        <strong class="text-center">
-                            {{ quizzCategory.parent.children | length }}
-                            Sous-Catégorie{% if quizzCategory.parent.children | length > 1 %}s{% endif %}
-                        </strong>
+                        {% if quizzCategory.parent.children | length > 0 %}
+                            <i class="fa-solid fa-boxes-packing text-fourth"></i>
+                            <strong class="text-center">
+                                {{ quizzCategory.parent.children | length }}
+                                Sous-Catégorie{% if quizzCategory.parent.children | length > 1 %}s{% endif %}
+                            </strong>
+                        {% endif %}
                     </p>
 
                     <div class="app-grid two">

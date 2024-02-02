@@ -1,0 +1,27 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Les Quizzs{% endblock %}
+
+{% block main %}
+    {% set quizzs = [] %}
+    {% for quizzCategory in quizzCategories %}
+        {% set quizzs = quizzs | merge(quizzCategory.quizzs) %}
+    {% endfor %}
+
+    <section class="bg-image">
+        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+
+        <h1>
+            <small>Les Quizzs :</small>
+            <br/>
+            {{ quizzs | length }} Quizz{% if quizzs | length > 1 %}s{% endif %}
+        </h1>
+    </section>
+
+    <section class="controls">
+        {# <a href="{{ path('app_admin_quizzcategory_add') }}" class="text-success">
+            <i class="fa-solid fa-circle-plus"></i>
+            Nouvelle
+        </a> #}
+    </section>
+{% endblock %}

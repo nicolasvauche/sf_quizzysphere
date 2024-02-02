@@ -42,7 +42,7 @@
                             {% endif %}
                         </figure>
 
-                        {% set quizzs = [] %}
+                        {% set quizzs = app_quizzService.quizzsByCourse(course.id) %}
                         <p>
                             <i class="fa-solid fa-globe text-fourth"></i>
                             <strong>

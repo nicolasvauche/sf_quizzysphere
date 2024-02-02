@@ -26,10 +26,27 @@ class QuizzCategoryFixtures extends Fixture implements OrderedFixtureInterface
 
         $quizzCategory = (new QuizzCategory())
             ->setName('Le Développement Front-End')
+            ->setCover('developpement-web657d8d0f54b2a.png')
             ->setActive(true)
             ->setParent($this->getReference('quizzcategory-developpement-web'));
         $manager->persist($quizzCategory);
         $this->addReference('quizzcategory-front-end', $quizzCategory);
+
+        $quizzCategory = (new QuizzCategory())
+            ->setName('Le langage JavaScript')
+            ->setCover('javascript657d8d65971e2.png')
+            ->setActive(true)
+            ->setParent($this->getReference('quizzcategory-developpement-web'));
+        $manager->persist($quizzCategory);
+        $this->addReference('quizzcategory-js', $quizzCategory);
+
+        $quizzCategory = (new QuizzCategory())
+            ->setName('Le framework Symfony')
+            ->setCover('symfony657d8d7ebc9ce.png')
+            ->setActive(true)
+            ->setParent($this->getReference('quizzcategory-developpement-web'));
+        $manager->persist($quizzCategory);
+        $this->addReference('quizzcategory-sf', $quizzCategory);
 
         $quizzCategory = (new QuizzCategory())
             ->setName("La Conception d'Applications")
@@ -60,14 +77,6 @@ class QuizzCategoryFixtures extends Fixture implements OrderedFixtureInterface
             ->setParent($this->getReference('quizzcategory-gestion-de-projets'));
         $manager->persist($quizzCategory);
         $this->addReference('quizzcategory-agile', $quizzCategory);
-
-        $quizzCategory = (new QuizzCategory())
-            ->setName("La Méthode SCRUM")
-            ->setCover('scrum657d8d4001103.png')
-            ->setActive(true)
-            ->setParent($this->getReference('quizzcategory-agile'));
-        $manager->persist($quizzCategory);
-        $this->addReference('quizzcategory-scrum', $quizzCategory);
 
         $manager->flush();
     }

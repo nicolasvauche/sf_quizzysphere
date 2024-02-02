@@ -34,17 +34,68 @@
         </section>
     {% endif %}
 
-    {% if false %}
-        <section>
+    {% if quizzs | length > 0 %}
+        <section class="alt">
             <h2>Quizzs</h2>
-            <p class="text-center">
-                Aucun Quizz dans ce parcours…
-            </p>
+
+            <dl>
+                {% for quizz in quizzs %}
+                    <dt>{{ quizz.name }}</dt>
+                    <dd>
+                        <figure>
+                            {% if quizz.cover %}
+                                <img src="{{ asset('uploads/quizz_category/' ~ quizz.cover) }}"
+                                     alt="{{ quizz.name }}"/>
+                            {% else %}
+                                <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+                            {% endif %}
+                        </figure>
+
+                        <p>
+                            <small>
+                                <strong>Catégorie{% if quizz.quizzCategories | length > 1 %}s{% endif %} :</strong>
+                                {% for quizzCategory in quizz.quizzCategories %}
+                                    <a href="{{ path('app_admin_quizzcategory_show', {'id': quizzCategory.id}) }}">
+                                        {{ quizzCategory.name }}
+                                    </a>
+                                    {% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </small>
+                            <br/>
+                            <small>
+                                <strong>Niveau :</strong>
+                                {{ quizz.level }}
+                            </small>
+                        </p>
+
+                        <div class="app-grid two">
+                            <a href="#"
+                               class="app-btn">
+                                <small>
+                                    <i class="fa-solid fa-eye text-primary"></i>
+                                    <strong>Détails</strong>
+                                </small>
+                            </a>
+                            <a href="#"
+                               class="app-btn text-info">
+                                <small>
+                                    <i class="fa-solid fa-pen-to-square text-info"></i>
+                                    <strong>Modifier</strong>
+                                </small>
+                            </a>
+                        </div>
+
+                        {% if loop.index != quizzs | length %}
+                            <hr/>
+                        {% endif %}
+                    </dd>
+                {% endfor %}
+            </dl>
         </section>
     {% endif %}
 
     {% if course.quizzCategories | length > 0 %}
-        <section class="alt">
+        <section>
             <h2>Catégories</h2>
 
             <dl>
@@ -67,8 +118,8 @@
                             {% endif %}
                         </figure>
 
+                        {% set quizzs = app_quizzService.collectQuizzsFromCategories([quizzCategory]) %}
                         <p>
-                            {% set quizzs = [] %}
                             <i class="fa-solid fa-globe text-fourth"></i>
                             <strong class="text-center">
                                 {{ quizzs | length }}

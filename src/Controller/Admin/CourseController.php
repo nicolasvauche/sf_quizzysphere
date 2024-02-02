@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Course;
 use App\Form\Admin\CourseType;
+use App\Service\QuizzService;
 use App\Service\FileUploaderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,10 +58,11 @@ class CourseController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show')]
-    public function show(Course $course): Response
+    public function show(QuizzService $quizzService, Course $course): Response
     {
         return $this->render('admin/course/show.html.twig', [
             'course' => $course,
+            'quizzs' => $quizzService->getQuizzsByCourse($course->getId()),
         ]);
     }
 

@@ -33,7 +33,7 @@
                 <i class="fa-solid fa-boxes-packing"></i>
                 Catégories de Quizzs
             </a>
-            <a href="#"
+            <a href="{{ path('app_admin_quizz_index') }}"
                {% if 'app_admin_quizz_' in app.request.get('_route') %}class="active"{% endif %}>
                 <i class="fa-solid fa-globe"></i>
                 Tous les Quizzs
