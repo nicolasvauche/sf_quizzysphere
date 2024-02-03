@@ -5,6 +5,8 @@ quizzyspherenew.crt
 quizzyspherenew.key
 public/uploads/quizz_category/*
 !public/uploads/quizz_category/.gitkeep
+public/uploads/quizz/*
+!public/uploads/quizz/.gitkeep
 ###< quizzysphere/local ###
 
 ###> symfony/framework-bundle ###

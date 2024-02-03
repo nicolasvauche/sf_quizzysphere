@@ -58,21 +58,31 @@
                     </dt>
                     <dd>
                         <p>
-                            <i class="fa-solid fa-globe text-fourth"></i>
+                            {% set quizzs = app_quizzService.quizzsByCourse(course.id) %}
+                            {% if quizzs | length > 0 %}
+                                <i class="fa-solid fa-globe text-fourth" aria-hidden="true"></i>
+                                <strong class="text-primary">
+                                    {{ quizzs | length }}
+                                    Quizz{% if quizzs | length > 1 %}s{% endif %}
+                                </strong>
+
+                                <br/>
+                            {% endif %}
+
                             {% if course.quizzCategories | length > 0 %}
+                                <i class="fa-solid fa-boxes-packing text-fourth" aria-hidden="true"></i>
                                 <strong class="text-primary">
                                     Catégorie{% if course.quizzCategories | length > 1 %}s{% endif %} :
                                 </strong>
                                 {% for quizzCategory in course.quizzCategories %}
                                 <a href="{{ path('app_admin_quizzcategory_show', {'id': quizzCategory.id}) }}">
-                                    {{ quizzCategory.name }}
-                                    </a>{% if loop.index < course.quizzCategories | length %}, {% endif %}
+                                    {{ quizzCategory.name }}</a>{% if loop.index < course.quizzCategories | length %}, {% endif %}
                                 {% endfor %}
                             {% endif %}
                         </p>
 
                         <div class="app-grid two">
-                            {# <a href="{{ path('app_admin_course_show', {'id': course.id}) }}" class="app-btn">
+                            <a href="{{ path('app_admin_course_show', {'id': course.id}) }}" class="app-btn">
                                 <small>
                                     <i class="fa-solid fa-eye text-primary"></i>
                                     <strong>Détails</strong>
@@ -84,7 +94,7 @@
                                     <i class="fa-solid fa-pen-to-square text-info"></i>
                                     <strong>Modifier</strong>
                                 </small>
-                            </a> #}
+                            </a>
                         </div>
 
                         {% if loop.index != course.quizzCategories | length %}

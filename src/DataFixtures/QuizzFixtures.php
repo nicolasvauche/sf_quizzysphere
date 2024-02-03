@@ -48,7 +48,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
 
         $quizz = (new Quizz())
             ->setName("Les Fondamentaux du Front-End")
-            ->setCover('developpement-web657d8d0f54b2a.png')
+            ->setCover('developpement-front-end657d8d0f54b2a.png')
             ->setLevel('Débutant')
             ->setActive(true)
             ->addQuizzCategory($this->getReference('quizzcategory-front-end'));

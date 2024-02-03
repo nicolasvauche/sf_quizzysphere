@@ -13,4 +13,10 @@
       grid-template-columns: 6fr 4fr;
     }
   }
+
+  &.no-xs {
+    @include respondTo(xs) {
+      grid-template-columns: 1fr;
+    }
+  }
 }

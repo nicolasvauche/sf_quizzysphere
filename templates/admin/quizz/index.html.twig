@@ -19,9 +19,62 @@
     </section>
 
     <section class="controls">
-        {# <a href="{{ path('app_admin_quizzcategory_add') }}" class="text-success">
+        <a href="{{ path('app_admin_quizz_add') }}" class="text-success">
             <i class="fa-solid fa-circle-plus"></i>
-            Nouvelle
-        </a> #}
+            Nouveau
+        </a>
     </section>
+
+    {% if quizzs | length > 0 %}
+        {% for quizzCategory in quizzCategories %}
+            {% if quizzCategory.quizzs | length > 0 %}
+                <section>
+                    <h2>{{ quizzCategory.name }}</h2>
+                    <div class="app-grid two no-xs">
+                        {% for quizz in quizzCategory.quizzs %}
+                            <article class="app-card">
+                                <div class="card-body">
+                                    {% if quizz.cover %}
+                                        <img src="{{ asset('uploads/quizz/' ~ quizz.cover) }}"
+                                             alt="{{ quizz.name }}"/>
+                                    {% elseif quizzCategory.cover %}
+                                        <img src="{{ asset('uploads/quizz_category/' ~ quizz.quizzCategory.cover) }}"
+                                             alt="{{ quizz.name }}"/>
+                                    {% else %}
+                                        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+                                    {% endif %}
+
+                                    <h3>{{ quizz.name }}</h3>
+
+                                    <p>
+                                        <small>
+                                            <strong>Niveau :</strong>
+                                            {{ quizz.level }}
+                                        </small>
+                                    </p>
+                                </div>
+
+                                <div class="card-footer app-grid two">
+                                    <a href="{{ path('app_admin_quizz_show', {'id': quizz.id}) }}"
+                                       class="app-btn">
+                                        <small>
+                                            <i class="fa-solid fa-eye text-primary"></i>
+                                            <strong>Détails</strong>
+                                        </small>
+                                    </a>
+                                    <a href="{{ path('app_admin_quizz_edit', {'id': quizz.id}) }}"
+                                       class="app-btn text-info">
+                                        <small>
+                                            <i class="fa-solid fa-pen-to-square text-info"></i>
+                                            <strong>Modifier</strong>
+                                        </small>
+                                    </a>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

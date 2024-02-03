@@ -48,10 +48,15 @@
     width: 100%;
 
     & > img {
+      margin-bottom: 1rem;
       width: 100%;
       height: 14dvh;
       object-fit: cover;
       border-radius: 0.25rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -59,5 +64,15 @@
     align-self: flex-end;
     width: 100%;
     text-align: left;
+
+    &.app-grid {
+      margin: 1rem 0 0;
+
+      a {
+        margin: 0 !important;
+        padding: 0.25rem 0.5rem !important;
+        background-color: rgba($white, 0.75);
+      }
+    }
   }
 }
