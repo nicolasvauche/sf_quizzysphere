@@ -2,8 +2,8 @@
 
 namespace App\Form\Admin;
 
+use App\Entity\Answer;
 use App\Entity\Question;
-use App\Entity\Quizz;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -11,31 +11,39 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class QuestionType extends AbstractType
+class AnswerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('quizz', EntityType::class, [
+            ->add('question', EntityType::class, [
                 'required' => true,
-                'label' => 'Quizz associé',
-                'class' => Quizz::class,
-                'choice_label' => 'name',
+                'label' => 'Question associée',
+                'class' => Question::class,
+                'choice_label' => 'text',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
             ->add('text', TextareaType::class, [
                 'required' => true,
-                'label' => 'Texte de la Question',
+                'label' => 'Texte de la Réponse',
                 'attr' => [
                     'class' => 'form-control',
                     'rows' => 5,
                 ],
             ])
-            ->add('active', CheckboxType::class, [
+            ->add('help', TextareaType::class, [
+                'required' => true,
+                'label' => "Correction de la Réponse",
+                'attr' => [
+                    'class' => 'form-control',
+                    'rows' => 7,
+                ],
+            ])
+            ->add('correct', CheckboxType::class, [
                 'required' => false,
-                'label' => 'Question Active',
+                'label' => 'Réponse correcte',
                 'attr' => [
                     'class' => 'form-checkbox',
                 ],
@@ -45,7 +53,7 @@ class QuestionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Question::class,
+            'data_class' => Answer::class,
         ]);
     }
 }

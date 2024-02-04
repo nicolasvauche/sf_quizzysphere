@@ -1,0 +1,35 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Modifier une Réponse{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        {% if answer.question.quizz.cover %}
+            <img src="{{ asset('uploads/quizz/' ~ answer.question.quizz.cover) }}"
+                 alt="{{ answer.question.quizz.name }}"/>
+        {% else %}
+            <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+        {% endif %}
+
+        <h1>
+            <small>Modifier une Réponse :</small>
+            <br/>
+            {{ answer.question.quizz.name }}
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_quizz_show', {'id': answer.question.quizz.id}) }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Quizz
+        </a>
+        <a href="{{ path('app_admin_question_delete', {id: answer.id}) }}"
+           class="text-danger"
+           onclick="return window.confirm('Supprimer cette Réponse ?')">
+            <i class="fa-solid fa-trash-can"></i>
+            Supprimer
+        </a>
+    </section>
+
+    {{ include('admin/answer/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}

@@ -102,90 +102,125 @@ ul {
 }
 
 ol {
-  padding: 1rem 0.25rem 0;
-  counter-reset: item;
+  &.question {
+    padding: 1rem 0.25rem 0;
+    counter-reset: item;
 
-  & > li {
-    position: relative;
-    margin-bottom: 1.5rem;
-    padding: 0.5rem 0.5rem 0.5rem 2rem;
-    line-height: 1.25rem;
-    counter-increment: item;
-    font-weight: 600;
-    background-color: rgba($fifth, 0.1);
-    border-radius: 0.5rem;
+    & > li {
+      position: relative;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 0.5rem 0.5rem 2rem;
+      line-height: 1.25rem;
+      counter-increment: item;
+      font-weight: 600;
+      background-color: rgba($fifth, 0.1);
+      border-radius: 0.5rem;
 
-    &:before {
-      content: counter(item);
-      counter-increment: list;
-      position: absolute;
-      top: -0.5rem;
-      left: -0.5rem;
-      @include displayFlex(center, center);
-      height: 1.75rem;
-      width: 1.75rem;
-      font-size: 0.85rem;
-      font-weight: bold;
-      color: $primary;
-      background-color: $fourth;
-      border-radius: 50%;
-    }
+      &:before {
+        content: counter(item);
+        counter-increment: list;
+        position: absolute;
+        top: -0.5rem;
+        left: -0.5rem;
+        @include displayFlex(center, center);
+        height: 1.75rem;
+        width: 1.75rem;
+        font-size: 0.85rem;
+        font-weight: bold;
+        color: $primary;
+        background-color: $fourth;
+        border-radius: 50%;
+      }
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+      &:last-child {
+        margin-bottom: 0;
+      }
 
-    &.app-dropdown {
-      padding: 0.5rem 0.5rem 0.5rem 2rem !important;
-      text-align: left !important;
+      &.app-dropdown {
+        padding: 0.5rem 0.5rem 0.5rem 2rem !important;
+        text-align: left !important;
 
-      .dropdown-content {
-        position: relative !important;
-        left: initial !important;
-        top: initial !important;
-        right: initial !important;
-        z-index: 9997 !important;
-        margin-top: 1rem;
-        padding: 0.25rem !important;
-        font-weight: normal !important;
-        color: $black !important;
-        background-color: rgba($white, 0.5) !important;
-        border-radius: 0.5rem !important;
+        .dropdown-content {
+          position: relative !important;
+          left: initial !important;
+          top: initial !important;
+          right: initial !important;
+          z-index: 9997 !important;
+          margin-top: 1rem;
+          padding: 0.25rem !important;
+          font-weight: normal !important;
+          color: $black !important;
+          background-color: rgba($white, 0.5) !important;
+          border-radius: 0.5rem !important;
 
-        ul {
-          padding: 0 0.5rem;
+          ul {
+            padding: 0 0.5rem;
 
-          li {
-            & > a {
-              display: block;
-              margin: 0.5rem 0.5rem 0 !important;
-              padding: 0 !important;
-              text-align: center;
+            li {
+              & > a {
+                display: block;
+                margin: 0.5rem -0.5rem 0 !important;
+                padding: 0.5rem 0.25rem !important;
+                text-align: center;
+                background-color: rgba($success, 0.15) !important;
+              }
+            }
+          }
+
+          .app-grid {
+            a {
+              display: block !important;
+              margin: 0.25rem 0 0 !important;
+              background-color: rgba($fifth, 0.15) !important;
             }
           }
         }
 
-        .app-grid {
-          a {
-            display: block !important;
-            margin: 1rem 0 0 !important;
-            background-color: rgba($fifth, 0.15) !important;
+        &:has(input:checked) {
+          color: $primary !important;
+
+          @include respondTo(md) {
+            background-color: rgba($fifth, 0.1) !important;
+            box-shadow: none !important;
           }
         }
       }
 
-      &:has(input:checked) {
-        color: $primary !important;
-
-        @include respondTo(md) {
-          background-color: rgba($fifth, 0.1) !important;
-          box-shadow: none !important;
-        }
+      a {
+        text-decoration: none;
       }
     }
+  }
 
-    a {
-      text-decoration: none;
+  &:not(.question) {
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    list-style: upper-alpha;
+    font-size: 0.85rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      white-space: normal;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &::marker {
+        font-weight: bold;
+        color: $primary;
+      }
+
+      &:has(.text-success) {
+        &::marker {
+          color: $success;
+        }
+      }
+
+      a {
+        margin: 0 !important;
+        padding: 0 !important;
+        font-weight: normal !important;
+      }
     }
   }
 }

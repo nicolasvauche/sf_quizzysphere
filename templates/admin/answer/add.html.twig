@@ -1,0 +1,24 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Nouvelle Réponse{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+
+        <h1>
+            <small>{{ answer.question.quizz.name }} :</small>
+            <br/>
+            Nouvelle réponse
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="{{ path('app_admin_quizz_show', {'id': answer.question.quizz.id}) }}" class="text-primary">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Quizz
+        </a>
+    </section>
+
+    {{ include('admin/answer/_form.html.twig') }}
+{% endblock %}
