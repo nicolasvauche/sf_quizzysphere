@@ -1,31 +1,43 @@
 <div class="app-grid">
-    <div class="app-card {% if warning is defined %} warning{% else %}alt{% endif %}">
-        <a href="#">
-            <div class="card-header">
-                <strong>Le Développement Web</strong>
-                <span class="app-badge top right">
-                        <i class="fa-solid fa-stopwatch"></i>
-                        30s
-                    </span>
-            </div>
+    {% for quizz in quizzs %}
+        <div class="app-card {% if warning is defined %} warning{% else %}alt{% endif %}">
+            <a href="#">
+                <div class="card-header">
+                    <strong>{{ quizz.quizzCategories[0].name }}</strong>
 
-            <div class="card-body">
-                <img src="{{ asset('img/quizzs_cover.png') }}"
-                     alt="Les Catégories de Quizzs"/>
-                <p class="big text-primary">JavaScript</p>
-            </div>
+                    {% if quizz.timer %}
+                        <span class="app-badge top right">
+                            <i class="fa-solid fa-stopwatch"></i>
+                            {{ quizz.timer }}s
+                        </span>
+                    {% endif %}
+                </div>
 
-            <div class="card-footer">
-                <strong>
-                    <small>
-                        <i class="fa-solid fa-circle-question"></i>
-                        1/10
-                    </small>
-                </strong>
-                <span class="app-badge bottom right">
-                        avancé
+                <div class="card-body">
+                    {% if quizz.cover %}
+                        <img src="{{ asset('uploads/quizz/' ~ quizz.cover) }}" alt="{{ quizz.name }}"/>
+                    {% else %}
+                        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Catégories de Quizzs"/>
+                    {% endif %}
+                    <h3 class="text-primary">{{ quizz.name }}</h3>
+                </div>
+
+                <div class="card-footer">
+                    <strong>
+                        <small>
+                            <i class="fa-solid fa-circle-question"></i>
+                            {% if warning is defined %}
+                                1/10
+                            {% else %}
+                                10 questions
+                            {% endif %}
+                        </small>
+                    </strong>
+                    <span class="app-badge bottom right">
+                        {{ quizz.level }}
                     </span>
-            </div>
-        </a>
-    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
 </div>

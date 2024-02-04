@@ -34,4 +34,27 @@
         </section>
     {% endif %}
 
+    <section class="alt">
+        <h2>Informations</h2>
+        <ul>
+            <li>
+                <strong class="text-primary">Niveau :</strong>
+                {{ quizz.level }}
+            </li>
+            {% if quizz.timer %}
+                <li>
+                    <strong class="text-primary">Temps de réponse :</strong>
+                    {{ quizz.timer }}s
+                </li>
+            {% else %}
+                <li>
+                    <strong class="text-primary">Non chronométré</strong>
+                </li>
+            {% endif %}
+            <li>
+                <strong class="text-primary">Créé le :</strong>
+                {{ quizz.createdAt|date('d/m/Y à H:i') }}
+            </li>
+        </ul>
+    </section>
 {% endblock %}

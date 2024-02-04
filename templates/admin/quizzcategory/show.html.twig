@@ -28,6 +28,29 @@
         </a>
     </section>
 
+    <section class="alt">
+        <h2>Informations</h2>
+        <ul>
+            <li>
+                <strong class="text-primary">Créée le :</strong>
+                {{ quizzCategory.createdAt|date('d/m/Y à H:i') }}
+            </li>
+
+            {% set quizzs = app_quizzService.collectQuizzsFromCategories([quizzCategory]) %}
+            <li>
+                {% if quizzs | length > 0 %}
+                    <i class="fa-solid fa-globe text-fourth"></i>
+                    <strong class="text-primary">
+                        {{ quizzs | length }}
+                        Quizz{% if quizzs | length > 1 %}s{% endif %}
+                    </strong>
+                {% else %}
+                    <strong class="text-primary">Aucun quizz</strong>
+                {% endif %}
+            </li>
+        </ul>
+    </section>
+
     {% if not quizzCategory.active %}
         <section class="inactive">
             <h3>Catégorie désactivée</h3>
@@ -35,7 +58,7 @@
     {% endif %}
 
     {% if quizzCategory.quizzs | length > 0 %}
-        <section class="alt">
+        <section>
             <h2>Quizzs</h2>
 
             <dl>
@@ -88,7 +111,7 @@
     {% endif %}
 
     {% if quizzCategory.children | length > 0 %}
-        <section>
+        <section class="alt">
             <h2>Sous-Catégories</h2>
 
             <dl>
@@ -159,7 +182,7 @@
     {% endif %}
 
     {% if quizzCategory.parent %}
-        <section>
+        <section {% if quizzCategory.children | length == 0 %}class="alt"{% endif %}>
             <h2>Catégorie Parente</h2>
 
             <dl>

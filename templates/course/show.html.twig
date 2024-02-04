@@ -26,17 +26,19 @@
         </section>
     {% endif %}
 
+    {% set quizzs = app_quizzService.quizzsByCourse(course.id) %}
     <section>
         <h2>Quizzs en cours</h2>
-        {% include 'quizz/_grid.html.twig' with {'warning': true} %}
+        {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'warning': true} %}
     </section>
 
+    {% set quizzs = app_quizzService.quizzsByCourse(course.id) %}
     <section class="alt">
-        <h2>Quizzs restants</h2>
-        {% include 'quizz/_grid.html.twig' %}
+        <h2>Quizzs restants dans ce parcours</h2>
+        {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs} %}
     </section>
 
-    {% if course.quizzCategories | length > 0 %}
+    {% if false and course.quizzCategories | length > 0 %}
         <section>
             <h2>Les Catégories</h2>
 
