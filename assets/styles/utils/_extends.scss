@@ -1,3 +1,8 @@
+/** MARGINS **/
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
 /** TEXT ALIGNMENTS **/
 .text-center {
   text-align: center !important;
@@ -19,6 +24,10 @@
 }
 
 /** TEXT COLORS **/
+.text-white {
+  color: $white !important;
+}
+
 .text-success {
   color: $success !important;
 }

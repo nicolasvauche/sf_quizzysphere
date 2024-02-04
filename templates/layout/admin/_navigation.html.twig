@@ -34,7 +34,7 @@
                 Catégories de Quizzs
             </a>
             <a href="{{ path('app_admin_quizz_index') }}"
-               {% if 'app_admin_quizz_' in app.request.get('_route') %}class="active"{% endif %}>
+               {% if 'app_admin_quizz_' in app.request.get('_route') or 'app_admin_question_' in app.request.get('_route') %}class="active"{% endif %}>
                 <i class="fa-solid fa-globe"></i>
                 Tous les Quizzs
             </a>

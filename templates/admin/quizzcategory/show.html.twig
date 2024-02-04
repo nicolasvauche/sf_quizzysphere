@@ -85,14 +85,14 @@
                         </p>
 
                         <div class="app-grid two">
-                            <a href="#"
+                            <a href="{{ path('app_admin_quizz_show', {'id': quizz.id}) }}"
                                class="app-btn">
                                 <small>
                                     <i class="fa-solid fa-eye text-primary"></i>
                                     <strong>Détails</strong>
                                 </small>
                             </a>
-                            <a href="#"
+                            <a href="{{ path('app_admin_quizz_edit', {'id': quizz.id}) }}"
                                class="app-btn text-info">
                                 <small>
                                     <i class="fa-solid fa-pen-to-square text-info"></i>
@@ -111,7 +111,7 @@
     {% endif %}
 
     {% if quizzCategory.children | length > 0 %}
-        <section class="alt">
+        <section>
             <h2>Sous-Catégories</h2>
 
             <dl>

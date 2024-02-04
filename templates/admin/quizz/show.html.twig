@@ -57,4 +57,52 @@
             </li>
         </ul>
     </section>
+
+    <section>
+        <h2>Questions du Quizz</h2>
+        {% if quizz.questions | length > 0 %}
+            <ol>
+                {% for question in quizz.questions %}
+                    <li class="app-dropdown">
+                        <input type="checkbox"/>
+                        {{ question.text | raw }}
+
+                        <div class="dropdown-content">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa-solid fa-flask-vial"></i>
+                                        Générer les réponses
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="app-grid two mb-0">
+                                <a href="{{ path('app_admin_question_edit', {'id': question.id}) }}"
+                                   class="app-btn text-info">
+                                    <small>
+                                        <i class="fa-solid fa-pen-to-square text-info"></i>
+                                        <strong>Modifier</strong>
+                                    </small>
+                                </a>
+                                <a href="{{ path('app_admin_question_delete', {'id': question.id}) }}"
+                                   class="app-btn text-danger"
+                                   onclick="return window.confirm('Supprimer cette question ?')">
+                                    <small>
+                                        <i class="fa-solid fa-trash-can text-danger"></i>
+                                        <strong>Supprimer</strong>
+                                    </small>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <a href="#" class="app-btn">
+                <i class="fa-solid fa-flask-vial"></i>
+                Générer les questions
+            </a>
+        {% endif %}
+    </section>
 {% endblock %}

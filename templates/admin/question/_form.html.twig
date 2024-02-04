@@ -1,0 +1,30 @@
+{{ form_start(form, {'attr': {'class': 'app-form'}}) }}
+
+<fieldset class="form-fieldset">
+    <div class="form-group">
+        <label for="{{ form.text.vars.id }}"
+               class="form-label {% if form.text.vars.required %}required{% endif %}">
+            {{ form.text.vars.label }}
+        </label>
+        {{ form_widget(form.text) }}
+        {{ form_errors(form.text) }}
+    </div>
+</fieldset>
+
+{{ form_widget(form._token) }}
+<button type="submit" class="app-btn cta">{{ button_label|default('Créer') }}</button>
+
+<p class="text-center">
+    <strong>ou</strong>
+    <a href="#" class="app-btn">
+        <i class="fa-solid fa-flask-vial"></i>
+        Générer la question
+        <br/>
+        <small class="text-danger">
+            <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+            <small>Ceci supprimera toutes les réponses</small>
+            <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+        </small>
+    </a>
+</p>
+{{ form_end(form, {'render_rest': false}) }}
