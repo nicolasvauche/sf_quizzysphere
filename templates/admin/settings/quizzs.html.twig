@@ -1,0 +1,45 @@
+{% extends 'layout/admin/_index.html.twig' %}
+
+{% block title %}Paramètres de l'application{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        <img src="{{ asset('img/home_cover.png') }}" alt="Paramètres de QuizzySphere"/>
+
+        <h1>
+            <small>Configuration :</small>
+            <br/>
+            Paramètres des Quizzs
+        </h1>
+    </section>
+
+    {{ form_start(form, {'attr': {'class': 'app-form'}}) }}
+
+    <fieldset class="form-fieldset">
+        <legend class="form-legend">Les Questions</legend>
+
+        <div class="form-group">
+            <label for="{{ form.quizzQuestionsMax.vars.id }}"
+                   class="form-label {% if form.quizzQuestionsMax.vars.required %}required{% endif %}">
+                {{ form.quizzQuestionsMax.vars.label }}
+            </label>
+            {{ form_widget(form.quizzQuestionsMax, {'value': settings ? settings.quizzQuestionsMax : null}) }}
+            {{ form_errors(form.quizzQuestionsMax) }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.quizzAnswersMax.vars.id }}"
+                   class="form-label {% if form.quizzAnswersMax.vars.required %}required{% endif %}">
+                {{ form.quizzAnswersMax.vars.label }}
+            </label>
+            {{ form_widget(form.quizzAnswersMax, {'value': settings ? settings.quizzAnswersMax : null}) }}
+            {{ form_errors(form.quizzAnswersMax) }}
+        </div>
+    </fieldset>
+
+    <input type="hidden" name="type" value="quizzs"/>
+    {{ form_widget(form._token) }}
+    <button type="submit" class="app-btn cta">Enregistrer</button>
+    {{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}

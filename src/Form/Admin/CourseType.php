@@ -58,6 +58,7 @@ class CourseType extends AbstractType
                 'required' => true,
                 'label' => 'Nom du Parcours',
                 'attr' => [
+                    'autofocus' => true,
                     'class' => 'form-control',
                 ],
             ])

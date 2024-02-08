@@ -43,6 +43,7 @@ class Quizz
     private Collection $quizzCategories;
 
     #[ORM\OneToMany(mappedBy: 'quizz', targetEntity: Question::class, orphanRemoval: true)]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $questions;
 
     public function __construct()
@@ -174,7 +175,7 @@ class Quizz
 
     public function addQuestion(Question $question): static
     {
-        if (!$this->questions->contains($question)) {
+        if(!$this->questions->contains($question)) {
             $this->questions->add($question);
             $question->setQuizz($this);
         }
@@ -184,9 +185,9 @@ class Quizz
 
     public function removeQuestion(Question $question): static
     {
-        if ($this->questions->removeElement($question)) {
+        if($this->questions->removeElement($question)) {
             // set the owning side to null (unless already changed)
-            if ($question->getQuizz() === $this) {
+            if($question->getQuizz() === $this) {
                 $question->setQuizz(null);
             }
         }

@@ -52,6 +52,10 @@
                 </li>
             {% endif %}
             <li>
+                <strong class="text-primary">Nombre de Questions :</strong>
+                {{ quizz.questions | length }}/{{ app_settings.quizzQuestionsMax }}
+            </li>
+            <li>
                 <strong class="text-primary">Créé le :</strong>
                 {{ quizz.createdAt|date('d/m/Y à H:i') }}
             </li>
@@ -61,11 +65,16 @@
     <section>
         <h2>Questions du Quizz</h2>
 
-        {% if quizz.questions | length < 20 %}
+        {% if quizz.questions | length < app_settings.quizzQuestionsMax %}
             <p class="text-center">
-                <a href="{{ path('app_admin_answer_add') }}" class="app-btn cta success">
+                <a href="{{ path('app_admin_question_add', {'id': quizz.id}) }}" class="app-btn cta success">
                     <i class="fa-solid fa-circle-plus"></i>
                     Nouvelle Question
+                </a>
+                <strong>ou</strong>
+                <a href="#" class="app-btn">
+                    <i class="fa-solid fa-flask-vial"></i>
+                    Générer une Question
                 </a>
             </p>
         {% endif %}
@@ -91,28 +100,29 @@
                                 </ol>
                             {% endif %}
 
-                            <ul>
-                                <li>
-                                    {% if quizz.questions | length > 0 %}
-                                        <a href="#" class="text-success"
-                                           onclick="return window.confirm('Toutes les réponses seront supprimées et remplacées. Continuer ?')">
-                                            <i class="fa-solid fa-flask-vial"></i>
-                                            Régénérer les réponses
-                                        </a>
-                                    {% else %}
-                                        <a href="#" class="text-success">
-                                            Générer les réponses
-                                        </a>
-                                    {% endif %}
-                                </li>
-                            </ul>
+                            <div class="app-grid two no-xs mb-0">
+                                {% if question.answers | length < app_settings.quizzAnswersMax %}
+                                    <a href="{{ path('app_admin_answer_add', {'id': question.id}) }}"
+                                       class="app-btn text-success">
+                                        <small>
+                                            <i class="fa-solid fa-circle-plus"></i>
+                                            Nouvelle Réponse
+                                        </small>
+                                    </a>
 
-                            <div class="app-grid two mb-0">
+                                    <a href="#" class="app-btn text-primary">
+                                        <small>
+                                            <i class="fa-solid fa-flask-vial"></i>
+                                            Générer une Réponse
+                                        </small>
+                                    </a>
+                                {% endif %}
+
                                 <a href="{{ path('app_admin_question_edit', {'id': question.id}) }}"
                                    class="app-btn text-info">
                                     <small>
                                         <i class="fa-solid fa-pen-to-square text-info"></i>
-                                        <strong>Modifier</strong>
+                                        <strong>Modifier la Question</strong>
                                     </small>
                                 </a>
                                 <a href="{{ path('app_admin_question_delete', {'id': question.id}) }}"
@@ -120,7 +130,7 @@
                                    onclick="return window.confirm('Supprimer cette question ?')">
                                     <small>
                                         <i class="fa-solid fa-trash-can text-danger"></i>
-                                        <strong>Supprimer</strong>
+                                        <strong>Supprimer la Question</strong>
                                     </small>
                                 </a>
                             </div>

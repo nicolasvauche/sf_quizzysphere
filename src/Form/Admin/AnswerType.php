@@ -29,6 +29,7 @@ class AnswerType extends AbstractType
                 'required' => true,
                 'label' => 'Texte de la Réponse',
                 'attr' => [
+                    'autofocus' => true,
                     'class' => 'form-control',
                     'rows' => 5,
                 ],

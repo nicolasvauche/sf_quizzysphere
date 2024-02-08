@@ -21,28 +21,13 @@ class AnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, Answer::class);
     }
 
-//    /**
-//     * @return Answer[] Returns an array of Answer objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Answer
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findMaxPositionForQuestion(int $questionId)
+    {
+        return $this->createQueryBuilder('a')
+            ->select('MAX(a.position) as maxPosition')
+            ->where('a.question = :questionId')
+            ->setParameter('questionId', $questionId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

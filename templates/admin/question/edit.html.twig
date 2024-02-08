@@ -30,5 +30,12 @@
         </a>
     </section>
 
+    <section class="alt">
+        <p class="mb-0">
+            <strong class="text-primary">Question n°</strong>
+            {{ question.position }}
+        </p>
+    </section>
+
     {{ include('admin/question/_form.html.twig', {'button_label': 'Modifier'}) }}
 {% endblock %}

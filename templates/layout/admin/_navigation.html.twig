@@ -60,9 +60,14 @@
         <input type="checkbox"/>
         <div class="dropdown-content">
             <a href="{{ path('app_admin_settings_users') }}"
-               {% if 'app_admin_settings_' in app.request.get('_route') %}class="active"{% endif %}>
+               {% if app.request.get('_route') == 'app_admin_settings_users' %}class="active"{% endif %}>
                 <i class="fa-solid fa-users-viewfinder"></i>
                 Paramètres Utilisateurs
+            </a>
+            <a href="{{ path('app_admin_settings_quizzs') }}"
+               {% if app.request.get('_route') == 'app_admin_settings_quizzs' %}class="active"{% endif %}>
+                <i class="fa-solid fa-globe"></i>
+                Paramètres des Quizzs
             </a>
         </div>
     </div>

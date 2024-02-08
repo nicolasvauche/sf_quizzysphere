@@ -23,4 +23,14 @@ class SettingsService
     {
         return $this->getSettings()?->getDefaultUserGroup();
     }
+
+    public function getQuizzQuestionsMax()
+    {
+        return $this->getSettings()?->getQuizzQuestionsMax();
+    }
+
+    public function getQuizzAnswersMax()
+    {
+        return $this->getSettings()?->getQuizzAnswersMax();
+    }
 }

@@ -31,6 +31,7 @@ class UserGroupType extends AbstractType
                 'required' => true,
                 'label' => 'Nom du groupe',
                 'attr' => [
+                    'autofocus' => true,
                     'class' => 'form-control',
                 ],
             ])

@@ -29,6 +29,7 @@ class QuestionType extends AbstractType
                 'required' => true,
                 'label' => 'Texte de la Question',
                 'attr' => [
+                    'autofocus' => true,
                     'class' => 'form-control',
                     'rows' => 5,
                 ],

@@ -30,6 +30,7 @@ class Question
     private ?Quizz $quizz = null;
 
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class, orphanRemoval: true)]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $answers;
 
     public function __construct()

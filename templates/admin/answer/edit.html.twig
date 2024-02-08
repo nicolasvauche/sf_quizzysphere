@@ -23,12 +23,22 @@
             <i class="fa-solid fa-circle-arrow-left"></i>
             Quizz
         </a>
-        <a href="{{ path('app_admin_question_delete', {id: answer.id}) }}"
+        <a href="{{ path('app_admin_answer_delete', {id: answer.id}) }}"
            class="text-danger"
            onclick="return window.confirm('Supprimer cette Réponse ?')">
             <i class="fa-solid fa-trash-can"></i>
             Supprimer
         </a>
+    </section>
+
+    <section class="alt">
+        <p class="mb-0">
+            <strong class="text-primary">Question : </strong>
+            {{ question.text | raw }}
+            <br/>
+            <strong class="text-primary">Réponse n°</strong>
+            {{ answer.position }}
+        </p>
     </section>
 
     {{ include('admin/answer/_form.html.twig', {'button_label': 'Modifier'}) }}

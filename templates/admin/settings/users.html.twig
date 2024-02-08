@@ -23,12 +23,14 @@
                    class="form-label {% if form.defaultUserGroup.vars.required %}required{% endif %}">
                 {{ form.defaultUserGroup.vars.label }}
             </label>
-            {{ form_widget(form.defaultUserGroup) }}
+            {{ form_widget(form.defaultUserGroup, {'value': (settings and settings.defaultUserGroup ? settings.defaultUserGroup.id : null)}) }}
             {{ form_errors(form.defaultUserGroup) }}
         </div>
     </fieldset>
 
+    <input type="hidden" name="type" value="users"/>
+    {{ form_widget(form._token) }}
     <button type="submit" class="app-btn cta">Enregistrer</button>
-    {{ form_end(form) }}
+    {{ form_end(form, {'render_rest': false}) }}
 
 {% endblock %}

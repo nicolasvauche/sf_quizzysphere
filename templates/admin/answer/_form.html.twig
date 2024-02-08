@@ -34,9 +34,25 @@
 
 <p class="text-center">
     <strong>ou</strong>
-    <a href="#" class="app-btn">
-        <i class="fa-solid fa-flask-vial"></i>
-        Régénérer la réponse
-    </a>
+    {% if button_label is defined %}
+        <a href="#"
+           class="app-btn"
+           onclick="return window.confirm('Supprimer et régénérer cette réponse ?')">
+            <i class="fa-solid fa-flask-vial"></i>
+            Régénérer la question
+            <br/>
+            <small class="text-danger">
+                <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+                <small>Ceci supprimera la réponse</small>
+                <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+            </small>
+        </a>
+    {% else %}
+        <a href="#"
+           class="app-btn">
+            <i class="fa-solid fa-flask-vial"></i>
+            Générer la réponse
+        </a>
+    {% endif %}
 </p>
 {{ form_end(form, {'render_rest': false}) }}

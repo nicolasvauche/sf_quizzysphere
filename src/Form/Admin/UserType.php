@@ -35,6 +35,7 @@ class UserType extends AbstractType
                 'required' => true,
                 'label' => 'Adresse e-mail',
                 'attr' => [
+                    'autofocus' => true,
                     'class' => 'form-control',
                 ],
             ])

@@ -49,6 +49,7 @@ class QuizzType extends AbstractType
                 'required' => true,
                 'label' => 'Nom du Quizz',
                 'attr' => [
+                    'autofocus' => true,
                     'class' => 'form-control',
                 ],
             ])
