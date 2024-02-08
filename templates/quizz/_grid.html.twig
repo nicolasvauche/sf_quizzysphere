@@ -1,6 +1,6 @@
-<div class="app-grid">
+<div class="app-grid two-sm">
     {% for quizz in quizzs %}
-        <div class="app-card {% if warning is defined %} warning{% else %}alt{% endif %}">
+        <div class="app-card {% if warning is defined %} warning{% elseif success is defined %}success{% else %}alt{% endif %}">
             <a href="#">
                 <div class="card-header">
                     <strong>{{ quizz.quizzCategories[0].name }}</strong>
@@ -24,14 +24,17 @@
 
                 <div class="card-footer">
                     <strong>
-                        <small>
+                        {% if warning is defined %}
                             <i class="fa-solid fa-circle-question"></i>
-                            {% if warning is defined %}
-                                1/10
-                            {% else %}
-                                10 questions
-                            {% endif %}
-                        </small>
+                            1/{{ quizz.questions |length }}
+                        {% elseif success is defined %}
+                            <i class="fa-solid fa-square-poll-vertical"></i>
+                            {{ quizz.questions |length }}/{{ quizz.questions |length }}
+                        {% else %}
+                            <i class="fa-solid fa-circle-question"></i>
+                            {{ quizz.questions |length }}
+                            question{% if quizz.questions |length > 1 %}s{% endif %}
+                        {% endif %}
                     </strong>
                     <span class="app-badge bottom right">
                         {{ quizz.level }}

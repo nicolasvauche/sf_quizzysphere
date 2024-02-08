@@ -36,7 +36,10 @@
 
     {% if quizzs | length > 0 %}
         <section class="alt">
-            <h2>Quizzs</h2>
+            <h2>
+                {{ quizzs | length }}
+                Quizz{% if quizzs | length > 1 %}s{% endif %}
+            </h2>
 
             <dl>
                 {% for quizz in quizzs %}

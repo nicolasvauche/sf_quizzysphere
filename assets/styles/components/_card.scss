@@ -1,6 +1,6 @@
 .app-card {
   position: relative;
-  @include displayFlex(space-between, center, 0.5rem, column);
+  @include displayFlex(space-between, center, 1rem, column);
   padding: 0.5rem;
   text-align: center;
   background-color: rgba($fifth, 0.25);
@@ -11,7 +11,7 @@
     background-color: $fourth;
 
     & > a {
-      @include displayFlex(space-between, center, 0.5rem, column);
+      @include displayFlex(space-between, center, 1rem, column);
       height: 100%;
       text-decoration: none;
       color: inherit;
@@ -33,6 +33,12 @@
   &.warning {
     &:has(a) {
       background-color: rgba($warning, 0.25);
+    }
+  }
+
+  &.success {
+    &:has(a) {
+      background-color: rgba($success, 0.15);
     }
   }
 

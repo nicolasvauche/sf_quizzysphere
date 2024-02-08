@@ -3,6 +3,8 @@
 {% block title %}Parcours - {{ course.name }}{% endblock %}
 
 {% block main %}
+    {% set quizzs = app_quizzService.collectQuizzsFromCategories(course.quizzCategories) %}
+
     <section class="bg-image">
         {% if course.cover %}
             <img src="{{ asset('uploads/course/' ~ course.cover) }}" alt="{{ course.name }}"/>
@@ -26,23 +28,29 @@
         </section>
     {% endif %}
 
-    {% set quizzs = app_quizzService.quizzsByCourse(course.id) %}
-    <section>
-        <h2>Quizzs en cours</h2>
-        {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'warning': true} %}
-    </section>
-
-    {% set quizzs = app_quizzService.quizzsByCourse(course.id) %}
-    <section class="alt">
-        <h2>Quizzs restants dans ce parcours</h2>
-        {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs} %}
-    </section>
-
-    {% if false and course.quizzCategories | length > 0 %}
+    {% if false %}
         <section>
-            <h2>Les Catégories</h2>
-
-            {% include 'quizzcategory/_grid.html.twig' with {'quizzCategories': course.quizzCategories} %}
+            <h2>Quizzs en cours</h2>
+            {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'warning': true} %}
         </section>
     {% endif %}
+
+    <section class="alt">
+        <h2>
+            {{ quizzs | length }}
+            Quizz{% if quizzs | length > 1 %}s{% endif %}
+            restant{% if quizzs | length > 1 %}s{% endif %}
+            dans ce parcours
+        </h2>
+        {% include 'quizz/_grid.html.twig' %}
+    </section>
+
+    <section>
+        <h2>
+            {{ quizzs | length }}
+            Quizz{% if quizzs | length > 1 %}s{% endif %}
+            terminé{% if quizzs | length > 1 %}s{% endif %}
+        </h2>
+        {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'success': true} %}
+    </section>
 {% endblock %}

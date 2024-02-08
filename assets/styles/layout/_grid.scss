@@ -6,6 +6,12 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  &.two-sm {
+    @include respondTo(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   &.third {
     grid-template-columns: 4fr 6fr;
 

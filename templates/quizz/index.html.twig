@@ -3,6 +3,8 @@
 {% block title %}Les Quizzs{% endblock %}
 
 {% block main %}
+    {% set quizzs = app_quizzService.collectQuizzsFromCategories(quizzCategories) %}
+
     <section class="bg-image">
         <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
 
@@ -13,19 +15,28 @@
         </h1>
     </section>
 
-    <section>
-        <h2>Quizzs à terminer</h2>
-        {% include 'quizz/_grid.html.twig' with {'warning': true} %}
-    </section>
+    {% if false %}
+        <section>
+            <h2>Quizzs à terminer</h2>
+            {% include 'quizz/_grid.html.twig' with {'warning': true} %}
+        </section>
+    {% endif %}
 
     <section class="alt">
-        <h2>Quizzs recommandés</h2>
+        <h2>
+            {{ quizzs | length }}
+            Quizz{% if quizzs | length > 1 %}s{% endif %}
+            recommandé{% if quizzs | length > 1 %}s{% endif %}
+        </h2>
         {% include 'quizz/_grid.html.twig' %}
     </section>
 
-    {# <section>
-        <h2>Parcourez les Catégories</h2>
-
-        {% include 'quizzcategory/_grid.html.twig' %}
-    </section> #}
+    <section>
+        <h2>
+            {{ quizzs | length }}
+            Quizz{% if quizzs | length > 1 %}s{% endif %}
+            terminé{% if quizzs | length > 1 %}s{% endif %}
+        </h2>
+        {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'success': true} %}
+    </section>
 {% endblock %}
