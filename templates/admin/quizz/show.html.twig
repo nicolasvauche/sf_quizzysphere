@@ -38,6 +38,15 @@
         <h2>Informations</h2>
         <ul>
             <li>
+                <strong class="text-primary">
+                    Catégorie{% if quizz.quizzCategories | length > 1 %}s{% endif %} :
+                </strong>
+                {% for quizzCategory in quizz.quizzCategories %}
+                    <a href="{{ path('app_admin_quizzcategory_show', {'id': quizzCategory.id}) }}">
+                        {{ quizzCategory.name }}{% if not loop.last %}, {% endif %}
+                    </a>
+                {% endfor %}
+            <li>
                 <strong class="text-primary">Niveau :</strong>
                 {{ quizz.level }}
             </li>

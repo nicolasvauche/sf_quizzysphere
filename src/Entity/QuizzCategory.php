@@ -210,7 +210,7 @@ class QuizzCategory
 
     public function addQuizz(Quizz $quizz): static
     {
-        if (!$this->quizzs->contains($quizz)) {
+        if(!$this->quizzs->contains($quizz)) {
             $this->quizzs->add($quizz);
             $quizz->addQuizzCategory($this);
         }
@@ -220,10 +220,25 @@ class QuizzCategory
 
     public function removeQuizz(Quizz $quizz): static
     {
-        if ($this->quizzs->removeElement($quizz)) {
+        if($this->quizzs->removeElement($quizz)) {
             $quizz->removeQuizzCategory($this);
         }
 
         return $this;
+    }
+
+    public function updateActiveRecursively(bool $active): void
+    {
+        $this->setActive($active);
+
+        // Mise à jour des catégories enfants
+        foreach($this->getChildren() as $child) {
+            $child->updateActiveRecursively($active);
+        }
+
+        // Mise à jour des quizz associés
+        foreach($this->getQuizzs() as $quizz) {
+            $quizz->setActive($active);
+        }
     }
 }

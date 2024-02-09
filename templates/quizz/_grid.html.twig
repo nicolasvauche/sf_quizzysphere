@@ -1,4 +1,4 @@
-<div class="app-grid two-sm">
+<div class="app-grid two-sm mb-0">
     {% for quizz in quizzs %}
         <div class="app-card {% if warning is defined %} warning{% elseif success is defined %}success{% else %}alt{% endif %}">
             <a href="#">
@@ -36,7 +36,7 @@
                             1/{{ quizz.questions |length }}
                         {% elseif success is defined and userAttempt %}
                             <i class="fa-solid fa-square-poll-vertical"></i>
-                            {{ userAttempt.score ? userAttempt.scrore : "0" }}/{{ quizz.questions |length }}
+                            {{ userAttempt.score ? userAttempt.score : "0" }}/20
                         {% else %}
                             <i class="fa-solid fa-circle-question"></i>
                             {{ quizz.questions |length }}

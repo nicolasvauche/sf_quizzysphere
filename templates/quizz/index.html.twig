@@ -26,7 +26,7 @@
         <h2>
             {{ quizzs | length }}
             Quizz{% if quizzs | length > 1 %}s{% endif %}
-            recommandé{% if quizzs | length > 1 %}s{% endif %}
+            à réaliser
         </h2>
         {% include 'quizz/_grid.html.twig' %}
     </section>
@@ -34,15 +34,19 @@
     {% if app.user.attempts | length > 0 %}
         {% set quizzs = [] %}
         {% for attempt in app.user.attempts %}
-            {% set quizzs = quizzs | merge([attempt.quizz]) %}
+            {% if attempt.quizz.active %}
+                {% set quizzs = quizzs | merge([attempt.quizz]) %}
+            {% endif %}
         {% endfor %}
-        <section>
-            <h2>
-                {{ app.user.attempts | length }}
-                Quizz{% if app.user.attempts | length > 1 %}s{% endif %}
-                terminé{% if app.user.attempts | length > 1 %}s{% endif %}
-            </h2>
-            {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'success': true} %}
-        </section>
+        {% if quizzs | length > 0 %}
+            <section>
+                <h2>
+                    {{ app.user.attempts | length }}
+                    Quizz{% if app.user.attempts | length > 1 %}s{% endif %}
+                    terminé{% if app.user.attempts | length > 1 %}s{% endif %}
+                </h2>
+                {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'success': true} %}
+            </section>
+        {% endif %}
     {% endif %}
 {% endblock %}

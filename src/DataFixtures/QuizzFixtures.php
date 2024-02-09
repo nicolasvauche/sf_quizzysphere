@@ -14,7 +14,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $quizz = (new Quizz())
             ->setName("L'Histoire du Web")
             ->setLevel('1 - Débutant')
-            ->setActive(true)
+            ->setActive(false)
             ->addQuizzCategory($this->getReference('quizzcategory-le-web'));
         $manager->persist($quizz);
         $this->addReference('quizz-histoire-du-web', $quizz);
@@ -22,7 +22,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $quizz = (new Quizz())
             ->setName("La Conception avec UML")
             ->setCover('uml657d8ca47eca2.png')
-            ->setLevel('2 - Intermédiaire')
+            ->setLevel('1 - Débutant')
             ->setActive(true)
             ->addQuizzCategory($this->getReference('quizzcategory-uml'));
         $manager->persist($quizz);

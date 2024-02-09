@@ -38,8 +38,7 @@
         <h2>
             {{ quizzs | length }}
             Quizz{% if quizzs | length > 1 %}s{% endif %}
-            restant{% if quizzs | length > 1 %}s{% endif %}
-            dans ce parcours
+            à réaliser dans ce parcours
         </h2>
         {% include 'quizz/_grid.html.twig' %}
     </section>

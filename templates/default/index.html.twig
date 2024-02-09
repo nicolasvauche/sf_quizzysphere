@@ -29,8 +29,8 @@
                         </div>
                         <div class="card-body text-primary">
                             <p class="big">
-                                {{ app_quizzService.collectQuizzsFromCategories(userCategories) | length }}
-                                <small>/{{ app_quizzService.collectQuizzsFromCategories(userCategories) | length }}</small>
+                                {% set totalQuizzs = (app_quizzService.collectQuizzsFromCategories(userCategories, app.user) | length) + (app.user.attempts | length) %}
+                                {{ app.user.attempts | length }}<small>/{{ totalQuizzs }}</small>
                             </p>
                         </div>
                         <div class="card-footer text-right">
@@ -39,14 +39,22 @@
                     </a>
                 </article>
 
+                {% if app.user.attempts | length > 0 %}
+                    {% set note = 0 %}
+                    {% for attempt in app.user.attempts %}
+                        {% set note = note + attempt.score %}
+                    {% endfor %}
+                    {% set note = note / (app.user.attempts | length) %}
+                {% else %}
+                    {% set note = "-" %}
+                {% endif %}
                 <article class="app-card">
                     <div class="card-header">
                         <strong>Note</strong>
                     </div>
                     <div class="card-body text-primary">
                         <p class="big">
-                            -
-                            <small>/20</small>
+                            {{ note }}<small>/20</small>
                         </p>
                     </div>
                     <div class="card-footer text-right">
@@ -62,8 +70,7 @@
                     </div>
                     <div class="card-body text-primary">
                         <p class="big">
-                            {{ users | length }}
-                            <small>/{{ users | length }}</small>
+                            {{ users | length }}<small>/{{ users | length }}</small>
                         </p>
                     </div>
                     <div class="card-footer text-right">

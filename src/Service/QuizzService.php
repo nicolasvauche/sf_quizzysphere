@@ -46,16 +46,18 @@ class QuizzService
         $maxUserLevels = $user ? $this->getMaxLevelsByUserAndCategories($user, $categories) : null;
         foreach($categories as $category) {
             foreach($category->getQuizzs() as $quizz) {
-                if($user) {
-                    $quizzLevel = $quizz->getLevel();
-                    $maxLevelForCategory = $maxUserLevels[$category->getId()] ?? '1 - Débutant';
+                if($quizz->isActive()) {
+                    if($user) {
+                        $quizzLevel = $quizz->getLevel();
+                        $maxLevelForCategory = $maxUserLevels[$category->getId()] ?? '1 - Débutant';
 
-                    if($quizzLevel === $maxLevelForCategory && !in_array($quizz, $quizzs)) {
-                        $quizzs[] = $quizz;
-                    }
-                } else {
-                    if(!in_array($quizz, $quizzs)) {
-                        $quizzs[] = $quizz;
+                        if($quizzLevel === $maxLevelForCategory && !in_array($quizz, $quizzs)) {
+                            $quizzs[] = $quizz;
+                        }
+                    } else {
+                        if(!in_array($quizz, $quizzs)) {
+                            $quizzs[] = $quizz;
+                        }
                     }
                 }
             }

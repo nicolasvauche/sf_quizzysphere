@@ -29,10 +29,17 @@
         {% for quizzCategory in quizzCategories %}
             {% if quizzCategory.quizzs | length > 0 %}
                 <section>
-                    <h2>{{ quizzCategory.name }}</h2>
+                    <h2 {% if not quizzCategory.active %}class="disabled"{% endif %}>
+                        {{ quizzCategory.name }}
+                        {% if not quizzCategory.active %}
+                            <small>
+                                <i class="fa-solid fa-eye-slash text-warning"></i>
+                            </small>
+                        {% endif %}
+                    </h2>
                     <div class="app-grid two no-xs">
                         {% for quizz in quizzCategory.quizzs %}
-                            <article class="app-card">
+                            <article class="app-card {% if not quizz.active %}disabled{% endif %}">
                                 <div class="card-body">
                                     {% if quizz.cover %}
                                         <img src="{{ asset('uploads/quizz/' ~ quizz.cover) }}"
@@ -44,7 +51,14 @@
                                         <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
                                     {% endif %}
 
-                                    <h3>{{ quizz.name }}</h3>
+                                    <h3>
+                                        {{ quizz.name }}
+                                        {% if not quizz.active %}
+                                            <small>
+                                                <i class="fa-solid fa-eye-slash text-warning"></i>
+                                            </small>
+                                        {% endif %}
+                                    </h3>
 
                                     <p>
                                         <small>

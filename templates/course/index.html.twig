@@ -30,12 +30,13 @@
                                 <h3>{{ course.name }}</h3>
                             </div>
 
+                            {% set quizzs = app_quizzService.quizzsByCourse(course.id, app.user) %}
                             <div class="card-footer text-center">
                                 <strong>
                                     <small>
-                                        {{ course.quizzCategories | length }}
-                                        Catégorie{% if course.quizzCategories | length > 1 %}s{% endif %}
-                                        de Quizzs
+                                        {{ quizzs | length }}
+                                        Quizz{% if quizzs | length > 1 %}s{% endif %}
+                                        à réaliser
                                     </small>
                                 </strong>
                             </div>

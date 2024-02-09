@@ -83,10 +83,7 @@ class QuizzCategoryController extends AbstractController
                 $quizzCategory->setCover($coverFileName);
             }
 
-            foreach($quizzCategory->getChildren() as $childCategory) {
-                $childCategory->setActive($quizzCategory->isActive());
-                $entityManager->persist($childCategory);
-            }
+            $quizzCategory->updateActiveRecursively($quizzCategory->isActive());
 
             $entityManager->persist($quizzCategory);
             $entityManager->flush();

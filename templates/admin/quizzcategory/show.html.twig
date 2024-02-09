@@ -64,13 +64,12 @@
                 Quizz{% if quizzCategory.quizzs | length > 1 %}s{% endif %}
             </h2>
 
-            <dl>
+            <div class="app-grid two no-xs">
                 {% for quizz in quizzCategory.quizzs %}
-                    <dt>{{ quizz.name }}</dt>
-                    <dd>
-                        <figure>
+                    <article class="app-card {% if not quizz.active %}disabled{% endif %}">
+                        <div class="card-body">
                             {% if quizz.cover %}
-                                <img src="{{ asset('uploads/quizz_category/' ~ quizz.cover) }}"
+                                <img src="{{ asset('uploads/quizz/' ~ quizz.cover) }}"
                                      alt="{{ quizz.name }}"/>
                             {% elseif quizzCategory.cover %}
                                 <img src="{{ asset('uploads/quizz_category/' ~ quizz.quizzCategory.cover) }}"
@@ -78,16 +77,25 @@
                             {% else %}
                                 <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
                             {% endif %}
-                        </figure>
 
-                        <p>
-                            <small>
-                                <strong>Niveau :</strong>
-                                {{ quizz.level }}
-                            </small>
-                        </p>
+                            <h3>
+                                {{ quizz.name }}
+                                {% if not quizz.active %}
+                                    <small>
+                                        <i class="fa-solid fa-eye-slash text-warning"></i>
+                                    </small>
+                                {% endif %}
+                            </h3>
 
-                        <div class="app-grid two">
+                            <p>
+                                <small>
+                                    <strong>Niveau :</strong>
+                                    {{ quizz.level }}
+                                </small>
+                            </p>
+                        </div>
+
+                        <div class="card-footer app-grid two">
                             <a href="{{ path('app_admin_quizz_show', {'id': quizz.id}) }}"
                                class="app-btn">
                                 <small>
@@ -103,13 +111,9 @@
                                 </small>
                             </a>
                         </div>
-
-                        {% if loop.index != quizzCategory.quizzs | length %}
-                            <hr/>
-                        {% endif %}
-                    </dd>
+                    </article>
                 {% endfor %}
-            </dl>
+            </div>
         </section>
     {% endif %}
 
@@ -189,8 +193,15 @@
             <h2>Catégorie Parente</h2>
 
             <dl>
-                <dt>{{ quizzCategory.parent.name }}</dt>
-                <dd>
+                <dt {% if not quizzCategory.parent.active %}class="disabled"{% endif %}>
+                    {{ quizzCategory.parent.name }}
+                    {% if not quizzCategory.parent.active %}
+                        <small>
+                            <i class="fa-solid fa-eye-slash text-warning"></i>
+                        </small>
+                    {% endif %}
+                </dt>
+                <dd {% if not quizzCategory.parent.active %}class="disabled"{% endif %}>
                     <figure>
                         {% if quizzCategory.parent.cover %}
                             <img src="{{ asset('uploads/quizz_category/' ~ quizzCategory.parent.cover) }}"

@@ -2,6 +2,10 @@
   @include displayGrid;
   margin-bottom: 0.5rem;
 
+  @include respondTo(sm) {
+    grid-gap: 1rem;
+  }
+
   &.two {
     grid-template-columns: repeat(2, 1fr);
   }
