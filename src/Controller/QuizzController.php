@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Quizz;
 use App\Entity\UserGroup;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,6 +36,14 @@ class QuizzController extends AbstractController
 
         return $this->render('quizz/index.html.twig', [
             'quizzCategories' => $userQuizzCategories,
+        ]);
+    }
+
+    #[Route('/{slug}', name: 'show')]
+    public function show(Quizz $quizz): Response
+    {
+        return $this->render('quizz/show.html.twig', [
+            'quizz' => $quizz,
         ]);
     }
 }

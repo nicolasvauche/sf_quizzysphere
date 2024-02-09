@@ -1,7 +1,7 @@
 <div class="app-grid two-sm mb-0">
     {% for quizz in quizzs %}
         <div class="app-card {% if warning is defined %} warning{% elseif success is defined %}success{% else %}alt{% endif %}">
-            <a href="#">
+            <a href="{{ path('app_quizz_show', {'slug': quizz.slug}) }}">
                 <div class="card-header">
                     <strong>{{ quizz.quizzCategories[0].name }}</strong>
 

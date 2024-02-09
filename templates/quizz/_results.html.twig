@@ -1,0 +1,25 @@
+<ol class="question">
+    {% for question in quizz.questions %}
+        <li class="app-dropdown danger">
+            <input type="checkbox"/>
+            {{ question.text | raw }}
+
+            <div class="dropdown-content">
+                {% if question.answers | length > 0 %}
+                    <ol type="A">
+                        {% for answer in question.answers %}
+                            <li class="{% if answer.correct %}text-success{% else %}text-danger{% endif %}">
+                                <strong>{{ answer.text }}</strong>
+                                {% if answer.help %}
+                                    <p>
+                                        {{ answer.help }}
+                                    </p>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ol>

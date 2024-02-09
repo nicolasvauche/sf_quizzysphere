@@ -136,6 +136,20 @@ ol {
         margin-bottom: 0;
       }
 
+      &.success {
+        &:before {
+          color: $white;
+          background-color: $success;
+        }
+      }
+
+      &.danger {
+        &:before {
+          color: $white;
+          background-color: $danger;
+        }
+      }
+
       &.app-dropdown {
         padding: 0.5rem 0.5rem 0.5rem 2rem !important;
         text-align: left !important;
@@ -210,9 +224,17 @@ ol {
         color: $primary;
       }
 
+      &.text-success,
       &:has(.text-success) {
         &::marker {
           color: $success;
+        }
+      }
+
+      &.text-danger,
+      &:has(.text-danger) {
+        &::marker {
+          color: $danger;
         }
       }
 

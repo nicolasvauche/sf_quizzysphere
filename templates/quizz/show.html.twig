@@ -1,0 +1,78 @@
+{% extends 'layout/default/_index.html.twig' %}
+
+{% block title %}Quizz : {{ quizz.name }}{% endblock %}
+
+{% block main %}
+    {% set userAttempt = null %}
+    {% for attempt in quizz.attempts %}
+        {% if attempt.player == app.user %}
+            {% set userAttempt = attempt %}
+        {% endif %}
+    {% endfor %}
+
+    <section class="bg-image">
+        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+
+        <h1>
+            <small>Quizz :</small>
+            <br/>
+            {{ quizz.name }}
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="#" class="text-primary" onclick="history.go(-1)">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Retour
+        </a>
+    </section>
+
+    <section class="alt">
+        <h2>Informations</h2>
+        <ul>
+            {% if userAttempt %}
+                <li>
+                    <strong class="text-primary">Votre score : </strong>
+                    {% set totalQuestions = (userAttempt.quizz.questions | length) * 2 %}
+                    {% if userAttempt.score == totalQuestions %}
+                        <strong class="text-success">{{ userAttempt.score }}/20</strong>
+                    {% elseif userAttempt.score >= totalQuestions * 3 / 4 %}
+                        <strong class="text-info">{{ userAttempt.score }}/20</strong>
+                    {% elseif userAttempt.score > totalQuestions / 4 %}
+                        <strong class="text-warning">{{ userAttempt.score }}/20</strong>
+                    {% else %}
+                        <strong class="text-danger">{{ userAttempt.score }}/20</strong>
+                    {% endif %}
+                </li>
+                <li>
+                    <strong class="text-primary">Réalisé le :</strong>
+                    {{ userAttempt.endedAt | date ('d/m/Y à H:i') }}
+                </li>
+            {% endif %}
+            <li>
+                <strong class="text-primary">Niveau :</strong>
+                {{ quizz.level }}
+            </li>
+            {% if quizz.timer %}
+                <li>
+                    <strong class="text-primary">Temps de réponse :</strong>
+                    {{ quizz.timer }}s
+                </li>
+            {% endif %}
+        </ul>
+    </section>
+
+    <section>
+        {% if userAttempt %}
+            <h2>Réponses du Quizz</h2>
+
+            {% include 'quizz/_results.html.twig' %}
+        {% else %}
+            <p class="text-center">
+                <a href="#" class="app-btn cta">
+                    Commencer le Quizz
+                </a>
+            </p>
+        {% endif %}
+    </section>
+{% endblock %}
