@@ -3,7 +3,6 @@
 {% block title %}Les Quizzs{% endblock %}
 
 {% block main %}
-    {% set quizzs = app_quizzService.collectQuizzsFromCategories(quizzCategories) %}
 
     <section class="bg-image">
         <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
@@ -22,6 +21,7 @@
         </section>
     {% endif %}
 
+    {% set quizzs = app_quizzService.collectQuizzsFromCategories(quizzCategories, app.user) %}
     <section class="alt">
         <h2>
             {{ quizzs | length }}
@@ -31,12 +31,18 @@
         {% include 'quizz/_grid.html.twig' %}
     </section>
 
-    <section>
-        <h2>
-            {{ quizzs | length }}
-            Quizz{% if quizzs | length > 1 %}s{% endif %}
-            terminé{% if quizzs | length > 1 %}s{% endif %}
-        </h2>
-        {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'success': true} %}
-    </section>
+    {% if app.user.attempts | length > 0 %}
+        {% set quizzs = [] %}
+        {% for attempt in app.user.attempts %}
+            {% set quizzs = quizzs | merge([attempt.quizz]) %}
+        {% endfor %}
+        <section>
+            <h2>
+                {{ app.user.attempts | length }}
+                Quizz{% if app.user.attempts | length > 1 %}s{% endif %}
+                terminé{% if app.user.attempts | length > 1 %}s{% endif %}
+            </h2>
+            {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'success': true} %}
+        </section>
+    {% endif %}
 {% endblock %}

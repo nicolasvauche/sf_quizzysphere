@@ -3,8 +3,6 @@
 {% block title %}Parcours - {{ course.name }}{% endblock %}
 
 {% block main %}
-    {% set quizzs = app_quizzService.collectQuizzsFromCategories(course.quizzCategories) %}
-
     <section class="bg-image">
         {% if course.cover %}
             <img src="{{ asset('uploads/course/' ~ course.cover) }}" alt="{{ course.name }}"/>
@@ -19,7 +17,7 @@
         </h1>
     </section>
 
-    {% if courses and courses | length > 1 %}
+    {% if app.user.userCourses and app.user.userCourses | length > 1 %}
         <section class="controls">
             <a href="{{ path('app_course_index') }}" class="text-primary">
                 <i class="fa-solid fa-circle-arrow-left"></i>
@@ -35,6 +33,7 @@
         </section>
     {% endif %}
 
+    {% set quizzs = app_quizzService.collectQuizzsFromCategories(course.quizzCategories, app.user) %}
     <section class="alt">
         <h2>
             {{ quizzs | length }}
@@ -45,12 +44,22 @@
         {% include 'quizz/_grid.html.twig' %}
     </section>
 
-    <section>
-        <h2>
-            {{ quizzs | length }}
-            Quizz{% if quizzs | length > 1 %}s{% endif %}
-            terminé{% if quizzs | length > 1 %}s{% endif %}
-        </h2>
-        {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'success': true} %}
-    </section>
+    {% if app.user.attempts | length > 0 %}
+        {% set quizzs = [] %}
+        {% for attempt in app.user.attempts %}
+            {% if attempt.quizz in app_quizzService.quizzsByCourse(course.id) %}
+                {% set quizzs = quizzs | merge([attempt.quizz]) %}
+            {% endif %}
+        {% endfor %}
+        {% if quizzs | length > 0 %}
+            <section>
+                <h2>
+                    {{ app.user.attempts | length }}
+                    Quizz{% if app.user.attempts | length > 1 %}s{% endif %}
+                    terminé{% if app.user.attempts | length > 1 %}s{% endif %}
+                </h2>
+                {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'success': true} %}
+            </section>
+        {% endif %}
+    {% endif %}
 {% endblock %}

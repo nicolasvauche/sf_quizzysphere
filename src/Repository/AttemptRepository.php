@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Attempt;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,28 +22,43 @@ class AttemptRepository extends ServiceEntityRepository
         parent::__construct($registry, Attempt::class);
     }
 
-//    /**
-//     * @return Attempt[] Returns an array of Attempt objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findMaxLevelsByUserAndCategories(User $user, $categories): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('qc.id AS categoryId, MAX(q.level) AS maxLevel')
+            ->innerJoin('a.quizz', 'q')
+            ->innerJoin('q.quizzCategories', 'qc')
+            ->where('a.player = :user')
+            ->andWhere('qc IN (:categories)')
+            ->groupBy('qc.id')
+            ->setParameter('user', $user)
+            ->setParameter('categories', $categories);
 
-//    public function findOneBySomeField($value): ?Attempt
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $result = $qb->getQuery()->getResult();
+
+        $nextLevels = [];
+        foreach($result as $row) {
+            // Extraire le numéro du niveau actuel à partir de maxLevel
+            $currentLevelNum = (int)substr($row['maxLevel'], 0, 1);
+            // Déterminer le niveau suivant
+            $nextLevelNum = $currentLevelNum + 1;
+            // Convertir le numéro du niveau suivant en sa représentation textuelle
+            switch($nextLevelNum) {
+                case 2:
+                    $nextLevel = "2 - Intermédiaire";
+                    break;
+                case 3:
+                    $nextLevel = "3 - Avancé";
+                    break;
+                default:
+                    // Si le niveau actuel est déjà le plus élevé, tu peux décider de ne pas augmenter le niveau
+                    // ou de retourner le niveau actuel comme "maximum atteint".
+                    $nextLevel = "3 - Avancé"; // ou garder le niveau actuel si tu ne veux pas dépasser le niveau Avancé
+                    break;
+            }
+            $nextLevels[$row['categoryId']] = $nextLevel;
+        }
+
+        return $nextLevels;
+    }
 }

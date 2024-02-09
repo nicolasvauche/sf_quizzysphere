@@ -22,14 +22,21 @@
                     <h3 class="text-primary">{{ quizz.name }}</h3>
                 </div>
 
+                {% set userAttempt = null %}
+                {% for attempt in app.user.attempts %}
+                    {% if attempt.quizz.id == quizz.id %}
+                        {% set userAttempt = attempt %}
+                    {% endif %}
+                {% endfor %}
+
                 <div class="card-footer">
                     <strong>
                         {% if warning is defined %}
                             <i class="fa-solid fa-circle-question"></i>
                             1/{{ quizz.questions |length }}
-                        {% elseif success is defined %}
+                        {% elseif success is defined and userAttempt %}
                             <i class="fa-solid fa-square-poll-vertical"></i>
-                            {{ quizz.questions |length }}/{{ quizz.questions |length }}
+                            {{ userAttempt.score ? userAttempt.scrore : "0" }}/{{ quizz.questions |length }}
                         {% else %}
                             <i class="fa-solid fa-circle-question"></i>
                             {{ quizz.questions |length }}

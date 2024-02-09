@@ -33,15 +33,6 @@ class QuizzController extends AbstractController
             }
         }
 
-        /*$userQuizzs = new ArrayCollection();
-        foreach($userQuizzCategories as $userQuizzCategory) {
-            foreach($userQuizzCategory->getQuizzs() as $userQuizz) {
-                if(!$userQuizzs->contains($userQuizz)) {
-                    $userQuizzs->add($userQuizz);
-                }
-            }
-        }*/
-
         return $this->render('quizz/index.html.twig', [
             'quizzCategories' => $userQuizzCategories,
         ]);

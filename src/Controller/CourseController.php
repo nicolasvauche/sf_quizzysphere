@@ -34,16 +34,9 @@ class CourseController extends AbstractController
     #[Route('/{slug}/details', name: 'show')]
     public function show(EntityManagerInterface $entityManager, Course $course): Response
     {
-        if($this->getUser()) {
-            $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
-            if($user) {
-                $userCourses = $user->getUserCourses();
-            }
-        }
 
         return $this->render('course/show.html.twig', [
             'course' => $course,
-            'courses' => $userCourses ?? null,
         ]);
     }
 }
