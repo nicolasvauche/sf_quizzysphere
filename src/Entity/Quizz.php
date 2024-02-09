@@ -46,10 +46,14 @@ class Quizz
     #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $questions;
 
+    #[ORM\OneToMany(mappedBy: 'quizz', targetEntity: Attempt::class, orphanRemoval: true)]
+    private Collection $attempts;
+
     public function __construct()
     {
         $this->quizzCategories = new ArrayCollection();
         $this->questions = new ArrayCollection();
+        $this->attempts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -189,6 +193,36 @@ class Quizz
             // set the owning side to null (unless already changed)
             if($question->getQuizz() === $this) {
                 $question->setQuizz(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Attempt>
+     */
+    public function getAttempts(): Collection
+    {
+        return $this->attempts;
+    }
+
+    public function addAttempt(Attempt $attempt): static
+    {
+        if (!$this->attempts->contains($attempt)) {
+            $this->attempts->add($attempt);
+            $attempt->setQuizz($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttempt(Attempt $attempt): static
+    {
+        if ($this->attempts->removeElement($attempt)) {
+            // set the owning side to null (unless already changed)
+            if ($attempt->getQuizz() === $this) {
+                $attempt->setQuizz(null);
             }
         }
 

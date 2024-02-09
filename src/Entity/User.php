@@ -55,9 +55,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: UserGroup::class, mappedBy: 'members', cascade: ['persist'])]
     private Collection $userGroups;
 
+    #[ORM\OneToMany(mappedBy: 'player', targetEntity: Attempt::class, orphanRemoval: true)]
+    private Collection $attempts;
+
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
+        $this->attempts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -255,5 +259,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $courses;
+    }
+
+    /**
+     * @return Collection<int, Attempt>
+     */
+    public function getAttempts(): Collection
+    {
+        return $this->attempts;
+    }
+
+    public function addAttempt(Attempt $attempt): static
+    {
+        if (!$this->attempts->contains($attempt)) {
+            $this->attempts->add($attempt);
+            $attempt->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttempt(Attempt $attempt): static
+    {
+        if ($this->attempts->removeElement($attempt)) {
+            // set the owning side to null (unless already changed)
+            if ($attempt->getPlayer() === $this) {
+                $attempt->setPlayer(null);
+            }
+        }
+
+        return $this;
     }
 }

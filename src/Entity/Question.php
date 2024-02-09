@@ -33,9 +33,13 @@ class Question
     #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $answers;
 
+    #[ORM\OneToMany(mappedBy: 'currentQuestion', targetEntity: Attempt::class)]
+    private Collection $attempts;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->attempts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,6 +119,36 @@ class Question
             // set the owning side to null (unless already changed)
             if ($answer->getQuestion() === $this) {
                 $answer->setQuestion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Attempt>
+     */
+    public function getAttempts(): Collection
+    {
+        return $this->attempts;
+    }
+
+    public function addAttempt(Attempt $attempt): static
+    {
+        if (!$this->attempts->contains($attempt)) {
+            $this->attempts->add($attempt);
+            $attempt->setCurrentQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttempt(Attempt $attempt): static
+    {
+        if ($this->attempts->removeElement($attempt)) {
+            // set the owning side to null (unless already changed)
+            if ($attempt->getCurrentQuestion() === $this) {
+                $attempt->setCurrentQuestion(null);
             }
         }
 
