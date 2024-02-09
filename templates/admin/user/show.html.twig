@@ -26,7 +26,7 @@
         {% endif %}
     </section>
 
-    <section>
+    <section class="alt">
         <h2>Informations</h2>
         <ul>
             {% if user.userGroups | length > 0 %}
@@ -60,7 +60,87 @@
         </ul>
     </section>
 
-    <section>
-        <h2>Quizzs réalisés</h2>
-    </section>
+    {% set quizzs = [] %}
+    {% for quizz in user.attempts %}
+        {% set quizzs = quizzs|merge([quizz.quizz]) %}
+    {% endfor %}
+    {% if quizzs | length > 0 %}
+        <section>
+            <h2>Quizzs réalisés</h2>
+
+            <div class="app-grid two no-xs">
+                {% for quizz in quizzs %}
+                    <article class="app-card {% if not quizz.active %}disabled{% endif %}">
+                        <div class="card-body">
+                            {% if quizz.cover %}
+                                <img src="{{ asset('uploads/quizz/' ~ quizz.cover) }}"
+                                     alt="{{ quizz.name }}"/>
+                            {% elseif quizz.quizzCategories[0].cover %}
+                                <img src="{{ asset('uploads/quizz_category/' ~ quizz.quizzCategories[0].cover) }}"
+                                     alt="{{ quizz.name }}"/>
+                            {% else %}
+                                <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+                            {% endif %}
+
+                            <h3>
+                                {{ quizz.name }}
+                                {% if not quizz.active %}
+                                    <small>
+                                        <i class="fa-solid fa-eye-slash text-warning"></i>
+                                    </small>
+                                {% endif %}
+                            </h3>
+
+                            <p>
+                                <small>
+                                    <strong class="text-primary">Niveau :</strong>
+                                    {{ quizz.level }}
+                                </small>
+
+                                <br/>
+
+                                {% set userAttempt = null %}
+                                {% for attempt in quizz.attempts %}
+                                    {% if attempt.player == user %}
+                                        {% set userAttempt = attempt %}
+                                    {% endif %}
+                                {% endfor %}
+                                <small>
+                                    <strong class="text-primary">Score :</strong>
+                                    {% set totalQuestions = (userAttempt.quizz.questions | length) * 2 %}
+                                    {% if userAttempt.score == totalQuestions %}
+                                        <span class="text-success">{{ userAttempt.score }}/20</span>
+                                    {% elseif userAttempt.score >= totalQuestions * 3 / 4 %}
+                                        <span class="text-info">{{ userAttempt.score }}/20</span>
+                                    {% elseif userAttempt.score > totalQuestions / 4 %}
+                                        <span class="text-warning">{{ userAttempt.score }}/20</span>
+                                    {% else %}
+                                        <span class="text-danger">{{ userAttempt.score }}/20</span>
+                                    {% endif %}
+                                </small>
+                            </p>
+                        </div>
+
+                        <div class="card-footer app-grid two">
+                            <a href="{{ path('app_admin_quizz_results', {'id': userAttempt.id}) }}"
+                               class="app-btn">
+                                <small>
+                                    <i class="fa-solid fa-square-poll-vertical"></i>
+                                    <strong>Résultats</strong>
+                                </small>
+                            </a>
+                            <a href="{{ path('app_admin_quizz_results_delete', {'id': userAttempt.id}) }}"
+                               class="app-btn text-danger"
+                               onclick="return window.confirm('Supprimer les résultats de ce Quizz ?')">
+                                <small>
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    <strong>Supprimer</strong>
+                                </small>
+                            </a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
 {% endblock %}

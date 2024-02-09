@@ -1,0 +1,86 @@
+{% extends 'layout/default/_index.html.twig' %}
+{% set quizz = attempt.quizz %}
+
+{% block title %}Quizz : {{ quizz.name }}{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+
+        <h1>
+            <small>Quizz de {{ attempt.player.fullname }} :</small>
+            <br/>
+            {{ quizz.name }}
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="#" class="text-primary" onclick="history.go(-1)">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Retour
+        </a>
+    </section>
+
+    <section class="alt">
+        <h2>Informations</h2>
+        <ul>
+            <li>
+                <strong class="text-primary">Score : </strong>
+                {% set totalQuestions = (attempt.quizz.questions | length) * 2 %}
+                {% if attempt.score == totalQuestions %}
+                    <strong class="text-success">{{ attempt.score }}/20</strong>
+                {% elseif attempt.score >= totalQuestions * 3 / 4 %}
+                    <strong class="text-info">{{ attempt.score }}/20</strong>
+                {% elseif attempt.score > totalQuestions / 4 %}
+                    <strong class="text-warning">{{ attempt.score }}/20</strong>
+                {% else %}
+                    <strong class="text-danger">{{ attempt.score }}/20</strong>
+                {% endif %}
+            </li>
+            <li>
+                <strong class="text-primary">Réalisé le :</strong>
+                {{ attempt.endedAt | date ('d/m/Y à H:i') }}
+            </li>
+            <li>
+                <strong class="text-primary">Niveau :</strong>
+                {{ quizz.level }}
+            </li>
+            {% if quizz.timer %}
+                <li>
+                    <strong class="text-primary">Temps de réponse :</strong>
+                    {{ quizz.timer }}s
+                </li>
+            {% endif %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Réponses de {{ attempt.player.fullname }}</h2>
+
+        <ol class="question">
+            {% for question in quizz.questions %}
+                <li class="app-dropdown danger">
+                    <input type="checkbox"/>
+                    {{ question.text | raw }}
+
+                    <div class="dropdown-content">
+                        {% if question.answers | length > 0 %}
+                            <ol type="A">
+                                {% for answer in question.answers %}
+                                    <li class="{% if answer.correct %}text-success{% else %}text-danger{% endif %}">
+                                        <strong>{{ answer.text }}</strong>
+                                        {% if answer.help %}
+                                            <p>
+                                                {{ answer.help }}
+                                            </p>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+    </section>
+{% endblock %}

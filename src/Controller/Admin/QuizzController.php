@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Attempt;
 use App\Entity\Quizz;
 use App\Entity\QuizzCategory;
 use App\Form\Admin\QuizzType;
@@ -111,5 +112,24 @@ class QuizzController extends AbstractController
         $this->addFlash('success', "Le quizz {$quizz->getName()} a été supprimé");
 
         return $this->redirectToRoute('app_admin_quizz_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/resultats', name: 'results')]
+    public function results(Attempt $attempt): Response
+    {
+        return $this->render('admin/quizz/results.html.twig', [
+            'attempt' => $attempt,
+        ]);
+    }
+
+    #[Route('/{id}/resultats/supprimer', name: 'results_delete')]
+    public function deleteResults(EntityManagerInterface $entityManager, Attempt $attempt): Response
+    {
+        $entityManager->remove($attempt);
+        $entityManager->flush();
+
+        $this->addFlash('success', "Les résultats du quizz de {$attempt->getPlayer()->getFullName()} ont été supprimés");
+
+        return $this->redirectToRoute('app_admin_user_show', ['id' => $attempt->getPlayer()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

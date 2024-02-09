@@ -30,7 +30,7 @@
                     <dd>
                         <p>
                             {% if user.userGroups | length > 0 %}
-                                <i class="fa-solid fa-globe text-fourth"></i>
+                                <i class="fa-solid fa-users-viewfinder text-fourth" aria-hidden="true"></i>
                                 <strong class="text-primary">
                                     Groupe{% if user.userGroups | length > 1 %}s{% endif %} :
                                 </strong>
@@ -43,7 +43,18 @@
                             {% endif %}
 
                             <i class="fa-regular fa-calendar-days text-fourth"></i>
-                            <strong class="text-primary">Inscrit le :</strong> {{ user.createdAt | date('d/m/Y') }}
+                            <strong class="text-primary">Inscrit le
+                                                         :</strong> {{ user.createdAt | date('d/m/Y à H:i') }}
+
+                            {% if "ROLE_ADMIN" not in user.roles %}
+                                <br/>
+                                <i class="fa-solid fa-globe text-fourth" aria-hidden="true"></i>
+                                <strong class="text-primary">
+                                    {{ user.attempts | length }}
+                                    Quizz{% if user.attempts | length > 1 %}s{% endif %}
+                                    réalisé{% if user.attempts | length > 1 %}s{% endif %}
+                                </strong>
+                            {% endif %}
                         </p>
 
                         <div class="app-grid two">
