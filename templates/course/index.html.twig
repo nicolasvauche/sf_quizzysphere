@@ -15,7 +15,7 @@
 
     {% if courses | length > 0 %}
         <section>
-            <div class="app-grid two">
+            <div class="app-grid two-sm">
                 {% for course in courses %}
                     <div class="app-card alt">
                         <a href="{{ path('app_course_show', {'slug': course.slug}) }}">

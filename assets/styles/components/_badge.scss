@@ -1,20 +1,21 @@
 .app-badge {
-  position: absolute;
   font-weight: 600;
 
-  &.top {
+  /*&.top {
     top: 0.5rem;
   }
 
   &.bottom {
     bottom: 0.5rem;
-  }
+  }*/
 
   &.left {
-    left: 0.5rem;
+    /*left: 0.5rem;*/
+
   }
 
   &.right {
-    right: 0.5rem;
+    /*right: 0.5rem;*/
+    float: right;
   }
 }

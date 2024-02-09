@@ -150,6 +150,14 @@ ol {
         }
       }
 
+      &.empty {
+        &::before {
+          color: $white;
+          background-color: $warning;
+          opacity: 0.5;
+        }
+      }
+
       &.app-dropdown {
         padding: 0.5rem 0.5rem 0.5rem 2rem !important;
         text-align: left !important;

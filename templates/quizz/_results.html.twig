@@ -1,14 +1,30 @@
 <ol class="question">
     {% for question in quizz.questions %}
-        <li class="app-dropdown danger">
+        {% set userAnswer = null %}
+        {% for attemptAnswer in userAttempt.attemptAnswers %}
+            {% if attemptAnswer.question.id == question.id %}
+                {% set userAnswer = attemptAnswer %}
+            {% endif %}
+        {% endfor %}
+
+        <li class="app-dropdown {% if userAnswer.score %}success{% elseif userAnswer.answer == null %}empty{% else %}danger{% endif %}">
             <input type="checkbox"/>
             {{ question.text | raw }}
 
             <div class="dropdown-content">
+                {% if not userAnswer.answer %}
+                    <p class="mb-0">
+                        <strong class="text-warning">
+                            &nbsp;<i class="fa-solid fa-ban"></i>
+                            <small>Vous n'avez pas répondu à cette question</small>
+                        </strong>
+                    </p>
+                {% endif %}
+
                 {% if question.answers | length > 0 %}
                     <ol type="A">
                         {% for answer in question.answers %}
-                            <li class="{% if answer.correct %}text-success{% else %}text-danger{% endif %}">
+                            <li class="{% if answer.correct %}text-success{% elseif not answer.correct and answer == userAnswer.answer %}text-danger{% endif %}">
                                 <strong>{{ answer.text }}</strong>
                                 {% if answer.help %}
                                     <p>

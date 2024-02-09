@@ -6,7 +6,7 @@
                     <strong>{{ quizz.quizzCategories[0].name }}</strong>
 
                     {% if quizz.timer %}
-                        <span class="app-badge top right">
+                        <span class="app-badge top right text-info">
                             <i class="fa-solid fa-stopwatch"></i>
                             {{ quizz.timer }}s
                         </span>
@@ -30,21 +30,37 @@
                 {% endfor %}
 
                 <div class="card-footer">
-                    <strong>
-                        {% if warning is defined %}
+                    {% if warning is defined %}
+                        <strong>
                             <i class="fa-solid fa-circle-question"></i>
                             1/{{ quizz.questions |length }}
-                        {% elseif success is defined and userAttempt %}
-                            <i class="fa-solid fa-square-poll-vertical"></i>
-                            {{ userAttempt.score ? userAttempt.score : "0" }}/20
+                        </strong>
+                    {% elseif success is defined and userAttempt %}
+                        {% set totalQuestions = (userAttempt.quizz.questions | length) * 2 %}
+                        {% if userAttempt.score == totalQuestions %}
+                            <strong class="text-success">
+                                <i class="fa-solid fa-square-poll-vertical"></i>
+                                {{ userAttempt.score ? userAttempt.score : "0" }}/20
+                            </strong>
+                        {% elseif userAttempt.score >= totalQuestions * 3 / 4 %}
+                            <strong class="text-info">
+                                <i class="fa-solid fa-square-poll-vertical"></i>
+                                {{ userAttempt.score ? userAttempt.score : "0" }}/20
+                            </strong>
+                        {% elseif userAttempt.score > totalQuestions / 4 %}
+                            <strong class="text-warning">
+                                <i class="fa-solid fa-square-poll-vertical"></i>
+                                {{ userAttempt.score ? userAttempt.score : "0" }}/20
+                            </strong>
                         {% else %}
-                            <i class="fa-solid fa-circle-question"></i>
-                            {{ quizz.questions |length }}
-                            question{% if quizz.questions |length > 1 %}s{% endif %}
+                            <strong class="text-danger">
+                                <i class="fa-solid fa-square-poll-vertical"></i>
+                                {{ userAttempt.score ? userAttempt.score : "0" }}/20
+                            </strong>
                         {% endif %}
-                    </strong>
+                    {% endif %}
                     <span class="app-badge bottom right">
-                        {{ quizz.level }}
+                        {{ quizz.level | replace({'1 - ': '', '2 - ': '', '3 - ': ''}) }}
                     </span>
                 </div>
             </a>

@@ -36,10 +36,14 @@ class Question
     #[ORM\OneToMany(mappedBy: 'currentQuestion', targetEntity: Attempt::class)]
     private Collection $attempts;
 
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: AttemptAnswer::class, orphanRemoval: true)]
+    private Collection $attemptAnswers;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
         $this->attempts = new ArrayCollection();
+        $this->attemptAnswers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,6 +153,36 @@ class Question
             // set the owning side to null (unless already changed)
             if ($attempt->getCurrentQuestion() === $this) {
                 $attempt->setCurrentQuestion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AttemptAnswer>
+     */
+    public function getAttemptAnswers(): Collection
+    {
+        return $this->attemptAnswers;
+    }
+
+    public function addAttemptAnswer(AttemptAnswer $attemptAnswer): static
+    {
+        if (!$this->attemptAnswers->contains($attemptAnswer)) {
+            $this->attemptAnswers->add($attemptAnswer);
+            $attemptAnswer->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttemptAnswer(AttemptAnswer $attemptAnswer): static
+    {
+        if ($this->attemptAnswers->removeElement($attemptAnswer)) {
+            // set the owning side to null (unless already changed)
+            if ($attemptAnswer->getQuestion() === $this) {
+                $attemptAnswer->setQuestion(null);
             }
         }
 

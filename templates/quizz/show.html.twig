@@ -51,12 +51,12 @@
             {% endif %}
             <li>
                 <strong class="text-primary">Niveau :</strong>
-                {{ quizz.level }}
+                {{ quizz.level | replace({'1 - ': '', '2 - ': '', '3 - ': ''}) }}
             </li>
             {% if quizz.timer %}
                 <li>
                     <strong class="text-primary">Temps de réponse :</strong>
-                    {{ quizz.timer }}s
+                    {{ quizz.timer }}s par question
                 </li>
             {% endif %}
         </ul>

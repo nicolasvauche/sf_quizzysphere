@@ -11,6 +11,8 @@
   }
 
   &.two-sm {
+    grid-gap: 1rem;
+
     @include respondTo(sm) {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -27,6 +29,7 @@
   &.no-xs {
     @include respondTo(xs) {
       grid-template-columns: 1fr;
+      grid-gap: 1rem;
     }
   }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AttemptRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -34,6 +36,14 @@ class Attempt
 
     #[ORM\ManyToOne(inversedBy: 'attempts')]
     private ?Question $currentQuestion = null;
+
+    #[ORM\OneToMany(mappedBy: 'attempt', targetEntity: AttemptAnswer::class, orphanRemoval: true)]
+    private Collection $attemptAnswers;
+
+    public function __construct()
+    {
+        $this->attemptAnswers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -108,6 +118,36 @@ class Attempt
     public function setCurrentQuestion(?Question $currentQuestion): static
     {
         $this->currentQuestion = $currentQuestion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AttemptAnswer>
+     */
+    public function getAttemptAnswers(): Collection
+    {
+        return $this->attemptAnswers;
+    }
+
+    public function addAttemptAnswer(AttemptAnswer $attemptAnswer): static
+    {
+        if (!$this->attemptAnswers->contains($attemptAnswer)) {
+            $this->attemptAnswers->add($attemptAnswer);
+            $attemptAnswer->setAttempt($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttemptAnswer(AttemptAnswer $attemptAnswer): static
+    {
+        if ($this->attemptAnswers->removeElement($attemptAnswer)) {
+            // set the owning side to null (unless already changed)
+            if ($attemptAnswer->getAttempt() === $this) {
+                $attemptAnswer->setAttempt(null);
+            }
+        }
 
         return $this;
     }
