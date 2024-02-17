@@ -7,19 +7,29 @@
             {% endif %}
         {% endfor %}
 
-        <li class="app-dropdown {% if userAnswer.score %}success{% elseif userAnswer.answer == null %}empty{% else %}danger{% endif %}">
+        <li class="app-dropdown {% if userAnswer.score == 1 %}success{% elseif userAnswer.answer == null %}empty{% else %}danger{% endif %}">
             <input type="checkbox"/>
             {{ question.text | raw }}
 
             <div class="dropdown-content">
-                {% if not userAnswer.answer %}
-                    <p class="mb-0">
+                <p class="mb-1 text-center">
+                    {% if not userAnswer.answer %}
                         <strong class="text-warning">
                             &nbsp;<i class="fa-solid fa-ban"></i>
                             <small>Vous n'avez pas répondu à cette question</small>
                         </strong>
-                    </p>
-                {% endif %}
+                    {% elseif userAnswer.score == 1 %}
+                        <strong class="text-success">
+                            &nbsp;<i class="fa-solid fa-check-circle"></i>
+                            <small>Bonne réponse !</small>
+                        </strong>
+                    {% else %}
+                        <strong class="text-danger">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <small>Mauvaise réponse</small>
+                        </strong>
+                    {% endif %}
+                </p>
 
                 {% if question.answers | length > 0 %}
                     <ol type="A">
