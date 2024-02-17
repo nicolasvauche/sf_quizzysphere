@@ -43,8 +43,8 @@
                             {% endif %}
 
                             <i class="fa-regular fa-calendar-days text-fourth"></i>
-                            <strong class="text-primary">Inscrit le
-                                                         :</strong> {{ user.createdAt | date('d/m/Y à H:i') }}
+                            <strong class="text-primary">Inscrit le :</strong>
+                            {{ user.createdAt | date('d/m/Y à H:i') }}
 
                             {% if "ROLE_ADMIN" not in user.roles %}
                                 <br/>

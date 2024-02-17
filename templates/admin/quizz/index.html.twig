@@ -60,12 +60,21 @@
                                         {% endif %}
                                     </h3>
 
-                                    <p>
+                                    <p class="mb-0">
                                         <small>
                                             <strong>Niveau :</strong>
                                             {{ quizz.level }}
                                         </small>
                                     </p>
+
+                                    {% if quizz.timer %}
+                                        <p>
+                                            <small>
+                                                <i class="fa-solid fa-stopwatch"></i>
+                                                {{ quizz.timer }}s
+                                            </small>
+                                        </p>
+                                    {% endif %}
                                 </div>
 
                                 <div class="card-footer app-grid two">

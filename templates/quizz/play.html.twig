@@ -1,0 +1,50 @@
+{% extends 'layout/default/_index.html.twig' %}
+
+{% block title %}Quizz : {{ quizz.name }}{% endblock %}
+
+{% block main %}
+    <section class="bg-image">
+        <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+
+        <h1>
+            <small>Quizz :</small>
+            <br/>
+            {{ quizz.name }}
+        </h1>
+    </section>
+
+    <section class="controls">
+        <a href="#" class="text-primary" onclick="history.go(-1)">
+            <i class="fa-solid fa-circle-arrow-left"></i>
+            Retour
+        </a>
+    </section>
+
+    <section class="alt">
+        <h2>Question {{ question.position }}/{{ quizz.questions | length }}</h2>
+        <p>
+            <strong>{{ question.text | raw }}</strong>
+        </p>
+    </section>
+
+    <section>
+        {% if question.answers | length > 0 %}
+            <ol class="answer">
+                {% for answer in question.answers %}
+                    <li>
+                        <label for="answer-{{ answer.id }}">
+                            <input type="radio" name="answer" value="{{ answer.id }}" id="answer-{{ answer.id }}"/>
+                            <strong>{{ answer.text }}</strong>
+                        </label>
+                    </li>
+                {% endfor %}
+            </ol>
+
+            <p class="text-center">
+                <a href="#" class="app-btn cta">
+                    Question suivante
+                </a>
+            </p>
+        {% endif %}
+    </section>
+{% endblock %}

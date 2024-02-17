@@ -59,15 +59,40 @@
 
         <ol class="question">
             {% for question in quizz.questions %}
-                <li class="app-dropdown danger">
+                {% set userAnswer = null %}
+                {% for attemptAnswer in attempt.attemptAnswers %}
+                    {% if attemptAnswer.question.id == question.id %}
+                        {% set userAnswer = attemptAnswer %}
+                    {% endif %}
+                {% endfor %}
+                <li class="app-dropdown {% if userAnswer.score == 1 %}success{% elseif userAnswer.answer == null %}empty{% else %}danger{% endif %}">
                     <input type="checkbox"/>
                     {{ question.text | raw }}
 
                     <div class="dropdown-content">
+                        <p class="mb-1 text-center">
+                            {% if not userAnswer.answer %}
+                                <strong class="text-warning">
+                                    &nbsp;<i class="fa-solid fa-ban"></i>
+                                    {{ attempt.player.fullname }} n'a pas répondu à cette question
+                                </strong>
+                            {% elseif userAnswer.score == 1 %}
+                                <strong class="text-success">
+                                    &nbsp;<i class="fa-solid fa-check-circle"></i>
+                                    Bonne réponse
+                                </strong>
+                            {% else %}
+                                <strong class="text-danger">
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                    Mauvaise réponse
+                                </strong>
+                            {% endif %}
+                        </p>
+
                         {% if question.answers | length > 0 %}
                             <ol type="A">
                                 {% for answer in question.answers %}
-                                    <li class="{% if answer.correct %}text-success{% else %}text-danger{% endif %}">
+                                    <li class="{% if answer.correct %}text-success{% elseif not answer.correct and answer == userAnswer.answer %}text-danger{% endif %}">
                                         <strong>{{ answer.text }}</strong>
                                         {% if answer.help %}
                                             <p>

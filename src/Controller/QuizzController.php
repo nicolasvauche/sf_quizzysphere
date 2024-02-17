@@ -42,8 +42,51 @@ class QuizzController extends AbstractController
     #[Route('/{slug}', name: 'show')]
     public function show(Quizz $quizz): Response
     {
+        $userAttempt = null;
+        foreach($this->getUser()->getAttempts() as $attempt) {
+            if($attempt->getQuizz() === $quizz) {
+                $userAttempt = $attempt;
+                break;
+            }
+        }
+
+        if(!$userAttempt || !$userAttempt->getEndedAt()) {
+            return $this->forward('App\Controller\QuizzController::play', [
+                'quizz' => $quizz,
+            ]);
+        }
+
         return $this->render('quizz/show.html.twig', [
             'quizz' => $quizz,
+        ]);
+    }
+
+    public function play(Quizz $quizz): Response
+    {
+        $userAttempt = null;
+        foreach($this->getUser()->getAttempts() as $attempt) {
+            if($attempt->getQuizz() === $quizz) {
+                $userAttempt = $attempt;
+                break;
+            }
+        }
+
+        if($userAttempt) {
+            foreach($quizz->getQuestions() as $question) {
+                if($userAttempt->getCurrentQuestion() === $question) {
+                    $currentQuestion = $question;
+                }
+            }
+        } else {
+            $currentQuestion = $quizz->getQuestions()->first();
+            if(!$currentQuestion) {
+                return $this->redirectToRoute('app_quizz_index');
+            }
+        }
+
+        return $this->render('quizz/play.html.twig', [
+            'quizz' => $quizz,
+            'question' => $currentQuestion,
         ]);
     }
 }

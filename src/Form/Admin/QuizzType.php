@@ -77,9 +77,9 @@ class QuizzType extends AbstractType
                 'required' => false,
                 'label' => 'Niveau du Quizz',
                 'choices' => [
-                    'Débutant' => 'Débutant',
-                    'Intermédiaire' => 'Intermédiaire',
-                    'Avancé' => 'Avancé',
+                    'Débutant' => '1 - Débutant',
+                    'Intermédiaire' => '2 - Intermédiaire',
+                    'Avancé' => '3 - Avancé',
                 ],
                 'attr' => [
                     'class' => 'form-control',

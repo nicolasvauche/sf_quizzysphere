@@ -33,11 +33,10 @@
 
     <section class="alt">
         <p class="mb-0">
-            <strong class="text-primary">Question : </strong>
+            <strong class="text-primary">Question n°{{ question.position }} : </strong>
             {{ question.text | raw }}
             <br/>
-            <strong class="text-primary">Réponse n°</strong>
-            {{ answer.position }}
+            <strong class="text-primary">Réponse n°{{ answer.position }}</strong>
         </p>
     </section>
 

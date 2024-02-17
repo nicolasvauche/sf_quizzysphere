@@ -69,7 +69,7 @@
             {% include 'quizz/_results.html.twig' %}
         {% else %}
             <p class="text-center">
-                <a href="#" class="app-btn cta">
+                <a href="{{ path('app_quizz_play', {'slug': quizz.slug}) }}" class="app-btn cta">
                     Commencer le Quizz
                 </a>
             </p>

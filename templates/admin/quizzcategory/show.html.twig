@@ -62,6 +62,7 @@
             <h2>
                 {{ quizzCategory.quizzs | length }}
                 Quizz{% if quizzCategory.quizzs | length > 1 %}s{% endif %}
+                dans cette catégorie
             </h2>
 
             <div class="app-grid two no-xs">
@@ -87,12 +88,21 @@
                                 {% endif %}
                             </h3>
 
-                            <p>
+                            <p class="mb-0">
                                 <small>
                                     <strong>Niveau :</strong>
                                     {{ quizz.level }}
                                 </small>
                             </p>
+
+                            {% if quizz.timer %}
+                                <p>
+                                    <small>
+                                        <i class="fa-solid fa-stopwatch"></i>
+                                        {{ quizz.timer }}s
+                                    </small>
+                                </p>
+                            {% endif %}
                         </div>
 
                         <div class="card-footer app-grid two">

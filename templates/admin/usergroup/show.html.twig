@@ -136,6 +136,16 @@
 
                             <i class="fa-regular fa-calendar-days text-fourth"></i>
                             <strong class="text-primary">Inscrit le :</strong> {{ user.createdAt | date('d/m/Y') }}
+
+                            {% if "ROLE_ADMIN" not in user.roles %}
+                                <br/>
+                                <i class="fa-solid fa-globe text-fourth" aria-hidden="true"></i>
+                                <strong class="text-primary">
+                                    {{ user.attempts | length }}
+                                    Quizz{% if user.attempts | length > 1 %}s{% endif %}
+                                    réalisé{% if user.attempts | length > 1 %}s{% endif %}
+                                </strong>
+                            {% endif %}
                         </p>
 
                         <div class="app-grid two">

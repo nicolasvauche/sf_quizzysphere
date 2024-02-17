@@ -54,7 +54,7 @@
                 <a href="mailto:{{ user.userIdentifier }}">{{ user.userIdentifier }}</a>
             </li>
             <li>
-                <strong class="text-primary">Créé le :</strong>
+                <strong class="text-primary">Inscrit le :</strong>
                 {{ user.createdAt|date('d/m/Y à H:i') }}
             </li>
         </ul>
@@ -66,7 +66,11 @@
     {% endfor %}
     {% if quizzs | length > 0 %}
         <section>
-            <h2>Quizzs réalisés</h2>
+            <h2>
+                {{ quizzs | length }}
+                Quizz{% if quizzs | length > 1 %}s{% endif %}
+                réalisé{% if quizzs | length > 1 %}s{% endif %}
+            </h2>
 
             <div class="app-grid two no-xs">
                 {% for quizz in quizzs %}
@@ -98,6 +102,14 @@
                                 </small>
 
                                 <br/>
+
+                                {% if quizz.timer %}
+                                    <small>
+                                        <i class="fa-solid fa-stopwatch"></i>
+                                        {{ quizz.timer }}s
+                                    </small>
+                                    <br/>
+                                {% endif %}
 
                                 {% set userAttempt = null %}
                                 {% for attempt in quizz.attempts %}

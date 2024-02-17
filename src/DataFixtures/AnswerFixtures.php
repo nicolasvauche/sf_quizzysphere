@@ -12,6 +12,366 @@ class AnswerFixtures extends Fixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $answer = (new Answer())
+            ->setText('AltaVista était le premier moteur de recherche à utiliser des algorithmes de recherche sémantique')
+            ->setHelp("Bien qu'AltaVista ait été un moteur de recherche innovant pour son époque, il n'était pas le premier à utiliser des algorithmes de recherche sémantique. Les moteurs de recherche précédents utilisaient également des techniques d'indexation sémantique.")
+            ->setPosition(1)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-01'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-01-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('AltaVista offrait une recherche rapide et une indexation plus complète que ses concurrents')
+            ->setHelp("AltaVista était considéré comme avancé car il proposait une recherche rapide et une indexation plus complète que la plupart de ses concurrents de l'époque. Il pouvait indexer une grande quantité de pages web, offrant ainsi aux utilisateurs un accès à une vaste quantité d'informations.")
+            ->setPosition(2)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-01'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-01-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('AltaVista avait une interface utilisateur révolutionnaire avec des fonctionnalités de recherche avancées')
+            ->setHelp("Bien qu'AltaVista ait eu une interface utilisateur avancée pour son époque, avec des fonctionnalités de recherche avancées, cela n'a pas été la principale raison de sa renommée. Sa vitesse de recherche et son indexation exhaustive étaient plus importantes.")
+            ->setPosition(3)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-01'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-01-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('AltaVista était le premier moteur de recherche à proposer des publicités ciblées aux utilisateurs')
+            ->setHelp("AltaVista n'a pas été le premier moteur de recherche à proposer des publicités ciblées aux utilisateurs. Cette fonctionnalité est apparue plus tard dans l'évolution des moteurs de recherche.")
+            ->setPosition(4)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-01'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-01-04', $answer);
+
+        $answer = (new Answer())
+            ->setText('HTTP (Hypertext Transfer Protocol)')
+            ->setHelp("C'est la réponse correcte. Tim Berners-Lee a introduit le protocole HTTP en 1990, qui est fondamental pour le fonctionnement du World Wide Web. Il permet la communication entre les navigateurs web et les serveurs web, facilitant ainsi le transfert d'informations sous forme de pages web.")
+            ->setPosition(1)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-02'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-02-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('HTML (Hypertext Markup Language)')
+            ->setHelp("Bien que Tim Berners-Lee ait joué un rôle clé dans le développement d'HTML, il n'a pas introduit ce langage en 1990. HTML est un langage de balisage utilisé pour créer la structure des pages web.")
+            ->setPosition(2)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-02'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-02-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('TCP/IP (Transmission Control Protocol/Internet Protocol)')
+            ->setHelp("Tim Berners-Lee n'a pas introduit TCP/IP en 1990. Ce protocole existait déjà et est à la base de la communication sur Internet. Il gère le routage des données sur le réseau.")
+            ->setPosition(3)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-02'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-02-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('FTP (File Transfer Protocol)')
+            ->setHelp("Tim Berners-Lee n'a pas introduit FTP en 1990. FTP est un protocole utilisé pour le transfert de fichiers sur Internet, mais il est distinct du protocole HTTP utilisé pour la navigation web.")
+            ->setPosition(4)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-02'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-02-04', $answer);
+
+        $answer = (new Answer())
+            ->setText('Gopher était le moteur de recherche le plus populaire en 1993')
+            ->setHelp("Cette réponse est incorrecte. En 1993, Gopher était une technologie de recherche et de partage de fichiers, mais il n'était pas le moteur de recherche le plus populaire.")
+            ->setPosition(1)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-03'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-03-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('Gopher était un outil de recherche concurrent de Google')
+            ->setHelp("Cette réponse est incorrecte. En 1993, Google n'existait pas encore. Gopher n'était pas en concurrence avec Google à cette époque.")
+            ->setPosition(2)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-03'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-03-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('Gopher était largement utilisé pour la recherche d\'informations sur Internet en 1993')
+            ->setHelp("Cette réponse est partiellement correcte. En 1993, Gopher était utilisé pour rechercher et accéder à des informations sur Internet, mais il n'était pas aussi répandu que d'autres technologies.")
+            ->setPosition(3)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-03'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-03-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('Gopher était un protocole de recherche d\'informations')
+            ->setHelp("Cette réponse est correcte. En 1993, Gopher était un protocole de recherche et de partage de fichiers largement utilisé pour trouver et accéder à des informations en ligne.")
+            ->setPosition(4)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-03'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-03-04', $answer);
+
+        $answer = (new Answer())
+            ->setText('Tim Berners-Lee')
+            ->setHelp("Cette réponse est incorrecte. Tim Berners-Lee est célèbre pour avoir inventé le World Wide Web, mais il n'est pas l'auteur de \"As We May Think\".")
+            ->setPosition(1)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-04'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-04-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('Alan Turing')
+            ->setHelp("Cette réponse est incorrecte. Alan Turing était un mathématicien et informaticien britannique célèbre pour ses contributions à l'informatique, mais il n'est pas l'auteur de \"As We May Think\".")
+            ->setPosition(2)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-04'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-04-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('Vannevar Bush')
+            ->setHelp("Cette réponse est correcte. Vannevar Bush, un ingénieur américain et inventeur, est l'auteur de l'article \"As We May Think\", publié en 1945. Dans cet article, il a conceptualisé l'idée d'un système d'hypertexte appelé le \"Memex\", qui a influencé le développement ultérieur de l'informatique et du World Wide Web.")
+            ->setPosition(3)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-04'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-04-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('John von Neumann')
+            ->setHelp("Cette réponse est incorrecte. John von Neumann était un mathématicien et physicien hongrois-américain, connu pour ses contributions à la physique quantique et à la théorie des jeux, mais il n'a pas écrit \"As We May Think\".")
+            ->setPosition(4)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-04'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-04-04', $answer);
+
+        $answer = (new Answer())
+            ->setText('Safari')
+            ->setHelp("Cette réponse est incorrecte. Safari est un navigateur web développé par Apple, mais il a été introduit bien plus tard, en 2003, et n'a pas été le premier à permettre la navigation par clics.")
+            ->setPosition(1)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-05'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-05-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('iTunes')
+            ->setHelp("Cette réponse est incorrecte. iTunes est un logiciel développé par Apple pour gérer et lire de la musique, des vidéos, et d'autres médias, mais il n'a pas été conçu pour la navigation par clics.")
+            ->setPosition(2)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-05'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-05-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('HyperCard')
+            ->setHelp("Cette réponse est correcte. HyperCard était un logiciel révolutionnaire développé par Apple en 1987, et non en 1981, qui a permis la création de systèmes d'hypertexte et la navigation par clics. Il a joué un rôle important dans le développement des applications interactives et a influencé le développement ultérieur du World Wide Web.")
+            ->setPosition(3)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-05'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-05-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('QuickTime')
+            ->setHelp("Cette réponse est incorrecte. QuickTime est un framework multimédia développé par Apple pour la lecture de vidéos et d'audio, mais il n'a pas été conçu pour la navigation par clics.")
+            ->setPosition(4)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-05'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-05-04', $answer);
+
+        $answer = (new Answer())
+            ->setText('Le XHTML était un langage de programmation orienté objet destiné à créer des jeux vidéo')
+            ->setHelp("Cette réponse est incorrecte. Le XHTML (eXtensible HyperText Markup Language) n'était pas un langage de programmation pour créer des jeux vidéo. En réalité, il s'agissait d'une technologie liée au web, conçue pour structurer et présenter le contenu des pages web de manière plus rigoureuse et conforme aux normes XML.")
+            ->setPosition(1)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-06'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-06-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('Le XHTML était une version améliorée du HTML, visant à être plus strictement conforme aux normes XML')
+            ->setHelp("Cette réponse est correcte. Le XHTML (eXtensible HyperText Markup Language) était une évolution du HTML visant à être plus conforme aux normes XML (eXtensible Markup Language). Son ambition initiale était de rendre les pages web plus structurées, lisibles par les machines et compatibles avec XML.")
+            ->setPosition(2)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-06'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-06-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('Le XHTML était un langage de programmation pour le développement d\'intelligence artificielle')
+            ->setHelp("Cette réponse est incorrecte. Le XHTML n'était pas lié au développement de l'intelligence artificielle. Il s'agissait d'une technologie de balisage utilisée pour créer des pages web, mais elle n'avait pas pour objectif de développer de l'intelligence artificielle.")
+            ->setPosition(3)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-06'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-06-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('Le XHTML était un système d\'exploitation open source pour les smartphones')
+            ->setHelp("Cette réponse est incorrecte. Le XHTML n'était pas un système d'exploitation pour les smartphones. Il s'agissait d'une technologie de balisage spécialement conçue pour le web, visant à améliorer la structure et la compatibilité des pages web.")
+            ->setPosition(4)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-06'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-06-04', $answer);
+
+        $answer = (new Answer())
+            ->setText('Google')
+            ->setHelp("Cette réponse est incorrecte. Google a été lancé en 1998, mais il est devenu un moteur de recherche distinct et concurrent de Bing, développé par Microsoft.")
+            ->setPosition(1)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-07'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-07-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('AltaVista')
+            ->setHelp("Cette réponse est incorrecte. AltaVista a été créé par une entreprise appelée Digital Equipment Corporation (DEC), le projet a été dirigé par Louis Monier, un ingénieur français. AltaVista a été lancé en 1995, mais il n'est pas devenu Bing. En fait, AltaVista a disparu en 2013.")
+            ->setPosition(2)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-07'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-07-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('Yahoo!')
+            ->setHelp("Cette réponse est incorrecte. Yahoo! a été fondé par deux étudiants de l'Université Stanford, Jerry Yang et David Filo. L'idée originale était de créer un répertoire en ligne pour aider les utilisateurs à trouver des sites web intéressants sur Internet. Yahoo! a commencé comme un projet étudiant baptisé \"Jerry's Guide to the World Wide Web\" avant de devenir Yahoo! en 1994. Il n'est pas devenu Bing, bien que Yahoo! ait utilisé la technologie de recherche de Bing pendant un certain temps, les deux moteurs de recherche sont restés distincts.")
+            ->setPosition(3)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-07'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-07-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('MSN Search')
+            ->setHelp("C'est la bonne réponse. MSN Search, lancé en 1998, est devenu Bing. Microsoft a renommé son moteur de recherche MSN Search en Bing en 2009 dans le cadre de sa stratégie de rebranding pour concurrencer Google. Depuis lors, Bing est devenu le moteur de recherche phare de Microsoft.")
+            ->setPosition(4)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-07'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-07-04', $answer);
+
+        $answer = (new Answer())
+            ->setText('Internet Explorer')
+            ->setHelp("Cette réponse est incorrecte. Internet Explorer n'était pas le premier navigateur web créé par Tim Berners-Lee. Il s'agissait d'un navigateur développé par Microsoft bien après les débuts du web.")
+            ->setPosition(1)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-08'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-08-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('Mosaic')
+            ->setHelp("Cette réponse est incorrecte. Mosaic n'était pas le premier navigateur web créé par Tim Berners-Lee. Il a été développé par Marc Andreessen et Eric Bina à l'Université de l'Illinois.")
+            ->setPosition(2)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-08'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-08-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('WorldWideWeb')
+            ->setHelp("Le premier navigateur web créé par Tim Berners-Lee s'appelait \"WorldWideWeb\". Il a été développé en 1990 au CERN (Organisation européenne pour la recherche nucléaire) et était le premier navigateur capable de visualiser des pages web.")
+            ->setPosition(3)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-08'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-08-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('Netscape Navigator')
+            ->setHelp("Cette réponse est incorrecte. Netscape Navigator était un navigateur web populaire dans les années 1990, mais il n'a pas été créé par Tim Berners-Lee.")
+            ->setPosition(4)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-08'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-08-04', $answer);
+
+        $answer = (new Answer())
+            ->setText('Windows')
+            ->setHelp("Cette réponse est incorrecte. Windows est un système d'exploitation développé par Microsoft, mais il n'a pas été le précurseur de l'édition de texte en mode hypertexte en 1960.")
+            ->setPosition(1)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-09'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-09-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('Macintosh')
+            ->setHelp("Cette réponse est incorrecte. Le Macintosh, également connu sous le nom de Mac, était un ordinateur personnel développé par Apple, mais il n'a pas été le précurseur de l'édition de texte en mode hypertexte en 1960.")
+            ->setPosition(2)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-09'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-09-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('Xerox')
+            ->setHelp("C'est la bonne réponse. Le système précurseur de l'édition de texte en mode hypertexte en 1960 était développé par Xerox. Il s'agissait du système NLS (oN-Line System) créé par Douglas Engelbart au Stanford Research Institute (SRI). Ce système a introduit des concepts tels que la souris et l'édition de texte hypertexte.")
+            ->setPosition(3)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-09'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-09-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('IBM')
+            ->setHelp("Cette réponse est incorrecte. IBM est une grande entreprise informatique, mais elle n'a pas été le précurseur de l'édition de texte en mode hypertexte en 1960.")
+            ->setPosition(4)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-09'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-09-04', $answer);
+
+        $answer = (new Answer())
+            ->setText('HTML 1')
+            ->setHelp("HTML 1 était la première version du langage HTML, introduite en 1993. À cette époque, les feuilles de style n'étaient pas encore une caractéristique intégrée dans HTML.")
+            ->setPosition(1)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-10'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-10-01', $answer);
+
+        $answer = (new Answer())
+            ->setText('HTML 2')
+            ->setHelp("HTML 2 était une version suivante du langage HTML, publiée en 1995. Bien qu'elle ait apporté certaines améliorations, elle n'a pas introduit les feuilles de style en tant que fonctionnalité majeure.")
+            ->setPosition(2)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-10'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-10-02', $answer);
+
+        $answer = (new Answer())
+            ->setText('HTML 3')
+            ->setHelp("HTML 3.2, publié en 1997, a fait une tentative significative pour introduire les feuilles de style dans le langage HTML. Il a été développé en parallèle avec la spécification CSS1 (Cascading Style Sheets Level 1) pour permettre la séparation de la structure du contenu et de la présentation visuelle. Bien que cette tentative n'ait pas été immédiatement couronnée de succès, elle a jeté les bases de l'utilisation ultérieure des feuilles de style dans le développement web.")
+            ->setPosition(3)
+            ->setCorrect(true)
+            ->setQuestion($this->getReference('question-histoire-du-web-10'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-10-03', $answer);
+
+        $answer = (new Answer())
+            ->setText('HTML 4')
+            ->setHelp("HTML 4.0 a été publié en décembre 1997 par le World Wide Web Consortium (W3C). Cette version du langage HTML a introduit des améliorations significatives par rapport aux versions précédentes, notamment en ce qui concerne les feuilles de style, mais elle n'a pas introduit le concept des feuilles de styles.")
+            ->setPosition(4)
+            ->setCorrect(false)
+            ->setQuestion($this->getReference('question-histoire-du-web-10'));
+        $manager->persist($answer);
+        $this->addReference('answer-histoire-du-web-10-04', $answer);
+
+        $answer = (new Answer())
             ->setText('Tim Berners-Lee, 1990')
             ->setHelp("Tim Berners-Lee est le créateur du World Wide Web, mais pas de JavaScript. Il a conçu le web en 1989 et 1990, mais cela n'inclut pas le développement de JavaScript.")
             ->setPosition(1)
