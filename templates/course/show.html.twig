@@ -34,28 +34,49 @@
     {% endif %}
 
     {% set quizzs = app_quizzService.collectQuizzsFromCategories(course.quizzCategories, app.user) %}
-    <section class="alt">
-        <h2>
-            {{ quizzs | length }}
-            Quizz{% if quizzs | length > 1 %}s{% endif %}
-            à réaliser dans ce parcours
-        </h2>
-        {% include 'quizz/_grid.html.twig' %}
-    </section>
+    {% if quizzs | length > 0 %}
+        <section class="alt">
+            <h2>
+                {{ quizzs | length }}
+                Quizz{% if quizzs | length > 1 %}s{% endif %}
+                à réaliser dans ce parcours
+            </h2>
+            {% include 'quizz/_grid.html.twig' %}
+        </section>
+    {% endif %}
 
     {% if app.user.attempts | length > 0 %}
         {% set quizzs = [] %}
         {% for attempt in app.user.attempts %}
-            {% if attempt.quizz in app_quizzService.quizzsByCourse(course.id) %}
+            {% if attempt.quizz.active and not attempt.endedAt %}
                 {% set quizzs = quizzs | merge([attempt.quizz]) %}
             {% endif %}
         {% endfor %}
         {% if quizzs | length > 0 %}
             <section>
                 <h2>
-                    {{ app.user.attempts | length }}
-                    Quizz{% if app.user.attempts | length > 1 %}s{% endif %}
-                    terminé{% if app.user.attempts | length > 1 %}s{% endif %}
+                    {{ quizzs | length }}
+                    Quizz{% if quizzs | length > 1 %}s{% endif %}
+                    à terminer
+                </h2>
+                {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'warning': true} %}
+            </section>
+        {% endif %}
+    {% endif %}
+
+    {% if app.user.attempts | length > 0 %}
+        {% set quizzs = [] %}
+        {% for attempt in app.user.attempts %}
+            {% if attempt.quizz in app_quizzService.quizzsByCourse(course.id) and attempt.endedAt %}
+                {% set quizzs = quizzs | merge([attempt.quizz]) %}
+            {% endif %}
+        {% endfor %}
+        {% if quizzs | length > 0 %}
+            <section>
+                <h2>
+                    {{ quizzs | length }}
+                    Quizz{% if quizzs | length > 1 %}s{% endif %}
+                    terminé{% if quizzs | length > 1 %}s{% endif %}
                 </h2>
                 {% include 'quizz/_grid.html.twig' with {'quizzs': quizzs, 'success': true} %}
             </section>

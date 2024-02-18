@@ -8,7 +8,7 @@
         {% endfor %}
         <div class="app-card {% if warning is defined %} warning{% elseif success is defined %}success{% else %}alt{% endif %}">
             <a href="{{ path('app_quizz_show', {'slug': quizz.slug}) }}"
-               {% if not userAttempt and quizz.timer %}onclick="return window.confirm('Attention ! Ce quizz est chronométré. Êtes-vous prêt ?')"{% endif %}>
+               {% if (not userAttempt or not userAttempt.endedAt) and quizz.timer %}onclick="return window.confirm('Attention ! Ce quizz est chronométré. Êtes-vous prêt ?')"{% endif %}>
                 <div class="card-header">
                     <strong>{{ quizz.quizzCategories[0].name }}</strong>
 

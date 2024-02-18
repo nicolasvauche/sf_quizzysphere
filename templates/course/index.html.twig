@@ -30,15 +30,37 @@
                                 <h3>{{ course.name }}</h3>
                             </div>
 
-                            {% set quizzs = app_quizzService.quizzsByCourse(course.id, app.user) %}
                             <div class="card-footer text-center">
-                                <strong>
-                                    <small>
-                                        {{ quizzs | length }}
-                                        Quizz{% if quizzs | length > 1 %}s{% endif %}
-                                        à réaliser
-                                    </small>
-                                </strong>
+                                {% set quizzs = app_quizzService.quizzsByCourse(course.id, app.user) %}
+                                {% if quizzs | length > 0 %}
+                                    <strong>
+                                        <small>
+                                            {{ quizzs | length }}
+                                            Quizz{% if quizzs | length > 1 %}s{% endif %}
+                                            à réaliser
+                                        </small>
+                                    </strong>
+                                {% endif %}
+
+                                {% if app.user.attempts | length > 0 %}
+                                    {% set quizzs = [] %}
+                                    {% for attempt in app.user.attempts %}
+                                        {% for category in course.quizzCategories %}
+                                            {% if attempt.quizz in category.quizzs %}
+                                                {% set quizzs = quizzs | merge([attempt.quizz]) %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% if quizzs | length > 0 %}
+                                        <strong>
+                                            <small>
+                                                {{ quizzs | length }}
+                                                Quizz{% if quizzs | length > 1 %}s{% endif %}
+                                                en cours
+                                            </small>
+                                        </strong>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         </a>
                     </div>
