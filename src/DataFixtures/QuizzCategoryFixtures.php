@@ -13,7 +13,7 @@ class QuizzCategoryFixtures extends Fixture implements OrderedFixtureInterface
     {
         $quizzCategory = (new QuizzCategory())
             ->setName('Le Web')
-            ->setActive(false);
+            ->setActive(true);
         $manager->persist($quizzCategory);
         $this->addReference('quizzcategory-le-web', $quizzCategory);
 

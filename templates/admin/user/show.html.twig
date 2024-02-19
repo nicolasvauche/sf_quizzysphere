@@ -119,15 +119,15 @@
                                 {% endfor %}
                                 <small>
                                     <strong class="text-primary">Score :</strong>
-                                    {% set totalQuestions = (userAttempt.quizz.questions | length) * 2 %}
+                                    {% set totalQuestions = (userAttempt.quizz.questions | length) %}
                                     {% if userAttempt.score == totalQuestions %}
-                                        <span class="text-success">{{ userAttempt.score }}/20</span>
+                                        <span class="text-success">{{ userAttempt.score * 2 }}/20</span>
                                     {% elseif userAttempt.score >= totalQuestions * 3 / 4 %}
-                                        <span class="text-info">{{ userAttempt.score }}/20</span>
+                                        <span class="text-info">{{ userAttempt.score * 2 }}/20</span>
                                     {% elseif userAttempt.score > totalQuestions / 4 %}
-                                        <span class="text-warning">{{ userAttempt.score }}/20</span>
+                                        <span class="text-warning">{{ userAttempt.score * 2 }}/20</span>
                                     {% else %}
-                                        <span class="text-danger">{{ userAttempt.score }}/20</span>
+                                        <span class="text-danger">{{ userAttempt.score * 2 }}/20</span>
                                     {% endif %}
                                 </small>
                             </p>

@@ -26,15 +26,15 @@
         <ul>
             <li>
                 <strong class="text-primary">Score : </strong>
-                {% set totalQuestions = (attempt.quizz.questions | length) * 2 %}
+                {% set totalQuestions = (attempt.quizz.questions | length) %}
                 {% if attempt.score == totalQuestions %}
-                    <strong class="text-success">{{ attempt.score }}/20</strong>
+                    <strong class="text-success">{{ attempt.score * 2 }}/20</strong>
                 {% elseif attempt.score >= totalQuestions * 3 / 4 %}
-                    <strong class="text-info">{{ attempt.score }}/20</strong>
+                    <strong class="text-info">{{ attempt.score * 2 }}/20</strong>
                 {% elseif attempt.score > totalQuestions / 4 %}
-                    <strong class="text-warning">{{ attempt.score }}/20</strong>
+                    <strong class="text-warning">{{ attempt.score * 2 }}/20</strong>
                 {% else %}
-                    <strong class="text-danger">{{ attempt.score }}/20</strong>
+                    <strong class="text-danger">{{ attempt.score * 2 }}/20</strong>
                 {% endif %}
             </li>
             <li>

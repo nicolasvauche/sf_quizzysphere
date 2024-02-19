@@ -33,7 +33,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
             ->setCover('agile657d8d30bae17.png')
             ->setLevel('1 - Débutant')
             ->setActive(true)
-            ->addQuizzCategory($this->getReference('quizzcategory-gestion-de-projets'));
+            ->addQuizzCategory($this->getReference('quizzcategory-agile'));
         $manager->persist($quizz);
         $this->addReference('quizz-agilite', $quizz);
 
