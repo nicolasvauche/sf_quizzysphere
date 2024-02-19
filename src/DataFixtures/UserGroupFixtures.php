@@ -18,10 +18,16 @@ class UserGroupFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('usergroup-administrateurs', $userGroup);
 
         $userGroup = (new UserGroup())
-            ->setName('Testeurs')
+            ->setName('FSD (test)')
             ->setActive(true);
         $manager->persist($userGroup);
-        $this->addReference('usergroup-testeurs', $userGroup);
+        $this->addReference('usergroup-fsd-test', $userGroup);
+
+        $userGroup = (new UserGroup())
+            ->setName('CDA (test)')
+            ->setActive(true);
+        $manager->persist($userGroup);
+        $this->addReference('usergroup-cda-test', $userGroup);
 
         $manager->flush();
     }

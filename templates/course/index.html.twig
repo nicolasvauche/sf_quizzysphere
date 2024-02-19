@@ -46,7 +46,7 @@
                                     {% set quizzs = [] %}
                                     {% for attempt in app.user.attempts %}
                                         {% for category in course.quizzCategories %}
-                                            {% if attempt.quizz in category.quizzs %}
+                                            {% if attempt.quizz in category.quizzs and not attempt.endedAt %}
                                                 {% set quizzs = quizzs | merge([attempt.quizz]) %}
                                             {% endif %}
                                         {% endfor %}

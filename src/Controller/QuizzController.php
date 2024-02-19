@@ -56,9 +56,7 @@ class QuizzController extends AbstractController
         }
 
         if(!$userAttempt || !$userAttempt->getEndedAt()) {
-            return $this->forward('App\Controller\QuizzController::play', [
-                'quizz' => $quizz,
-            ]);
+            return $this->redirectToRoute('app_quizz_play', ['slug' => $quizz->getSlug()]);
         }
 
         return $this->render('quizz/show.html.twig', [
@@ -117,8 +115,8 @@ class QuizzController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}/handle-answer', name: 'handle_answer', methods: ['POST'])]
-    public function handleAnswer(Request $request, EntityManagerInterface $entityManager, Quizz $quizz): Response
+    #[Route('/{slug}/handle-answer/{answerId}', name: 'handle_answer')]
+    public function handleAnswer(EntityManagerInterface $entityManager, Quizz $quizz, ?string $answerId = null): Response
     {
         $userAttempt = $entityManager->getRepository(Attempt::class)->findOneBy([
             'quizz' => $quizz,
@@ -127,9 +125,6 @@ class QuizzController extends AbstractController
 
         if($userAttempt) {
             $currentQuestion = $userAttempt->getCurrentQuestion();
-
-            // Obtention de answerId, qui peut être null si aucune réponse n'est sélectionnée
-            $answerId = $request->request->get('answerId');
 
             // Création ou récupération de AttemptAnswer pour la question courante
             $attemptAnswer = $entityManager->getRepository(AttemptAnswer::class)->findOneBy([
@@ -141,12 +136,12 @@ class QuizzController extends AbstractController
                 $attemptAnswer = new AttemptAnswer();
                 $attemptAnswer->setAttempt($userAttempt)
                     ->setQuestion($currentQuestion)
-                    ->setEndedAt(new \DateTimeImmutable());
+                    ->setEndedAt(new DateTimeImmutable());
                 $entityManager->persist($attemptAnswer);
             }
 
             // Traitement de la réponse si une réponse a été soumise
-            if($answerId !== null) {
+            if($answerId) {
                 $answer = $entityManager->getRepository(Answer::class)->find($answerId);
                 if($answer) {
                     $attemptAnswer->setAnswer($answer);
@@ -157,8 +152,11 @@ class QuizzController extends AbstractController
                 }
             } else {
                 // Aucune réponse soumise
-                $attemptAnswer->setScore(0); // Vous pouvez ajuster cette logique selon les besoins de votre application
+                $attemptAnswer->setScore(null);
             }
+
+            $attemptAnswer->setEndedAt(new DateTimeImmutable());
+            $entityManager->persist($attemptAnswer);
 
             // Mise à jour de la question suivante ou fin du quiz
             $questions = $quizz->getQuestions()->getValues();
@@ -169,10 +167,11 @@ class QuizzController extends AbstractController
                 $userAttempt->setCurrentQuestion($questions[$nextIndex]);
             } else {
                 $userAttempt->setCurrentQuestion(null);
-                $userAttempt->setEndedAt(new \DateTimeImmutable()); // Marquer la fin du quiz
+                $userAttempt->setEndedAt(new DateTimeImmutable());
             }
 
-            $entityManager->flush(); // Sauvegarde les modifications dans la base de données
+            $entityManager->persist($userAttempt);
+            $entityManager->flush();
 
             // Redirection vers la page de jeu ou les résultats du quiz
             return $userAttempt->getCurrentQuestion() === null

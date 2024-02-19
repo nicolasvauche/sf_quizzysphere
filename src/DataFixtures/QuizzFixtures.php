@@ -14,7 +14,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $quizz = (new Quizz())
             ->setName("L'Histoire du Web")
             ->setLevel('1 - Débutant')
-            ->setActive(false)
+            ->setActive(true)
             ->addQuizzCategory($this->getReference('quizzcategory-le-web'));
         $manager->persist($quizz);
         $this->addReference('quizz-histoire-du-web', $quizz);

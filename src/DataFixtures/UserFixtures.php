@@ -32,7 +32,7 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('user-admin', $user);
 
         $user = new User();
-        $user->addUserGroup($this->getReference('usergroup-testeurs'))
+        $user->addUserGroup($this->getReference('usergroup-fsd-test'))
             ->setGender('Monsieur')
             ->setFirstname('Nicolas')
             ->setLastname('Vauché')
@@ -42,6 +42,18 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
             ->setActive(true);
         $manager->persist($user);
         $this->addReference('user-nicolasvauche', $user);
+
+        $user = new User();
+        $user->addUserGroup($this->getReference('usergroup-cda-test'))
+            ->setGender('Monsieur')
+            ->setFirstname('Bob')
+            ->setLastname('Marley')
+            ->setPseudo('bobmarley')
+            ->setEmail('bob@quizzysphere.com')
+            ->setPassword($this->passwordHasher->hashPassword($user, 'bob'))
+            ->setActive(true);
+        $manager->persist($user);
+        $this->addReference('user-bob', $user);
 
         $manager->flush();
     }

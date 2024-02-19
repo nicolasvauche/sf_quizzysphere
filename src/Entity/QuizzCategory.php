@@ -45,6 +45,7 @@ class QuizzCategory
     private Collection $courses;
 
     #[ORM\ManyToMany(targetEntity: Quizz::class, mappedBy: 'quizzCategories')]
+    #[ORM\OrderBy(['level' => 'ASC'])]
     private Collection $quizzs;
 
     public function __construct()

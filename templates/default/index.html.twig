@@ -30,7 +30,13 @@
                         <div class="card-body text-primary">
                             <p class="big">
                                 {% set totalQuizzs = (app_quizzService.collectQuizzsFromCategories(userCategories, app.user) | length) + (app.user.attempts | length) %}
-                                {{ app.user.attempts | length }}<small>/{{ totalQuizzs }}</small>
+                                {% set quizzs = [] %}
+                                {% for attempt in app.user.attempts %}
+                                    {% if attempt.quizz.active and attempt.endedAt %}
+                                        {% set quizzs = quizzs | merge([attempt.quizz]) %}
+                                    {% endif %}
+                                {% endfor %}
+                                {{ quizzs | length }}<small>/{{ totalQuizzs }}</small>
                             </p>
                         </div>
                         <div class="card-footer text-right">
@@ -42,7 +48,9 @@
                 {% if app.user.attempts | length > 0 %}
                     {% set note = 0 %}
                     {% for attempt in app.user.attempts %}
-                        {% set note = note + attempt.score %}
+                        {% if attempt.endedAt %}
+                            {% set note = note + attempt.score * 2 %}
+                        {% endif %}
                     {% endfor %}
                     {% set note = note / (app.user.attempts | length) %}
                 {% else %}

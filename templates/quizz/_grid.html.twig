@@ -40,29 +40,29 @@
                     {% if warning is defined %}
                         <strong>
                             <i class="fa-solid fa-circle-question"></i>
-                            1/{{ quizz.questions |length }}
+                            {{ userAttempt.currentQuestion.position }}/{{ quizz.questions |length }}
                         </strong>
                     {% elseif success is defined and userAttempt %}
-                        {% set totalQuestions = (userAttempt.quizz.questions | length) * 2 %}
+                        {% set totalQuestions = (userAttempt.quizz.questions | length) %}
                         {% if userAttempt.score == totalQuestions %}
                             <strong class="text-success">
                                 <i class="fa-solid fa-square-poll-vertical"></i>
-                                {{ userAttempt.score ? userAttempt.score : "0" }}/20
+                                {{ userAttempt.score ? userAttempt.score * 2 : "0" }}/20
                             </strong>
                         {% elseif userAttempt.score >= totalQuestions * 3 / 4 %}
                             <strong class="text-info">
                                 <i class="fa-solid fa-square-poll-vertical"></i>
-                                {{ userAttempt.score ? userAttempt.score : "0" }}/20
+                                {{ userAttempt.score ? userAttempt.score * 2 : "0" }}/20
                             </strong>
                         {% elseif userAttempt.score > totalQuestions / 4 %}
                             <strong class="text-warning">
                                 <i class="fa-solid fa-square-poll-vertical"></i>
-                                {{ userAttempt.score ? userAttempt.score : "0" }}/20
+                                {{ userAttempt.score ? userAttempt.score * 2 : "0" }}/20
                             </strong>
                         {% else %}
                             <strong class="text-danger">
                                 <i class="fa-solid fa-square-poll-vertical"></i>
-                                {{ userAttempt.score ? userAttempt.score : "0" }}/20
+                                {{ userAttempt.score ? userAttempt.score * 2 : "0" }}/20
                             </strong>
                         {% endif %}
                     {% endif %}

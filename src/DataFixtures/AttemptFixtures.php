@@ -15,7 +15,7 @@ class AttemptFixtures extends Fixture implements OrderedFixtureInterface
         $attempt = (new Attempt())
             ->setQuizz($this->getReference('quizz-js-fondamentaux'))
             ->setPlayer($this->getReference('user-nicolasvauche'))
-            ->setScore(8)
+            ->setScore(4)
             ->setEndedAt(new DateTimeImmutable('2021-10-01 12:00:00'));
         $manager->persist($attempt);
         $this->addReference('attempt-01', $attempt);

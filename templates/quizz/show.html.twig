@@ -21,10 +21,17 @@
     </section>
 
     <section class="controls">
-        <a href="#" class="text-primary" onclick="history.go(-1)">
-            <i class="fa-solid fa-circle-arrow-left"></i>
-            Retour
-        </a>
+        {% if userAttempt %}
+            <a href="{{ path('app_quizz_index') }}" class="text-primary">
+                <i class="fa-solid fa-circle-arrow-left"></i>
+                Retour
+            </a>
+        {% else %}
+            <a href="#" class="text-primary" onclick="history.go(-1)">
+                <i class="fa-solid fa-circle-arrow-left"></i>
+                Retour
+            </a>
+        {% endif %}
     </section>
 
     <section class="alt">
@@ -33,15 +40,15 @@
             {% if userAttempt %}
                 <li>
                     <strong class="text-primary">Votre score : </strong>
-                    {% set totalQuestions = (userAttempt.quizz.questions | length) * 2 %}
+                    {% set totalQuestions = (userAttempt.quizz.questions | length) %}
                     {% if userAttempt.score == totalQuestions %}
-                        <strong class="text-success">{{ userAttempt.score }}/20</strong>
+                        <strong class="text-success">{{ userAttempt.score * 2 }}/20</strong>
                     {% elseif userAttempt.score >= totalQuestions * 3 / 4 %}
-                        <strong class="text-info">{{ userAttempt.score }}/20</strong>
+                        <strong class="text-info">{{ userAttempt.score * 2 }}/20</strong>
                     {% elseif userAttempt.score > totalQuestions / 4 %}
-                        <strong class="text-warning">{{ userAttempt.score }}/20</strong>
+                        <strong class="text-warning">{{ userAttempt.score * 2 }}/20</strong>
                     {% else %}
-                        <strong class="text-danger">{{ userAttempt.score }}/20</strong>
+                        <strong class="text-danger">{{ userAttempt.score * 2 }}/20</strong>
                     {% endif %}
                 </li>
                 <li>

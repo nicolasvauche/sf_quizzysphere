@@ -17,7 +17,7 @@ class CourseFixtures extends Fixture implements OrderedFixtureInterface
             ->addQuizzCategory($this->getReference('quizzcategory-le-web'))
             ->addQuizzCategory($this->getReference('quizzcategory-developpement-web'))
             ->addQuizzCategory($this->getReference('quizzcategory-front-end'))
-            ->addUserGroup($this->getReference('usergroup-testeurs'));
+            ->addUserGroup($this->getReference('usergroup-fsd-test'));
         $manager->persist($course);
         $this->addReference('course-fsd', $course);
 
@@ -27,7 +27,7 @@ class CourseFixtures extends Fixture implements OrderedFixtureInterface
             ->addQuizzCategory($this->getReference('quizzcategory-uml'))
             ->addQuizzCategory($this->getReference('quizzcategory-gestion-de-projets'))
             ->addQuizzCategory($this->getReference('quizzcategory-agile'))
-            ->addUserGroup($this->getReference('usergroup-testeurs'));
+            ->addUserGroup($this->getReference('usergroup-cda-test'));
         $manager->persist($course);
         $this->addReference('course-cda', $course);
 
