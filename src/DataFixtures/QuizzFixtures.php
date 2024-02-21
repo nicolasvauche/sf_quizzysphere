@@ -20,7 +20,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('quizz-histoire-du-web', $quizz);
 
         $quizz = (new Quizz())
-            ->setName("La Conception avec UML")
+            ->setName("La Conception d'applications avec UML")
             ->setCover('uml657d8ca47eca2.png')
             ->setLevel('1 - Débutant')
             ->setActive(true)
@@ -29,7 +29,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('quizz-conception-uml', $quizz);
 
         $quizz = (new Quizz())
-            ->setName("L'Agilité")
+            ->setName("L'Agilité dans le Développement Web")
             ->setCover('agile657d8d30bae17.png')
             ->setLevel('1 - Débutant')
             ->setActive(true)
@@ -47,7 +47,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('quizz-scrum', $quizz);
 
         $quizz = (new Quizz())
-            ->setName("Les Fondamentaux du Front-End")
+            ->setName("Les Fondamentaux du Développement Front-End")
             ->setCover('developpement-front-end657d8d0f54b2a.png')
             ->setLevel('1 - Débutant')
             ->setActive(true)
@@ -65,7 +65,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('quizz-js-fondamentaux', $quizz);
 
         $quizz = (new Quizz())
-            ->setName("Les Structures de données")
+            ->setName("Les Structures de données en JavaScript")
             ->setCover('javascript657d8d65971e2.png')
             ->setLevel('2 - Intermédiaire')
             ->setActive(true)
@@ -74,7 +74,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('quizz-js-structures-donnees', $quizz);
 
         $quizz = (new Quizz())
-            ->setName("L'Assignation par Décomposition")
+            ->setName("L'Assignation par Décomposition en JavaScript")
             ->setCover('javascript657d8d65971e2.png')
             ->setLevel('2 - Intermédiaire')
             ->setActive(true)
@@ -83,7 +83,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('quizz-js-decomposition', $quizz);
 
         $quizz = (new Quizz())
-            ->setName("Les Fonctions Constructeurs")
+            ->setName("Les Fonctions Constructeurs en JavaScript")
             ->setCover('javascript657d8d65971e2.png')
             ->setLevel('3 - Avancé')
             ->setActive(true)
@@ -101,7 +101,7 @@ class QuizzFixtures extends Fixture implements OrderedFixtureInterface
         $this->addReference('quizz-sf-fondamentaux', $quizz);
 
         $quizz = (new Quizz())
-            ->setName("Symfony 7")
+            ->setName("Symfony Avancé")
             ->setCover('symfony657d8d7ebc9ce.png')
             ->setLevel('3 - Avancé')
             ->setActive(true)
