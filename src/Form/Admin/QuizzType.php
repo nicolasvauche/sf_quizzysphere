@@ -74,7 +74,7 @@ class QuizzType extends AbstractType
                 ],
             ])
             ->add('level', ChoiceType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => 'Niveau du Quizz',
                 'choices' => [
                     'Débutant' => '1 - Débutant',

@@ -35,10 +35,10 @@
                     <ol type="A">
                         {% for answer in question.answers %}
                             <li class="{% if answer.correct %}text-success{% elseif not answer.correct and (userAnswer and answer == userAnswer.answer) %}text-danger{% endif %}">
-                                <strong>{{ answer.text }}</strong>
+                                <strong>{{ answer.text | raw }}</strong>
                                 {% if answer.help %}
                                     <p>
-                                        {{ answer.help }}
+                                        {{ answer.help | raw }}
                                     </p>
                                 {% endif %}
                             </li>

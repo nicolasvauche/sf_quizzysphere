@@ -34,7 +34,7 @@
                     <li>
                         <label for="answer-{{ answer.id }}">
                             <input type="radio" name="answer" value="{{ answer.id }}" id="answer-{{ answer.id }}"/>
-                            <strong>{{ answer.text }}</strong>
+                            <strong>{{ answer.text | raw }}</strong>
                         </label>
                     </li>
                 {% endfor %}

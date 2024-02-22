@@ -45,15 +45,17 @@
                 {% for quizz in quizzs %}
                     <article class="app-card {% if not quizz.active %}disabled{% endif %}">
                         <div class="card-body">
-                            {% if quizz.cover %}
-                                <img src="{{ asset('uploads/quizz/' ~ quizz.cover) }}"
-                                     alt="{{ quizz.name }}"/>
-                            {% elseif quizz.quizzCategories[0].cover %}
-                                <img src="{{ asset('uploads/quizz_category/' ~ quizz.quizzCategory.cover) }}"
-                                     alt="{{ quizz.name }}"/>
-                            {% else %}
-                                <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
-                            {% endif %}
+                            <a href="{{ path('app_admin_quizz_show', {'id': quizz.id}) }}">
+                                {% if quizz.cover %}
+                                    <img src="{{ asset('uploads/quizz/' ~ quizz.cover) }}"
+                                         alt="{{ quizz.name }}"/>
+                                {% elseif quizz.quizzCategories[0].cover %}
+                                    <img src="{{ asset('uploads/quizz_category/' ~ quizz.quizzCategory.cover) }}"
+                                         alt="{{ quizz.name }}"/>
+                                {% else %}
+                                    <img src="{{ asset('img/quizzs_cover.png') }}" alt="Les Quizzs"/>
+                                {% endif %}
+                            </a>
 
                             <h3>
                                 {{ quizz.name }}

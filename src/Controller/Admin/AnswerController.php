@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Answer;
 use App\Entity\Question;
 use App\Form\Admin\AnswerType;
+use App\Service\MistralAPIClient;
 use App\Service\SettingsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,6 +57,56 @@ class AnswerController extends AbstractController
             'question' => $question,
             'maxPosition' => $entityManager->getRepository(Answer::class)->findMaxPositionForQuestion($question->getId()),
         ]);
+    }
+
+    #[Route('/{id}/generer', name: 'generate')]
+    public function generate(MistralAPIClient       $APIClient,
+                             EntityManagerInterface $entityManager,
+                             Question               $question): Response
+    {
+        $answers = $APIClient->generateAnswers($question);
+        if(!empty($answers)) {
+            $lines = explode("[END]", trim($answers));
+            $formattedAnswers = [];
+
+            foreach($lines as $line) {
+                if(!empty($line)) {
+                    $line = str_replace("\n", '', $line);
+                    preg_match('/\s*\[1\]\s*(.*?)\s*\[2\]\s*(.*?)\s*\[3\]\s*(Correcte|Incorrecte)\s*/s', $line, $matches);
+                    if(isset($matches[1]) && isset($matches[2]) && isset($matches[3])) {
+                        $formattedAnswers[] = [
+                            'text' => $matches[1],
+                            'help' => $matches[2],
+                            'correct' => $matches[3] === 'Correcte',
+                        ];
+                    } else {
+                        dd($answers);
+                    }
+                }
+            }
+
+            foreach($question->getAnswers() as $answer) {
+                $entityManager->remove($answer);
+                $entityManager->flush();
+            }
+
+            foreach($formattedAnswers as $formattedAnswer) {
+                $answer = (new Answer())
+                    ->setQuestion($question)
+                    ->setText($formattedAnswer['text'])
+                    ->setHelp($formattedAnswer['help'])
+                    ->setCorrect($formattedAnswer['correct'])
+                    ->setPosition($entityManager->getRepository(Answer::class)->findMaxPositionForQuestion($question->getId()) + 1);
+                $entityManager->persist($answer);
+                $entityManager->flush();
+            }
+
+            $this->addFlash('success', "Les réponses ont été générées pour la question n°{$question->getPosition()}");
+        } else {
+            $this->addFlash('danger', "Impossible de générer les réponses pour la question n°{$question->getPosition()}");
+        }
+
+        return $this->redirectToRoute('app_admin_quizz_show', ['id' => $question->getQuizz()->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/modifier', name: 'edit')]
@@ -111,6 +162,19 @@ class AnswerController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('success', "La réponse à la question n°{$question->getPosition()} a été supprimée");
+
+        return $this->redirectToRoute('app_admin_quizz_show', ['id' => $question->getQuizz()->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/vider', name: 'clean')]
+    public function clean(EntityManagerInterface $entityManager, Question $question): Response
+    {
+        foreach($question->getAnswers() as $answer) {
+            $entityManager->remove($answer);
+        }
+        $entityManager->flush();
+
+        $this->addFlash('success', "Les réponses à la question n°{$question->getPosition()} ont été supprimées");
 
         return $this->redirectToRoute('app_admin_quizz_show', ['id' => $question->getQuizz()->getId()], Response::HTTP_SEE_OTHER);
     }

@@ -152,9 +152,8 @@ class QuizzController extends AbstractController
                 ->setPosition($entityManager->getRepository(Question::class)->findMaxPositionForQuizz($quizz->getId()) + 1)
                 ->setActive(true);
             $entityManager->persist($question);
+            $entityManager->flush();
         }
-
-        $entityManager->flush();
 
         $this->addFlash('success', "Les questions du quizz {$quizz->getName()} ont été générées");
 

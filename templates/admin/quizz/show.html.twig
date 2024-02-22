@@ -93,7 +93,7 @@
                     <br/>
                     <small class="text-danger">
                         <i class="fa-solid fa-triangle-exclamation text-danger"></i>
-                        <small>Ceci supprimera toutes les questions existantes</small>
+                        <small>Ceci remplacera toutes les questions existantes</small>
                         <i class="fa-solid fa-triangle-exclamation text-danger"></i>
                     </small>
                 </a>
@@ -119,7 +119,7 @@
                                         <li>
                                             <a href="{{ path('app_admin_answer_edit', {'id': answer.id}) }}"
                                                {% if answer.correct %}class="text-success"{% endif %}>
-                                                {{ answer.text }}
+                                                {{ answer.text | raw }}
                                             </a>
                                         </li>
                                     {% endfor %}
@@ -132,17 +132,35 @@
                                        class="app-btn text-success">
                                         <small>
                                             <i class="fa-solid fa-circle-plus"></i>
-                                            Nouvelle Réponse
+                                            <strong>Nouvelle Réponse</strong>
                                         </small>
                                     </a>
-
-                                    <a href="#" class="app-btn text-primary">
+                                {% else %}
+                                    <a href="{{ path('app_admin_answer_clean', {'id': question.id}) }}"
+                                       class="app-btn text-danger"
+                                       onclick="return window.confirm('Toutes les réponses de cette question seront supprimées. Continuer ?')"
+                                    >
                                         <small>
-                                            <i class="fa-solid fa-flask-vial"></i>
-                                            Générer une Réponse
+                                            <i class="fa-solid fa-trash-can text-danger"></i>
+                                            <strong>Supprimer les Réponses</strong>
                                         </small>
                                     </a>
                                 {% endif %}
+                                <a href="{{ path('app_admin_answer_generate', {'id': question.id}) }}"
+                                   class="app-btn text-primary"
+                                        {% if question.answers | length > 0 %}
+                                            onclick="return window.confirm('Toutes les réponses de cette question seront supprimées et remplacées. Continuer ?')"
+                                        {% endif %}
+                                >
+                                    <small>
+                                        <i class="fa-solid fa-flask-vial"></i>
+                                        {% if question.answers | length > 0 %}
+                                            <strong>Régénérer les Réponses</strong>
+                                        {% else %}
+                                            <strong>Générer les Réponses</strong>
+                                        {% endif %}
+                                    </small>
+                                </a>
 
                                 <a href="{{ path('app_admin_question_edit', {'id': question.id}) }}"
                                    class="app-btn text-info">
