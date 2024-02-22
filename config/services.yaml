@@ -27,5 +27,10 @@ services:
     arguments:
       $uploadsDirectory: '%uploads_directory%'
 
+  App\Service\MistralAPIClient:
+    arguments:
+      $apiKey: '%env(MISTRAL_API_KEY)%'
+      $baseUrl: '%env(MISTRAL_API_URL)%'
+      $model: '%env(MISTRAL_API_MODEL)%'
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

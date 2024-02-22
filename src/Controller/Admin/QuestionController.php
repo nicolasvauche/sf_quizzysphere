@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Question;
 use App\Entity\Quizz;
 use App\Form\Admin\QuestionType;
+use App\Service\MistralAPIClient;
 use App\Service\SettingsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,6 +46,42 @@ class QuestionController extends AbstractController
             'quizz' => $quizz,
             'maxPosition' => $entityManager->getRepository(Question::class)->findMaxPositionForQuizz($quizz->getId()),
         ]);
+    }
+
+    #[Route('/{id}/generer/{questionId}', name: 'generate')]
+    public function generate(MistralAPIClient       $APIClient,
+                             EntityManagerInterface $entityManager,
+                             Quizz                  $quizz,
+                             ?string                $questionId = null): Response
+    {
+        $questionText = $APIClient->generateQuestion($quizz->getName(), $quizz->getLevel());
+        if(!empty($questionText)) {
+            if($questionId) {
+                $question = $entityManager->getRepository(Question::class)->find($questionId);
+                $question->setText($questionText);
+
+                foreach($question->getAnswers() as $answer) {
+                    $entityManager->remove($answer);
+                }
+
+                $this->addFlash('success', "La question a été régénérée");
+            } else {
+                $question = (new Question())
+                    ->setQuizz($quizz)
+                    ->setText($questionText)
+                    ->setPosition($entityManager->getRepository(Question::class)->findMaxPositionForQuizz($quizz->getId()) + 1)
+                    ->setActive(true);
+                $this->addFlash('success', "La question a été générée");
+            }
+            $entityManager->persist($question);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_admin_question_edit', ['id' => $question->getId()], Response::HTTP_SEE_OTHER);
+        } else {
+            $this->addFlash('danger', "Impossible de générer une question pour le quizz {$quizz->getName()}");
+
+            return $this->redirectToRoute('app_admin_question_generate', ['id' => $quizz->getId()], Response::HTTP_SEE_OTHER);
+        }
     }
 
     #[Route('/{id}/modifier', name: 'edit')]

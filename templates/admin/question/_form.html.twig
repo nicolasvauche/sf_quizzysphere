@@ -17,7 +17,7 @@
 <p class="text-center">
     <strong>ou</strong>
     {% if button_label is defined %}
-        <a href="#"
+        <a href="{{ path('app_admin_question_generate', {'id': question.quizz.id, 'questionId': question.id}) }}"
            class="app-btn"
            onclick="return window.confirm('Toutes les réponses de cette question seront supprimées et remplacées. Continuer ?')">
             <i class="fa-solid fa-flask-vial"></i>
@@ -30,7 +30,7 @@
             </small>
         </a>
     {% else %}
-        <a href="#"
+        <a href="{{ path('app_admin_question_generate', {'id': quizz.id}) }}"
            class="app-btn">
             <i class="fa-solid fa-flask-vial"></i>
             Générer la question

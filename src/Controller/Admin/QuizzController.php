@@ -3,10 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Attempt;
+use App\Entity\Question;
 use App\Entity\Quizz;
 use App\Entity\QuizzCategory;
 use App\Form\Admin\QuizzType;
 use App\Service\FileUploaderService;
+use App\Service\MistralAPIClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -131,5 +133,31 @@ class QuizzController extends AbstractController
         $this->addFlash('success', "Les résultats du quizz de {$attempt->getPlayer()->getFullName()} ont été supprimés");
 
         return $this->redirectToRoute('app_admin_user_show', ['id' => $attempt->getPlayer()->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/generer', name: 'generate')]
+    public function generate(MistralAPIClient $APIClient, EntityManagerInterface $entityManager, Quizz $quizz): Response
+    {
+        foreach($quizz->getQuestions() as $question) {
+            $entityManager->remove($question);
+        }
+        $entityManager->flush();
+
+        $questionsString = $APIClient->generateQuestions($quizz->getName(), $quizz->getLevel());
+        $questions = explode("\n", trim($questionsString));
+        foreach($questions as $question) {
+            $question = (new Question())
+                ->setQuizz($quizz)
+                ->setText($question)
+                ->setPosition($entityManager->getRepository(Question::class)->findMaxPositionForQuizz($quizz->getId()) + 1)
+                ->setActive(true);
+            $entityManager->persist($question);
+        }
+
+        $entityManager->flush();
+
+        $this->addFlash('success', "Les questions du quizz {$quizz->getName()} ont été générées");
+
+        return $this->redirectToRoute('app_admin_quizz_show', ['id' => $quizz->getId()], Response::HTTP_SEE_OTHER);
     }
 }
