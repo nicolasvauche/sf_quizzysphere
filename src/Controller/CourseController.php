@@ -32,7 +32,7 @@ class CourseController extends AbstractController
     }
 
     #[Route('/{slug}/details', name: 'show')]
-    public function show(EntityManagerInterface $entityManager, Course $course): Response
+    public function show(Course $course): Response
     {
 
         return $this->render('course/show.html.twig', [
